@@ -1,0 +1,41 @@
+@import 'tailwindcss';
+
+/*
+  TODO(fonts): brand fonts are not chosen yet, so the site uses the system font
+  stack (zero network cost, no layout shift). When real fonts are picked:
+
+  1. Self-host the files (put .woff2 in src/assets/fonts/ or add an
+     @fontsource-variable/<family> dependency).
+  2. Declare @font-face below WITH `font-display: swap`.
+  3. Point --font-sans (and/or --font-display) at the new family.
+  4. Preload the critical weight in src/components/BaseHead.astro.
+
+  Example:
+    @font-face {
+      font-family: 'Brand Sans';
+      src: url('/fonts/brand-sans.woff2') format('woff2');
+      font-weight: 100 900;
+      font-display: swap;
+    }
+*/
+
+@theme {
+  --font-sans:
+    ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  font-family: var(--font-sans);
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Visible focus ring for keyboard users across interactive elements. */
+:focus-visible {
+  outline: 2px solid var(--color-slate-900, #0f172a);
+  outline-offset: 2px;
+}

@@ -1,0 +1,69 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../consts';
+import placeholder from '../assets/placeholder.png';
+
+/*
+  Structured data (JSON-LD) scaffolding — Organization schema.
+  Placeholder values; wire real data in when branding is finalized.
+  TODO(brand): logo, sameAs profiles, and description below are placeholders.
+*/
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: SITE.name,
+  url: SITE.url,
+  logo: new URL('/favicon.svg', SITE.url).href,
+  description: SITE.description,
+  email: SITE.email,
+  sameAs: [
+    // 'https://www.linkedin.com/company/strictons',
+    // 'https://twitter.com/strictons',
+  ],
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'customer support',
+    email: SITE.email,
+    url: `${SITE.url}/contact`,
+  },
+};
+---
+
+<BaseLayout
+  title={SITE.name}
+  description="Strictons builds digital guides for hotels and businesses. Placeholder marketing copy — real content to come."
+>
+  <script
+    is:inline
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify(organizationSchema)}
+  />
+
+  <section class="mx-auto max-w-6xl px-4 py-16">
+    <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">Strictons</h1>
+
+    <p class="mt-4 max-w-prose text-slate-600">
+      Placeholder home page. Real copy, imagery, and branding will be added
+      later. Brand direction will follow the companion digital guide app at
+      <a class="underline" href={SITE.appUrl}>guide.strictons.com</a>.
+    </p>
+
+    <figure class="mt-12">
+      <Image
+        src={placeholder}
+        alt=""
+        widths={[480, 800, 1200]}
+        sizes="(min-width: 1024px) 1024px, 100vw"
+        loading="eager"
+        class="w-full rounded-xl border border-slate-200"
+      />
+      <figcaption class="mt-2 text-xs text-slate-500">
+        Placeholder image — establishes the responsive <code>&lt;Image&gt;</code
+        >
+        optimization pattern (see <code>src/assets/</code>).
+      </figcaption>
+    </figure>
+  </section>
+</BaseLayout>

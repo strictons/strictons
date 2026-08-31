@@ -1,0 +1,70 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../consts';
+---
+
+<BaseLayout
+  title="Contact"
+  description="Placeholder contact page for Strictons. Real content to come."
+>
+  <section class="mx-auto max-w-6xl px-4 py-16">
+    <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">Contact</h1>
+    <p class="mt-4 max-w-prose text-slate-600">
+      Placeholder content. For now, email
+      <a class="underline" href={`mailto:${SITE.email}`}>{SITE.email}</a>.
+    </p>
+
+    {
+      /*
+      TODO(forms): this form is a STATIC PLACEHOLDER and is not wired to anything.
+      Inputs are disabled and there is no action/handler. When wiring it up:
+        - Pick a backend (Vercel serverless function, Formspree, Basin, etc.).
+        - Add real fields, client + server validation, and spam protection.
+        - Remove `disabled` and set `action` / `method` (or a submit handler).
+    */
+    }
+    <form
+      class="mt-10 grid max-w-md gap-4"
+      aria-label="Contact form (placeholder — not active)"
+    >
+      <label class="grid gap-1 text-sm">
+        <span class="font-medium">Name</span>
+        <input
+          type="text"
+          name="name"
+          autocomplete="name"
+          disabled
+          class="rounded border border-slate-300 px-3 py-2"
+        />
+      </label>
+
+      <label class="grid gap-1 text-sm">
+        <span class="font-medium">Email</span>
+        <input
+          type="email"
+          name="email"
+          autocomplete="email"
+          disabled
+          class="rounded border border-slate-300 px-3 py-2"
+        />
+      </label>
+
+      <label class="grid gap-1 text-sm">
+        <span class="font-medium">Message</span>
+        <textarea
+          name="message"
+          rows="4"
+          disabled
+          class="rounded border border-slate-300 px-3 py-2"></textarea>
+      </label>
+
+      <button
+        type="submit"
+        disabled
+        class="cursor-not-allowed rounded bg-slate-900 px-4 py-2 text-sm font-semibold text-white opacity-60"
+      >
+        Send (disabled placeholder)
+      </button>
+    </form>
+  </section>
+</BaseLayout>

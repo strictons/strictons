@@ -1,0 +1,29 @@
+# Strictons
+
+> Strictons builds digital guides for hotels and businesses. This site
+> (strictons.com) is the marketing and information site; the product itself is
+> the Strictons digital guide app at https://guide.strictons.com.
+
+Placeholder summary — real copy will replace this. The pages below are the
+canonical entry points for understanding what Strictons is and who it is for.
+
+## Pages
+
+- [Home](https://strictons.com/): Overview of Strictons.
+- [For Hotels](https://strictons.com/for-hotels): How hotels use Strictons digital guides.
+- [For Business](https://strictons.com/for-business): How other businesses use Strictons.
+- [FAQs](https://strictons.com/faq): Common questions about Strictons.
+- [Contact](https://strictons.com/contact): How to get in touch.
+
+## Product
+
+- [Strictons digital guide app](https://guide.strictons.com): The live product (a separate application).
+
+## Contact
+
+- Email: guides@strictons.com
+
+## Notes
+
+- This file follows the llms.txt convention: https://llmstxt.org/
+- All content is served as static HTML; no JavaScript is required to read any page.

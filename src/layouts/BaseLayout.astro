@@ -1,0 +1,47 @@
+---
+/**
+ * BaseLayout — the shell every page renders into.
+ *
+ * Usage:
+ *   <BaseLayout title="For Hotels" description="...">
+ *     <Fragment slot="head"> ...JSON-LD / extra meta... </Fragment>
+ *     <section>...page content...</section>
+ *   </BaseLayout>
+ */
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  type?: 'website' | 'article';
+  noindex?: boolean;
+}
+
+const { title, description, image, type, noindex } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead {title} {description} {image} {type} {noindex}>
+      <slot name="head" />
+    </BaseHead>
+  </head>
+  <body class="flex min-h-screen flex-col bg-white text-slate-900 antialiased">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:rounded focus:bg-slate-900 focus:px-3 focus:py-2 focus:text-sm focus:text-white"
+    >
+      Skip to content
+    </a>
+    <Header />
+    <main id="main" class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
