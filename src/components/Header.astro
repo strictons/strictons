@@ -5,9 +5,11 @@ import logo from '../assets/strictons-logo.png';
 
 interface Props {
   /**
-   * Layer the header transparently over a full-bleed hero (home page). The hero
-   * is dark on every breakpoint (artwork / colour blend), so in overlay mode
-   * the logo + wordmark + toggle are all light.
+   * Layer the header transparently over the home hero. The logo lockup sits
+   * over the linen headline column on lg+ (dark) and over the artwork on
+   * smaller screens (light), so its colours flip at `lg`. While the menu is
+   * open the header bar sits on top of the dark menu panel and its marks are
+   * forced light — see `header[data-nav-open]` in global.css.
    */
   overlay?: boolean;
 }
@@ -19,6 +21,9 @@ const isActive = (href: string) =>
   href === '/'
     ? pathname === '/'
     : pathname === href || pathname.startsWith(`${href}/`);
+
+// The menu lists everything except Home (the logo already links home).
+const menuLinks = NAV_LINKS.filter((link) => link.href !== '/');
 ---
 
 <header
@@ -29,7 +34,12 @@ const isActive = (href: string) =>
       : 'relative border-b border-slate-200 bg-white',
   ]}
 >
-  <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
+  {
+    /* Bar — stays above the menu panel at all times (local z-20 > panel z-10). */
+  }
+  <div
+    class="relative z-20 mx-auto flex max-w-6xl items-center justify-between px-4 py-4"
+  >
     <a
       href="/"
       aria-label={`${SITE.name} – home`}
@@ -41,12 +51,15 @@ const isActive = (href: string) =>
         width={80}
         height={93}
         densities={[1, 2]}
-        class:list={['h-7 w-auto sm:h-8', overlay ? 'invert' : '']}
+        class:list={[
+          'nav-logo h-7 w-auto sm:h-8',
+          overlay ? 'invert lg:invert-0' : '',
+        ]}
       />
       <span
         class:list={[
-          'font-display text-lg tracking-[0.2em] uppercase sm:text-xl',
-          overlay ? 'text-white' : 'text-slate-900',
+          'nav-tint font-display text-lg tracking-[0.2em] uppercase sm:text-xl',
+          overlay ? 'text-white lg:text-slate-900' : 'text-slate-900',
         ]}>{SITE.name}</span
       >
     </a>
@@ -57,102 +70,45 @@ const isActive = (href: string) =>
       aria-controls="primary-nav"
       aria-expanded="false"
       class:list={[
-        '-mr-2 inline-flex h-10 w-10 items-center justify-center rounded transition-colors',
-        overlay
-          ? 'text-white hover:text-white/70'
-          : 'text-slate-900 hover:text-slate-500',
+        'nav-tint -mr-2 inline-flex h-10 w-10 items-center justify-center rounded',
+        overlay ? 'text-white' : 'text-slate-900',
       ]}
     >
       <span class="sr-only">Menu</span>
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="1.75"
-        stroke-linecap="round"
-        aria-hidden="true"
-      >
-        <line x1="3" y1="7" x2="21" y2="7"></line>
-        <line x1="3" y1="13" x2="21" y2="13"></line>
-        <line x1="3" y1="19" x2="15" y2="19"></line>
-      </svg>
+      <span class="hamburger" aria-hidden="true">
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+      </span>
     </button>
   </div>
 
   {
     /*
-    Full-screen overlay menu — used at every breakpoint.
-    The drop-from-top animation lives in global.css (#primary-nav), keyed off
-    the data-open attribute the script toggles.
+    Full-screen menu. The curtain drop and the delayed content reveal live in
+    global.css (#primary-nav / .nav-reveal), keyed off the data-open attribute.
   */
   }
   <div
     id="primary-nav"
     data-open="false"
-    class="fixed inset-0 z-[70] flex flex-col overflow-y-auto bg-white text-slate-900"
+    tabindex="-1"
+    class="fixed inset-0 z-10 flex flex-col overflow-y-auto bg-artwork-blend text-white"
   >
-    <div
-      class="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-4"
-    >
-      <a
-        href="/"
-        aria-label={`${SITE.name} – home`}
-        class="flex items-center gap-2.5"
-      >
-        <Image
-          src={logo}
-          alt=""
-          width={80}
-          height={93}
-          densities={[1, 2]}
-          class="h-7 w-auto sm:h-8"
-        />
-        <span
-          class="font-display text-lg tracking-[0.2em] text-slate-900 uppercase sm:text-xl"
-          >{SITE.name}</span
-        >
-      </a>
-      <button
-        type="button"
-        data-nav-close
-        class="-mr-2 inline-flex h-10 w-10 items-center justify-center rounded text-slate-900 transition-colors hover:text-slate-500"
-      >
-        <span class="sr-only">Close menu</span>
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.75"
-          stroke-linecap="round"
-          aria-hidden="true"
-        >
-          <line x1="5" y1="5" x2="19" y2="19"></line>
-          <line x1="19" y1="5" x2="5" y2="19"></line>
-        </svg>
-      </button>
-    </div>
-
     <nav
       aria-label="Primary"
-      class="mx-auto flex w-full max-w-6xl flex-1 flex-col justify-center px-4 pb-24"
+      class="nav-reveal mx-auto flex w-full max-w-6xl flex-1 flex-col justify-center px-4 pt-24 pb-24"
     >
       <ul>
         {
-          NAV_LINKS.map((link, i) => (
-            <li class="border-b border-slate-200 first:border-t">
+          menuLinks.map((link) => (
+            <li class="border-b border-white/15 first:border-t">
               <a
                 href={link.href}
                 aria-current={isActive(link.href) ? 'page' : undefined}
-                class="group flex items-baseline gap-4 py-4 font-serif text-4xl tracking-tight text-slate-900 uppercase transition-colors hover:text-slate-400 aria-[current=page]:text-slate-400 sm:gap-6 sm:py-5 sm:text-6xl"
+                class="group block py-4 font-serif text-4xl tracking-tight text-white uppercase transition-colors hover:text-white/60 aria-[current=page]:text-white/50 sm:py-5 sm:text-6xl"
               >
-                <span class="font-sans text-xs tracking-widest text-slate-400 tabular-nums">
-                  {String(i + 1).padStart(2, '0')}
-                </span>
-                <span class="transition-transform group-hover:translate-x-1">
+                <span class="inline-block transition-transform duration-300 group-hover:translate-x-2">
                   {link.label}
                 </span>
               </a>
@@ -161,8 +117,10 @@ const isActive = (href: string) =>
         }
       </ul>
 
-      <p class="mt-10 text-sm text-slate-500">
-        <a href={SITE.appUrl} class="font-medium text-slate-900 hover:underline"
+      <p class="mt-10 text-sm text-white/60">
+        <a
+          href={SITE.appUrl}
+          class="font-medium text-white/90 underline-offset-4 hover:text-white hover:underline"
           >Open the guide app &rarr;</a
         >
       </p>
@@ -178,12 +136,18 @@ const isActive = (href: string) =>
         position: static;
         visibility: visible;
         transform: none;
+        background: #fff;
+        color: #0f172a;
       }
-      #primary-nav [data-nav-close] {
-        display: none;
+      #primary-nav .nav-reveal {
+        opacity: 1;
+        transform: none;
       }
-      #primary-nav nav {
-        padding-bottom: 1.5rem;
+      #primary-nav a {
+        color: #0f172a;
+      }
+      #primary-nav li {
+        border-color: #e2e8f0;
       }
       #primary-nav .text-4xl {
         font-size: 1.5rem;
@@ -195,13 +159,15 @@ const isActive = (href: string) =>
 <script>
   const toggle = document.getElementById('nav-toggle');
   const panel = document.getElementById('primary-nav');
+  const header = toggle?.closest('header');
 
-  if (toggle && panel) {
-    const closeBtn = panel.querySelector<HTMLElement>('[data-nav-close]');
+  if (toggle && panel && header) {
+    // Focus trap spans the whole header: the bar's logo + toggle plus the
+    // panel's links (the toggle doubles as the close button).
     const focusables = () =>
       Array.from(
-        panel.querySelectorAll<HTMLElement>('a[href], button:not([disabled])')
-      );
+        header.querySelectorAll<HTMLElement>('a[href], button:not([disabled])')
+      ).filter((el) => el.getClientRects().length > 0);
 
     const onKeydown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -224,32 +190,31 @@ const isActive = (href: string) =>
     };
 
     const openMenu = () => {
+      header.dataset.navOpen = 'true';
       panel.dataset.open = 'true';
       toggle.setAttribute('aria-expanded', 'true');
       document.documentElement.style.overflow = 'hidden';
       document.addEventListener('keydown', onKeydown);
-      // Wait a frame: the panel is `visibility:hidden` until `data-open`
-      // takes effect, and a hidden element can't take focus.
-      requestAnimationFrame(() => (closeBtn ?? focusables()[0])?.focus());
+      // Move focus into the menu (still fine while it fades in).
+      requestAnimationFrame(() =>
+        panel.querySelector<HTMLElement>('a[href]')?.focus()
+      );
     };
 
-    const closeMenu = ({ restoreFocus = true } = {}) => {
+    const closeMenu = () => {
+      delete header.dataset.navOpen;
       panel.dataset.open = 'false';
       toggle.setAttribute('aria-expanded', 'false');
       document.documentElement.style.overflow = '';
       document.removeEventListener('keydown', onKeydown);
-      // Standard disclosure pattern: focus returns to the button that opened it.
-      if (restoreFocus) toggle.focus();
+      toggle.focus();
     };
 
     toggle.addEventListener('click', () =>
       panel.dataset.open === 'true' ? closeMenu() : openMenu()
     );
-    closeBtn?.addEventListener('click', () => closeMenu());
     panel.addEventListener('click', (e) => {
-      if ((e.target as HTMLElement).closest('a[href]')) {
-        closeMenu({ restoreFocus: false });
-      }
+      if ((e.target as HTMLElement).closest('a[href]')) closeMenu();
     });
   }
 </script>

@@ -56,7 +56,7 @@ src/
   components/
     BaseHead.astro      Reusable SEO / OG / Twitter meta pattern
     Header.astro        Logo lockup + hamburger + full-screen overlay menu
-    Hero.astro          Home-page full-viewport hero
+    Hero.astro          Home-page full-viewport hero (linen column | artwork)
     Footer.astro        Simple footer (also carries the full nav link list)
   layouts/
     BaseLayout.astro    HTML shell: <head> + header + <main> + footer
@@ -70,23 +70,36 @@ vercel.json             Deploy config for this project (see Deployment)
 
 ### Navigation
 
-The header is just the logo lockup + a hamburger button, at every breakpoint.
-The button opens a **full-screen overlay menu** ([`Header.astro`](src/components/Header.astro))
-with the nav links. It's a progressive enhancement:
+The header is just the logo lockup + a hamburger button, at every breakpoint
+([`Header.astro`](src/components/Header.astro)). Opening it:
 
-- A small inline `<script>` handles open/close, `Escape`, focus trap + restore,
-  `aria-expanded`, and scroll-lock. It's the only client JS the site ships.
+1. A **curtain** (`#primary-nav`) drops from above the viewport — slow to start,
+   accelerating into the finish. Its background is `bg-artwork-blend`, a gradient
+   mixed from colours sampled out of the painting.
+2. The logo + hamburger stay pinned on top; the hamburger **morphs into an X**.
+3. Once the curtain lands, the links (`.nav-reveal`) **fade + rise** into view.
+
+The menu lists everything except Home (the logo links home) with no item numbers.
+All the motion is CSS in `global.css`, keyed off `data-open` / `data-nav-open`
+attributes and `aria-expanded`; `prefers-reduced-motion` collapses it.
+
+Progressive enhancement:
+
+- A small inline `<script>` toggles those attributes and handles `Escape`, focus
+  trap (spanning the header) + restore, `aria-expanded`, and scroll-lock. It's
+  the only client JS the site ships.
 - Without JS, a `<noscript>` style renders the links as a plain inline list and
   hides the toggle. The footer also carries every nav link.
 
 ### Logo
 
 `src/assets/strictons-logo.png` is a trimmed, transparent, single-colour (black)
-lion mark derived from the supplied `strictons-logo.svg` (a 660 KB Canva export
-that wrapped a raster PNG + a baked white background — not usable as-is in the
-header). It renders black on light headers and is flipped to white with a CSS
-`invert` filter over the dark hero. Replace it with a proper vector mark when one
-exists; keep the transparent, single-colour, tightly-cropped shape.
+lion mark, **mirrored to face left**, derived from the supplied
+`strictons-logo.svg` (a 660 KB Canva export that wrapped a raster PNG + a baked
+white background — not usable as-is in the header). It renders black on light
+headers and is flipped to white with a CSS `invert` filter over dark surfaces
+(mobile hero, open menu). Replace it with a proper vector mark when one exists;
+keep the transparent, single-colour, tightly-cropped, left-facing shape.
 
 The wordmark next to it is **"Graveur Display" Bold** (`--font-display`) — the
 font file still needs to be added, see [`public/fonts/README.md`](public/fonts/README.md).
