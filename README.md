@@ -170,6 +170,10 @@ Per-page `<head>` extras (JSON-LD, extra preloads) go in the `head` slot:
   ~1 KB nav-menu toggle in `Header.astro`.
 - Images go through Astro's `<Image>` component (Sharp) for automatic
   optimization + responsive `srcset`. See the pattern in `src/components/Hero.astro`.
+- The hero artwork has a slow Ken Burns drift plus CSS-only drifting light motes
+  (`.hero-kenburns` / `.hero-speck` / `.hero-glow` in `global.css`, positions
+  generated deterministically in `Hero.astro`). All transform/opacity only, and
+  fully disabled under `prefers-reduced-motion`.
 - **Fonts:** `--font-sans` / `--font-serif` are system stacks (no network cost).
   `--font-display` (the wordmark) points at "Graveur Display" via an `@font-face`
   with `font-display: swap` — the file needs adding, see
