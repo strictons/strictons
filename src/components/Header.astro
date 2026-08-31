@@ -5,9 +5,9 @@ import logo from '../assets/strictons-logo.png';
 
 interface Props {
   /**
-   * Layer the header transparently over a full-bleed hero (home page).
-   * The wordmark sits over the white headline column on lg+ and over the
-   * artwork on smaller screens, so its colour flips at the `lg` breakpoint.
+   * Layer the header transparently over a full-bleed hero (home page). The hero
+   * is dark on every breakpoint (artwork / colour blend), so in overlay mode
+   * the logo + wordmark + toggle are all light.
    */
   overlay?: boolean;
 }
@@ -41,12 +41,12 @@ const isActive = (href: string) =>
         width={80}
         height={93}
         densities={[1, 2]}
-        class:list={['h-7 w-auto sm:h-8', overlay ? 'invert lg:invert-0' : '']}
+        class:list={['h-7 w-auto sm:h-8', overlay ? 'invert' : '']}
       />
       <span
         class:list={[
           'font-display text-lg tracking-[0.2em] uppercase sm:text-xl',
-          overlay ? 'text-white lg:text-slate-900' : 'text-slate-900',
+          overlay ? 'text-white' : 'text-slate-900',
         ]}>{SITE.name}</span
       >
     </a>
@@ -81,11 +81,17 @@ const isActive = (href: string) =>
     </button>
   </div>
 
-  {/* Full-screen overlay menu — used at every breakpoint */}
+  {
+    /*
+    Full-screen overlay menu — used at every breakpoint.
+    The drop-from-top animation lives in global.css (#primary-nav), keyed off
+    the data-open attribute the script toggles.
+  */
+  }
   <div
     id="primary-nav"
     data-open="false"
-    class="invisible fixed inset-0 z-[70] flex translate-y-[-6px] flex-col bg-white text-slate-900 opacity-0 transition-[opacity,transform] duration-200 ease-out data-[open=true]:visible data-[open=true]:translate-y-0 data-[open=true]:opacity-100 motion-reduce:transition-none"
+    class="fixed inset-0 z-[70] flex flex-col overflow-y-auto bg-white text-slate-900"
   >
     <div
       class="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-4"
@@ -172,7 +178,6 @@ const isActive = (href: string) =>
         position: static;
         visibility: visible;
         transform: none;
-        opacity: 1;
       }
       #primary-nav [data-nav-close] {
         display: none;
@@ -197,7 +202,6 @@ const isActive = (href: string) =>
       Array.from(
         panel.querySelectorAll<HTMLElement>('a[href], button:not([disabled])')
       );
-    let lastFocused: HTMLElement | null = null;
 
     const onKeydown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -220,7 +224,6 @@ const isActive = (href: string) =>
     };
 
     const openMenu = () => {
-      lastFocused = document.activeElement as HTMLElement;
       panel.dataset.open = 'true';
       toggle.setAttribute('aria-expanded', 'true');
       document.documentElement.style.overflow = 'hidden';
@@ -235,7 +238,8 @@ const isActive = (href: string) =>
       toggle.setAttribute('aria-expanded', 'false');
       document.documentElement.style.overflow = '';
       document.removeEventListener('keydown', onKeydown);
-      if (restoreFocus) (lastFocused ?? toggle).focus();
+      // Standard disclosure pattern: focus returns to the button that opened it.
+      if (restoreFocus) toggle.focus();
     };
 
     toggle.addEventListener('click', () =>
