@@ -56,11 +56,12 @@ src/
   components/
     BaseHead.astro      Reusable SEO / OG / Twitter meta pattern
     Header.astro        Logo lockup + hamburger + full-screen overlay menu
-    Hero.astro          Home-page full-viewport hero (linen column | artwork);
-                        carries the site copyright line — the home page is
-                        hero-only, and there is no footer anywhere
+    Hero.astro          Home-page full-viewport hero (linen column | artwork).
+                        Home is hero-only; the hero shows the copyright on lg+
+                        and nothing on mobile.
   layouts/
-    BaseLayout.astro    HTML shell: <head> + header + <main>
+    BaseLayout.astro    HTML shell: <head> + header + <main> + slim footer
+                        (copyright only; omitted on the home page)
   pages/                One file per route (see below)
   styles/global.css     Tailwind entry + @font-face + font tokens
   consts.ts             Site identity, nav links, SEO defaults
@@ -92,7 +93,7 @@ Progressive enhancement:
   open it focuses the panel container itself, not a link, so nothing appears
   "selected". It's the only client JS the site ships.
 - Without JS, a `<noscript>` style renders the links as a plain inline list and
-  hides the toggle. (There is no footer to fall back to.)
+  hides the toggle.
 
 ### Logo
 

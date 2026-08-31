@@ -38,3 +38,9 @@ export const NAV_LINKS = [
   { href: '/faq', label: 'FAQs' },
   { href: '/contact', label: 'Contact' },
 ] as const;
+
+/**
+ * Copyright line. Shown in the slim footer on inner pages, and at the bottom of
+ * the hero on desktop home (hidden on mobile home). Year is fixed at build time.
+ */
+export const COPYRIGHT = `© ${new Date().getFullYear()} ${SITE.name} · All rights reserved`;
