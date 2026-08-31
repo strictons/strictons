@@ -1,8 +1,7 @@
 ---
-import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
 import { SITE } from '../consts';
-import placeholder from '../assets/placeholder.png';
 
 /*
   Structured data (JSON-LD) scaffolding — Organization schema.
@@ -41,29 +40,19 @@ const organizationSchema = {
     set:html={JSON.stringify(organizationSchema)}
   />
 
-  <section class="mx-auto max-w-6xl px-4 py-16">
-    <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">Strictons</h1>
+  <Hero />
 
+  {
+    /* TODO(content): sections below the hero (how it works, audiences, proof, CTA). */
+  }
+  <section aria-labelledby="home-intro" class="mx-auto max-w-6xl px-6 py-16">
+    <h2 id="home-intro" class="text-2xl font-bold tracking-tight">
+      What Strictons does
+    </h2>
     <p class="mt-4 max-w-prose text-slate-600">
-      Placeholder home page. Real copy, imagery, and branding will be added
-      later. Brand direction will follow the companion digital guide app at
+      Placeholder section. Real copy, imagery, and branding will be added later,
+      following the companion digital guide app at
       <a class="underline" href={SITE.appUrl}>guide.strictons.com</a>.
     </p>
-
-    <figure class="mt-12">
-      <Image
-        src={placeholder}
-        alt=""
-        widths={[480, 800, 1200]}
-        sizes="(min-width: 1024px) 1024px, 100vw"
-        loading="eager"
-        class="w-full rounded-xl border border-slate-200"
-      />
-      <figcaption class="mt-2 text-xs text-slate-500">
-        Placeholder image — establishes the responsive <code>&lt;Image&gt;</code
-        >
-        optimization pattern (see <code>src/assets/</code>).
-      </figcaption>
-    </figure>
   </section>
 </BaseLayout>
