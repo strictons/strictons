@@ -1,16 +1,16 @@
 # strictons.com
 
-Marketing / informational site for **Strictons**. Companion to the digital guide
-app at [guide.strictons.com](https://guide.strictons.com), which lives in a
-separate repository and has its own deployment. **This repo contains no app
-logic** — it is purely static marketing content.
+Marketing / informational site for **Strictons**. The Strictons product (a
+digital guide app) lives in a separate repository with its own deployment;
+**this repo contains no app logic and does not link out to it** — it is purely
+static marketing content.
 
 Built with [Astro](https://astro.build/) (static output, ~1 KB of client JS for
 the nav menu and nothing else), TypeScript, and Tailwind CSS v4.
 
-> **Status:** structure / shell only. Every page is placeholder content. Real
-> copy, imagery, and branding come later and will follow the brand direction of
-> the guide app.
+> **Status:** structure / shell only. Every page is placeholder content — real
+> copy, imagery and branding come later. The home page is the hero and nothing
+> else; the other pages are a heading + a line.
 
 ---
 
@@ -56,10 +56,11 @@ src/
   components/
     BaseHead.astro      Reusable SEO / OG / Twitter meta pattern
     Header.astro        Logo lockup + hamburger + full-screen overlay menu
-    Hero.astro          Home-page full-viewport hero (linen column | artwork)
-    Footer.astro        Simple footer (also carries the full nav link list)
+    Hero.astro          Home-page full-viewport hero (linen column | artwork);
+                        carries the site copyright line — the home page is
+                        hero-only, and there is no footer anywhere
   layouts/
-    BaseLayout.astro    HTML shell: <head> + header + <main> + footer
+    BaseLayout.astro    HTML shell: <head> + header + <main>
   pages/                One file per route (see below)
   styles/global.css     Tailwind entry + @font-face + font tokens
   consts.ts             Site identity, nav links, SEO defaults
@@ -79,17 +80,19 @@ The header is just the logo lockup + a hamburger button, at every breakpoint
 2. The logo + hamburger stay pinned on top; the hamburger **morphs into an X**.
 3. Once the curtain lands, the links (`.nav-reveal`) **fade + rise** into view.
 
-The menu lists everything except Home (the logo links home) with no item numbers.
-All the motion is CSS in `global.css`, keyed off `data-open` / `data-nav-open`
-attributes and `aria-expanded`; `prefers-reduced-motion` collapses it.
+The menu lists For Hotels / For Business / FAQs / Contact — no Home (the logo
+links home), no item numbers. All the motion is CSS in `global.css`, keyed off
+`data-open` / `data-nav-open` attributes and `aria-expanded`;
+`prefers-reduced-motion` collapses it.
 
 Progressive enhancement:
 
 - A small inline `<script>` toggles those attributes and handles `Escape`, focus
-  trap (spanning the header) + restore, `aria-expanded`, and scroll-lock. It's
-  the only client JS the site ships.
+  trap (spanning the header) + restore, `aria-expanded`, and scroll-lock. On
+  open it focuses the panel container itself, not a link, so nothing appears
+  "selected". It's the only client JS the site ships.
 - Without JS, a `<noscript>` style renders the links as a plain inline list and
-  hides the toggle. The footer also carries every nav link.
+  hides the toggle. (There is no footer to fall back to.)
 
 ### Logo
 
@@ -203,7 +206,8 @@ to it, deploy.
   `public/fonts/README.md`); swap `--font-serif` for the real brand serif.
 - `TODO(forms)` — contact form backend (`src/pages/contact.astro`); currently a
   disabled static placeholder.
-- `TODO(analytics)` — analytics loader (`src/components/Footer.astro`); none loaded.
+- `TODO(analytics)` — analytics loader (add to `src/layouts/BaseLayout.astro`);
+  none loaded.
 - `TODO(content)` — real copy on every page; FAQ Q&A structure + FAQPage JSON-LD.
 
 ## Linting / formatting

@@ -120,6 +120,10 @@ html {
     transform 320ms cubic-bezier(0.4, 0, 1, 1),
     visibility 0s linear 320ms;
 }
+/* Focused programmatically on open; it must not draw a ring of its own. */
+#primary-nav:focus {
+  outline: none;
+}
 #primary-nav[data-open='true'] {
   transform: translateY(0);
   visibility: visible;

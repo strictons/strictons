@@ -18,12 +18,7 @@ const { overlay = false } = Astro.props;
 
 const pathname = Astro.url.pathname.replace(/\/+$/, '') || '/';
 const isActive = (href: string) =>
-  href === '/'
-    ? pathname === '/'
-    : pathname === href || pathname.startsWith(`${href}/`);
-
-// The menu lists everything except Home (the logo already links home).
-const menuLinks = NAV_LINKS.filter((link) => link.href !== '/');
+  pathname === href || pathname.startsWith(`${href}/`);
 ---
 
 <header
@@ -101,7 +96,7 @@ const menuLinks = NAV_LINKS.filter((link) => link.href !== '/');
     >
       <ul>
         {
-          menuLinks.map((link) => (
+          NAV_LINKS.map((link) => (
             <li class="border-b border-white/15 first:border-t">
               <a
                 href={link.href}
@@ -116,14 +111,6 @@ const menuLinks = NAV_LINKS.filter((link) => link.href !== '/');
           ))
         }
       </ul>
-
-      <p class="mt-10 text-sm text-white/60">
-        <a
-          href={SITE.appUrl}
-          class="font-medium text-white/90 underline-offset-4 hover:text-white hover:underline"
-          >Open the guide app &rarr;</a
-        >
-      </p>
     </nav>
   </div>
 
@@ -195,10 +182,9 @@ const menuLinks = NAV_LINKS.filter((link) => link.href !== '/');
       toggle.setAttribute('aria-expanded', 'true');
       document.documentElement.style.overflow = 'hidden';
       document.addEventListener('keydown', onKeydown);
-      // Move focus into the menu (still fine while it fades in).
-      requestAnimationFrame(() =>
-        panel.querySelector<HTMLElement>('a[href]')?.focus()
-      );
+      // Focus the panel itself, not a link — nothing should look "selected".
+      // The focus trap + Tab take over from here.
+      requestAnimationFrame(() => panel.focus());
     };
 
     const closeMenu = () => {

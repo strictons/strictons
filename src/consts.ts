@@ -16,9 +16,6 @@ export const SITE = {
   description:
     'Strictons builds digital guides for hotels and businesses. This is the marketing and information site for the Strictons digital guide platform.',
 
-  /** Companion product — a separate application and repo. */
-  appUrl: 'https://guide.strictons.com',
-
   /** Contact address (also used in structured data + llms.txt). */
   email: 'guides@strictons.com',
 
@@ -34,9 +31,8 @@ export const SITE = {
   locale: 'en_US',
 } as const;
 
-/** Primary navigation. Rendered in the header and footer. */
+/** Primary navigation, shown in the header's full-screen menu. */
 export const NAV_LINKS = [
-  { href: '/', label: 'Home' },
   { href: '/for-hotels', label: 'For Hotels' },
   { href: '/for-business', label: 'For Business' },
   { href: '/faq', label: 'FAQs' },
