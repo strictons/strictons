@@ -3,90 +3,96 @@ import { Image } from 'astro:assets';
 import artwork from '../assets/strictons-artwork-lillie-nolan.jpg';
 
 /**
- * Home-page hero. Split layout:
- *   left  — white column, serif display headline
- *   right — full-bleed commissioned artwork with overlay tagline + credit
+ * Home-page hero — full-viewport split.
+ *   lg+   : white headline column (left)  |  commissioned artwork (right)
+ *   < lg  : artwork fills the screen; headline, tagline and credit sit on top
  *
- * On < lg the two columns stack (headline first, then artwork).
+ * The site header is layered over this section — see BaseLayout `headerOverlay`.
+ * The artwork is set with `object-fill`: it always shows its full height and is
+ * stretched horizontally to fill its column (no vertical cropping).
  *
- * TODO(content): headline, tagline, and a primary CTA below the headline are
- * placeholder brand copy — swap when real messaging is finalized.
+ * TODO(content): headline, tagline and a primary CTA (below the headline) are
+ * placeholder brand copy.
  * TODO(fonts): `font-serif` is a system serif stack today; see global.css.
  */
 ---
 
-<section aria-labelledby="hero-heading" class="border-b border-slate-200">
-  <div class="grid lg:grid-cols-2">
-    {/* Left — headline */}
+<section
+  aria-labelledby="hero-heading"
+  class="relative min-h-svh overflow-hidden"
+>
+  {/* Artwork layer — full-bleed on mobile, right half on lg+ */}
+  <figure class="absolute inset-0 bg-[#5a1f16] lg:left-1/2">
+    <Image
+      src={artwork}
+      alt="Oil painting by Lillie Nolan of a hotel host handing a guest a teal Strictons guide at check-in."
+      widths={[640, 960, 1280, 1920, 2400]}
+      sizes="(min-width: 1024px) 50vw, 100vw"
+      loading="eager"
+      fetchpriority="high"
+      class="h-full w-full object-fill"
+    />
+
+    {/* Legibility overlays — must not intercept clicks */}
     <div
-      class="order-2 flex items-center px-6 py-14 sm:px-10 sm:py-20 lg:order-1 lg:px-14 lg:py-28 xl:px-20"
+      class="pointer-events-none absolute inset-0 bg-black/25 lg:bg-transparent"
     >
-      <div class="max-w-xl">
-        <h1 id="hero-heading" class="font-serif text-slate-900">
-          <span
-            class="block text-lg font-medium tracking-[0.06em] text-slate-800 uppercase sm:text-2xl"
-          >
-            Professional. Thoughtful.
-          </span>
-          <span
-            class="mt-1 block text-[2.75rem] leading-none font-bold tracking-[0.01em] uppercase sm:text-6xl lg:text-7xl"
-          >
-            Memorable.
-          </span>
-        </h1>
-        {/* TODO(content): supporting sentence + primary CTA button go here. */}
-      </div>
+    </div>
+    <div
+      class="pointer-events-none absolute inset-0 [background:radial-gradient(60%_50%_at_50%_50%,rgba(0,0,0,0.4),transparent_72%)]"
+    >
+    </div>
+    <div
+      class="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/45 to-transparent lg:hidden"
+    >
+    </div>
+    <div
+      class="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/45 to-transparent"
+    >
     </div>
 
-    {/* Right — artwork */}
-    <figure
-      class="relative order-1 min-h-[440px] overflow-hidden bg-[#5a1f16] sm:min-h-[540px] lg:order-2 lg:min-h-[640px]"
+    {/* Tagline — centred on the artwork at every breakpoint */}
+    <p
+      class="absolute inset-x-0 top-1/2 -translate-y-1/2 px-4 text-center font-serif text-lg font-bold tracking-[0.05em] text-white uppercase italic [text-shadow:0_2px_16px_rgba(0,0,0,0.65)] sm:px-8 sm:text-xl xl:text-2xl 2xl:text-3xl"
     >
-      <Image
-        src={artwork}
-        alt="Oil painting by Lillie Nolan of a hotel host handing a guest a teal Strictons guide at check-in."
-        widths={[640, 960, 1280, 1920, 2400]}
-        sizes="(min-width: 1024px) 50vw, 100vw"
-        loading="eager"
-        fetchpriority="high"
-        class="absolute inset-0 h-full w-full object-cover object-[50%_42%]"
-      />
+      Hand them a guide at check in
+    </p>
 
-      {
-        /*
-        Legibility overlays. Kept light so the artwork stays vivid:
-        a soft vignette feathered from the left (behind the tagline) and a
-        gentle bottom gradient (behind the credit). Text also carries a shadow.
-      */
-      }
-      <div
-        class="pointer-events-none absolute inset-0 [background:radial-gradient(120%_90%_at_0%_50%,rgba(0,0,0,0.42),rgba(0,0,0,0.12)_45%,transparent_70%)]"
+    <figcaption
+      class="absolute right-4 bottom-4 max-w-[16rem] text-right font-serif text-xs leading-relaxed text-white/90 italic [text-shadow:0_1px_10px_rgba(0,0,0,0.65)] sm:right-6 sm:bottom-6 sm:max-w-none sm:text-sm"
+    >
+      Artwork commissioned by Australian<br class="hidden sm:inline" />
+      <span class="sm:hidden"> </span>artist Lillie Nolan &middot;
+      <a
+        href="https://www.instagram.com/lilliepaints"
+        target="_blank"
+        rel="noopener"
+        class="pointer-events-auto underline decoration-white/40 underline-offset-2 hover:decoration-white"
+        >@lilliepaints</a
       >
-      </div>
-      <div
-        class="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/40 to-transparent"
-      >
-      </div>
+    </figcaption>
+  </figure>
 
-      <p
-        class="absolute top-1/2 right-6 left-6 -translate-y-1/2 font-serif text-lg font-bold tracking-[0.04em] text-white uppercase italic [text-shadow:0_2px_16px_rgba(0,0,0,0.6)] sm:right-8 sm:left-8 sm:text-2xl sm:tracking-[0.05em] 2xl:text-3xl"
-      >
-        Hand them a guide at check in
-      </p>
-
-      <figcaption
-        class="absolute right-4 bottom-4 max-w-[16rem] text-right font-serif text-xs leading-relaxed text-white/90 italic [text-shadow:0_1px_10px_rgba(0,0,0,0.6)] sm:right-6 sm:bottom-6 sm:max-w-none sm:text-sm"
-      >
-        Artwork commissioned by Australian<br class="hidden sm:inline" />
-        <span class="sm:hidden"> </span>artist Lillie Nolan &middot;
-        <a
-          href="https://www.instagram.com/lilliepaints"
-          target="_blank"
-          rel="noopener"
-          class="underline decoration-white/40 underline-offset-2 hover:decoration-white"
-          >@lilliepaints</a
+  {/* Headline layer — over white (lg) / over artwork (mobile) */}
+  <div class="pointer-events-none relative z-10 grid min-h-svh lg:grid-cols-2">
+    <div
+      class="flex flex-col justify-start px-6 pt-28 pb-16 text-white sm:px-10 lg:justify-center lg:px-10 lg:py-0 lg:text-slate-900 xl:px-12 2xl:px-20"
+    >
+      <h1 id="hero-heading" class="max-w-xl font-serif">
+        <span
+          class="block text-base font-medium tracking-[0.06em] text-white/90 uppercase [text-shadow:0_2px_14px_rgba(0,0,0,0.55)] sm:text-lg lg:text-xl lg:text-slate-800 lg:[text-shadow:none]"
         >
-      </figcaption>
-    </figure>
+          Professional. Thoughtful.
+        </span>
+        <span
+          class="mt-1 block text-[2.5rem] leading-none font-bold tracking-[0.01em] uppercase [text-shadow:0_2px_20px_rgba(0,0,0,0.55)] sm:text-5xl lg:[text-shadow:none] xl:text-6xl 2xl:text-7xl"
+        >
+          Memorable.
+        </span>
+      </h1>
+      {
+        /* TODO(content): supporting sentence + primary CTA (needs `pointer-events-auto`). */
+      }
+    </div>
   </div>
 </section>

@@ -19,9 +19,18 @@ interface Props {
   image?: string;
   type?: 'website' | 'article';
   noindex?: boolean;
+  /** Layer the header transparently over the page's hero (home page). */
+  headerOverlay?: boolean;
 }
 
-const { title, description, image, type, noindex } = Astro.props;
+const {
+  title,
+  description,
+  image,
+  type,
+  noindex,
+  headerOverlay = false,
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -38,7 +47,7 @@ const { title, description, image, type, noindex } = Astro.props;
     >
       Skip to content
     </a>
-    <Header />
+    <Header overlay={headerOverlay} />
     <main id="main" class="flex-1">
       <slot />
     </main>
