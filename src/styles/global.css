@@ -1,28 +1,29 @@
 @import 'tailwindcss';
 
 /*
-  TODO(fonts): brand fonts are not chosen yet, so the site uses system font
-  stacks (zero network cost, no layout shift). Two roles are in use:
+  Font roles
+  ----------
+    --font-sans     body / UI text            (system stack — final)
+    --font-serif    display headings           (system stack — placeholder)
+    --font-display  brand wordmark / display   -> "Graveur Display" (Bold)
 
-    --font-sans   body / UI text
-    --font-serif  display headings (the hero uses this; brand direction points
-                  at a high-contrast serif — see the reference / guide app)
+  TODO(fonts): the "Graveur Display" file is NOT in the repo yet. Drop
+  `graveur-display-bold.woff2` (and optionally `.woff`) into `public/fonts/`
+  — see public/fonts/README.md. Until then the wordmark renders in the serif
+  fallback below; nothing else needs to change. When it lands, also uncomment
+  the <link rel="preload"> in src/components/BaseHead.astro.
 
-  When real fonts are picked:
-  1. Self-host the files (put .woff2 in src/assets/fonts/ or add an
-     @fontsource-variable/<family> dependency).
-  2. Declare @font-face below WITH `font-display: swap`.
-  3. Point --font-sans / --font-serif at the new families.
-  4. Preload the critical weight(s) in src/components/BaseHead.astro.
-
-  Example:
-    @font-face {
-      font-family: 'Brand Serif';
-      src: url('/fonts/brand-serif.woff2') format('woff2');
-      font-weight: 400 700;
-      font-display: swap;
-    }
+  --font-serif is still a system stack; swap it for the real brand serif the
+  same way (add an @font-face, repoint the token, add a preload).
 */
+
+@font-face {
+  font-family: 'Graveur Display';
+  src: url('/fonts/graveur-display-bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
 
 @theme {
   --font-sans:
@@ -31,6 +32,8 @@
   --font-serif:
     ui-serif, 'Iowan Old Style', 'Palatino Linotype', Palatino, 'Book Antiqua',
     Georgia, Cambria, 'Times New Roman', Times, serif;
+  --font-display:
+    'Graveur Display', ui-serif, Georgia, 'Times New Roman', Times, serif;
 }
 
 :root {

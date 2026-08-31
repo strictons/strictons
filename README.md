@@ -5,8 +5,8 @@ app at [guide.strictons.com](https://guide.strictons.com), which lives in a
 separate repository and has its own deployment. **This repo contains no app
 logic** — it is purely static marketing content.
 
-Built with [Astro](https://astro.build/) (static output, zero client JS by
-default), TypeScript, and Tailwind CSS v4.
+Built with [Astro](https://astro.build/) (static output, ~1 KB of client JS for
+the nav menu and nothing else), TypeScript, and Tailwind CSS v4.
 
 > **Status:** structure / shell only. Every page is placeholder content. Real
 > copy, imagery, and branding come later and will follow the brand direction of
@@ -46,24 +46,50 @@ Dev server runs at `http://localhost:4321`.
 ```
 public/                 Static assets served as-is
   favicon.svg           TODO(brand): placeholder mark
+  fonts/                Self-hosted brand fonts — see public/fonts/README.md
   robots.txt            Full crawl allowed, incl. AI crawlers
   llms.txt              AI-visibility summary (llmstxt.org convention)
   og-default.png        TODO(brand): placeholder 1200x630 social image
 src/
   assets/               Images processed by Astro's <Image> (optimized at build)
+    strictons-logo.png  Brand lion mark (see "Logo" below)
   components/
     BaseHead.astro      Reusable SEO / OG / Twitter meta pattern
-    Header.astro        Primary nav + logo placeholder
-    Footer.astro        Simple footer
+    Header.astro        Logo lockup + hamburger + full-screen overlay menu
+    Hero.astro          Home-page full-viewport hero
+    Footer.astro        Simple footer (also carries the full nav link list)
   layouts/
     BaseLayout.astro    HTML shell: <head> + header + <main> + footer
   pages/                One file per route (see below)
-  styles/global.css     Tailwind entry + font TODO spot
+  styles/global.css     Tailwind entry + @font-face + font tokens
   consts.ts             Site identity, nav links, SEO defaults
 astro.config.mjs        site origin, sitemap integration, image service
 vercel.json             Deploy config for this project (see Deployment)
 .lighthouserc.json      Lighthouse CI thresholds
 ```
+
+### Navigation
+
+The header is just the logo lockup + a hamburger button, at every breakpoint.
+The button opens a **full-screen overlay menu** ([`Header.astro`](src/components/Header.astro))
+with the nav links. It's a progressive enhancement:
+
+- A small inline `<script>` handles open/close, `Escape`, focus trap + restore,
+  `aria-expanded`, and scroll-lock. It's the only client JS the site ships.
+- Without JS, a `<noscript>` style renders the links as a plain inline list and
+  hides the toggle. The footer also carries every nav link.
+
+### Logo
+
+`src/assets/strictons-logo.png` is a trimmed, transparent, single-colour (black)
+lion mark derived from the supplied `strictons-logo.svg` (a 660 KB Canva export
+that wrapped a raster PNG + a baked white background — not usable as-is in the
+header). It renders black on light headers and is flipped to white with a CSS
+`invert` filter over the dark hero. Replace it with a proper vector mark when one
+exists; keep the transparent, single-colour, tightly-cropped shape.
+
+The wordmark next to it is **"Graveur Display" Bold** (`--font-display`) — the
+font file still needs to be added, see [`public/fonts/README.md`](public/fonts/README.md).
 
 ### Routes
 
@@ -119,14 +145,15 @@ Per-page `<head>` extras (JSON-LD, extra preloads) go in the `head` slot:
 
 ## Performance
 
-- Every route is statically generated at build time; no client JS is shipped
-  unless a component explicitly opts in.
+- Every route is statically generated at build time. The only client JS is the
+  ~1 KB nav-menu toggle in `Header.astro`.
 - Images go through Astro's `<Image>` component (Sharp) for automatic
-  optimization + responsive `srcset`. See the pattern in `src/pages/index.astro`.
-- **Fonts:** currently the system font stack (no network cost). When brand fonts
-  are chosen, follow the `TODO(fonts)` notes in `src/styles/global.css` and
-  `src/components/BaseHead.astro` — self-host, preload the critical weight, and
-  set `font-display: swap`.
+  optimization + responsive `srcset`. See the pattern in `src/components/Hero.astro`.
+- **Fonts:** `--font-sans` / `--font-serif` are system stacks (no network cost).
+  `--font-display` (the wordmark) points at "Graveur Display" via an `@font-face`
+  with `font-display: swap` — the file needs adding, see
+  [`public/fonts/README.md`](public/fonts/README.md); until then it falls back to
+  serif. When it's added, uncomment the preload in `src/components/BaseHead.astro`.
 
 ### Lighthouse CI
 
@@ -157,8 +184,10 @@ to it, deploy.
 
 ## TODO markers (where things plug in later)
 
-- `TODO(brand)` — logo, favicon, OG image, colors, fonts, social handles.
-- `TODO(fonts)` — self-hosted font setup (`global.css`, `BaseHead.astro`).
+- `TODO(brand)` — favicon, OG image, colors, social handles; replace the raster
+  lion mark with a vector one.
+- `TODO(fonts)` — add `public/fonts/graveur-display-bold.woff2` (see
+  `public/fonts/README.md`); swap `--font-serif` for the real brand serif.
 - `TODO(forms)` — contact form backend (`src/pages/contact.astro`); currently a
   disabled static placeholder.
 - `TODO(analytics)` — analytics loader (`src/components/Footer.astro`); none loaded.

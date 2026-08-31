@@ -63,9 +63,19 @@ const fullTitle = title === SITE.name ? title : `${title} | ${SITE.name}`;
 
 {
   /*
-    TODO(fonts): once brand fonts are chosen, preload the critical weight here, e.g.
-    <link rel="preload" href="/fonts/brand-sans.woff2" as="font" type="font/woff2" crossorigin />
-    See src/styles/global.css for the matching @font-face + font-display: swap.
+    TODO(fonts): uncomment once public/fonts/graveur-display-bold.woff2 exists
+    (the brand wordmark uses it via --font-display). See public/fonts/README.md
+    and the @font-face in src/styles/global.css.
+
+    <link
+      rel="preload"
+      href="/fonts/graveur-display-bold.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
+    Add the same for the real brand serif when --font-serif is swapped.
   */
 }
 

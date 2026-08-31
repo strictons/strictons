@@ -1,11 +1,13 @@
 ---
+import { Image } from 'astro:assets';
 import { NAV_LINKS, SITE } from '../consts';
+import logo from '../assets/strictons-logo.png';
 
 interface Props {
   /**
    * Layer the header transparently over a full-bleed hero (home page).
-   * The logo sits over the white headline column on lg+ and over the artwork
-   * on smaller screens, so its colours flip at the `lg` breakpoint.
+   * The wordmark sits over the white headline column on lg+ and over the
+   * artwork on smaller screens, so its colour flips at the `lg` breakpoint.
    */
   overlay?: boolean;
 }
@@ -27,54 +29,223 @@ const isActive = (href: string) =>
       : 'relative border-b border-slate-200 bg-white',
   ]}
 >
-  <nav
-    aria-label="Primary"
-    class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-6 gap-y-3 px-4 py-4"
-  >
+  <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
     <a
       href="/"
-      class:list={[
-        'flex items-center gap-2 text-base font-semibold',
-        overlay ? 'text-white lg:text-slate-900' : 'text-slate-900',
-      ]}
+      aria-label={`${SITE.name} – home`}
+      class="flex items-center gap-2.5"
     >
-      {
-        /* TODO(brand): replace with the real logo asset. Brand direction will
-          follow the companion guide app (guide.strictons.com). */
-      }
+      <Image
+        src={logo}
+        alt=""
+        width={80}
+        height={93}
+        densities={[1, 2]}
+        class:list={['h-7 w-auto sm:h-8', overlay ? 'invert lg:invert-0' : '']}
+      />
       <span
-        aria-hidden="true"
         class:list={[
-          'inline-flex h-8 w-8 items-center justify-center rounded text-sm font-bold',
-          overlay
-            ? 'bg-white text-slate-900 lg:bg-slate-900 lg:text-white'
-            : 'bg-slate-900 text-white',
-        ]}>S</span
-      >
-      <span class={overlay ? 'drop-shadow-sm lg:drop-shadow-none' : ''}
-        >{SITE.name}</span
+          'font-display text-lg tracking-[0.2em] uppercase sm:text-xl',
+          overlay ? 'text-white lg:text-slate-900' : 'text-slate-900',
+        ]}>{SITE.name}</span
       >
     </a>
 
-    <ul class="flex flex-wrap items-center gap-4 text-sm sm:gap-6">
-      {
-        NAV_LINKS.map((link) => (
-          <li>
-            <a
-              href={link.href}
-              aria-current={isActive(link.href) ? 'page' : undefined}
-              class:list={[
-                'transition-colors aria-[current=page]:font-semibold',
-                overlay
-                  ? 'text-white/90 drop-shadow-sm hover:text-white aria-[current=page]:text-white'
-                  : 'text-slate-600 hover:text-slate-900 aria-[current=page]:text-slate-900',
-              ]}
-            >
-              {link.label}
-            </a>
-          </li>
-        ))
+    <button
+      type="button"
+      id="nav-toggle"
+      aria-controls="primary-nav"
+      aria-expanded="false"
+      class:list={[
+        '-mr-2 inline-flex h-10 w-10 items-center justify-center rounded transition-colors',
+        overlay
+          ? 'text-white hover:text-white/70'
+          : 'text-slate-900 hover:text-slate-500',
+      ]}
+    >
+      <span class="sr-only">Menu</span>
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.75"
+        stroke-linecap="round"
+        aria-hidden="true"
+      >
+        <line x1="3" y1="7" x2="21" y2="7"></line>
+        <line x1="3" y1="13" x2="21" y2="13"></line>
+        <line x1="3" y1="19" x2="15" y2="19"></line>
+      </svg>
+    </button>
+  </div>
+
+  {/* Full-screen overlay menu — used at every breakpoint */}
+  <div
+    id="primary-nav"
+    data-open="false"
+    class="invisible fixed inset-0 z-[70] flex translate-y-[-6px] flex-col bg-white text-slate-900 opacity-0 transition-[opacity,transform] duration-200 ease-out data-[open=true]:visible data-[open=true]:translate-y-0 data-[open=true]:opacity-100 motion-reduce:transition-none"
+  >
+    <div
+      class="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-4"
+    >
+      <a
+        href="/"
+        aria-label={`${SITE.name} – home`}
+        class="flex items-center gap-2.5"
+      >
+        <Image
+          src={logo}
+          alt=""
+          width={80}
+          height={93}
+          densities={[1, 2]}
+          class="h-7 w-auto sm:h-8"
+        />
+        <span
+          class="font-display text-lg tracking-[0.2em] text-slate-900 uppercase sm:text-xl"
+          >{SITE.name}</span
+        >
+      </a>
+      <button
+        type="button"
+        data-nav-close
+        class="-mr-2 inline-flex h-10 w-10 items-center justify-center rounded text-slate-900 transition-colors hover:text-slate-500"
+      >
+        <span class="sr-only">Close menu</span>
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.75"
+          stroke-linecap="round"
+          aria-hidden="true"
+        >
+          <line x1="5" y1="5" x2="19" y2="19"></line>
+          <line x1="19" y1="5" x2="5" y2="19"></line>
+        </svg>
+      </button>
+    </div>
+
+    <nav
+      aria-label="Primary"
+      class="mx-auto flex w-full max-w-6xl flex-1 flex-col justify-center px-4 pb-24"
+    >
+      <ul>
+        {
+          NAV_LINKS.map((link, i) => (
+            <li class="border-b border-slate-200 first:border-t">
+              <a
+                href={link.href}
+                aria-current={isActive(link.href) ? 'page' : undefined}
+                class="group flex items-baseline gap-4 py-4 font-serif text-4xl tracking-tight text-slate-900 uppercase transition-colors hover:text-slate-400 aria-[current=page]:text-slate-400 sm:gap-6 sm:py-5 sm:text-6xl"
+              >
+                <span class="font-sans text-xs tracking-widest text-slate-400 tabular-nums">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <span class="transition-transform group-hover:translate-x-1">
+                  {link.label}
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+
+      <p class="mt-10 text-sm text-slate-500">
+        <a href={SITE.appUrl} class="font-medium text-slate-900 hover:underline"
+          >Open the guide app &rarr;</a
+        >
+      </p>
+    </nav>
+  </div>
+
+  <noscript>
+    <style>
+      #nav-toggle {
+        display: none;
       }
-    </ul>
-  </nav>
+      #primary-nav {
+        position: static;
+        visibility: visible;
+        transform: none;
+        opacity: 1;
+      }
+      #primary-nav [data-nav-close] {
+        display: none;
+      }
+      #primary-nav nav {
+        padding-bottom: 1.5rem;
+      }
+      #primary-nav .text-4xl {
+        font-size: 1.5rem;
+      }
+    </style>
+  </noscript>
 </header>
+
+<script>
+  const toggle = document.getElementById('nav-toggle');
+  const panel = document.getElementById('primary-nav');
+
+  if (toggle && panel) {
+    const closeBtn = panel.querySelector<HTMLElement>('[data-nav-close]');
+    const focusables = () =>
+      Array.from(
+        panel.querySelectorAll<HTMLElement>('a[href], button:not([disabled])')
+      );
+    let lastFocused: HTMLElement | null = null;
+
+    const onKeydown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        closeMenu();
+        return;
+      }
+      if (e.key === 'Tab') {
+        const items = focusables();
+        if (items.length === 0) return;
+        const first = items[0];
+        const last = items[items.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    };
+
+    const openMenu = () => {
+      lastFocused = document.activeElement as HTMLElement;
+      panel.dataset.open = 'true';
+      toggle.setAttribute('aria-expanded', 'true');
+      document.documentElement.style.overflow = 'hidden';
+      document.addEventListener('keydown', onKeydown);
+      // Wait a frame: the panel is `visibility:hidden` until `data-open`
+      // takes effect, and a hidden element can't take focus.
+      requestAnimationFrame(() => (closeBtn ?? focusables()[0])?.focus());
+    };
+
+    const closeMenu = ({ restoreFocus = true } = {}) => {
+      panel.dataset.open = 'false';
+      toggle.setAttribute('aria-expanded', 'false');
+      document.documentElement.style.overflow = '';
+      document.removeEventListener('keydown', onKeydown);
+      if (restoreFocus) (lastFocused ?? toggle).focus();
+    };
+
+    toggle.addEventListener('click', () =>
+      panel.dataset.open === 'true' ? closeMenu() : openMenu()
+    );
+    closeBtn?.addEventListener('click', () => closeMenu());
+    panel.addEventListener('click', (e) => {
+      if ((e.target as HTMLElement).closest('a[href]')) {
+        closeMenu({ restoreFocus: false });
+      }
+    });
+  }
+</script>
