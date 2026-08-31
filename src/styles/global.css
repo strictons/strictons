@@ -212,10 +212,7 @@ header[data-nav-open='true'] .nav-logo {
   transform: translateY(-50%) rotate(-45deg);
 }
 
-/*
-  Hero artwork "comes alive": a very slow Ken Burns drift on the painting, and
-  a scattering of warm motes of light that rise and twinkle over it.
-*/
+/* Hero painting — a very slow Ken Burns drift. */
 .hero-kenburns {
   transform-origin: 50% 42%;
   animation: hero-kenburns 38s ease-in-out infinite alternate;
@@ -226,80 +223,6 @@ header[data-nav-open='true'] .nav-logo {
   }
   to {
     transform: scale(1.16) translate3d(-1.6%, -1.4%, 0);
-  }
-}
-
-.hero-specks {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  mix-blend-mode: screen;
-}
-.hero-speck {
-  position: absolute;
-  border-radius: 9999px;
-  background: radial-gradient(
-    circle,
-    rgba(255, 244, 224, 0.95) 0%,
-    rgba(255, 208, 138, 0.45) 42%,
-    transparent 72%
-  );
-  filter: blur(0.6px);
-  opacity: 0;
-  will-change: transform, opacity;
-  animation: hero-speck var(--dur, 24s) ease-in-out var(--delay, 0s) infinite;
-}
-@keyframes hero-speck {
-  0% {
-    opacity: 0;
-    transform: translate3d(0, 0, 0) scale(0.4);
-  }
-  10% {
-    opacity: var(--peak, 0.5);
-  }
-  45% {
-    opacity: calc(var(--peak, 0.5) * 0.7);
-    transform: translate3d(
-        calc(var(--drift, 0px) * 0.5),
-        calc(var(--rise, 80px) * -0.5),
-        0
-      )
-      scale(1);
-  }
-  80% {
-    opacity: var(--peak, 0.5);
-  }
-  100% {
-    opacity: 0;
-    transform: translate3d(var(--drift, 0px), calc(var(--rise, 80px) * -1), 0)
-      scale(0.6);
-  }
-}
-
-.hero-glow {
-  position: absolute;
-  border-radius: 9999px;
-  background: radial-gradient(
-    circle,
-    rgba(255, 226, 180, 0.9) 0%,
-    rgba(255, 194, 128, 0.32) 45%,
-    transparent 75%
-  );
-  filter: blur(7px);
-  opacity: 0;
-  will-change: transform, opacity;
-  animation: hero-glow var(--dur, 28s) ease-in-out var(--delay, 0s) infinite;
-}
-@keyframes hero-glow {
-  0%,
-  100% {
-    opacity: 0;
-    transform: translate3d(0, 0, 0) scale(0.85);
-  }
-  50% {
-    opacity: var(--peak, 0.1);
-    transform: translate3d(var(--drift, 0px), calc(var(--rise, 30px) * -1), 0)
-      scale(1.12);
   }
 }
 
@@ -315,8 +238,5 @@ header[data-nav-open='true'] .nav-logo {
   .hero-kenburns {
     animation: none;
     transform: scale(1.03);
-  }
-  .hero-specks {
-    display: none;
   }
 }

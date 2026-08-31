@@ -9,9 +9,8 @@ import { COPYRIGHT } from '../consts';
  *   < lg  : artwork fills the screen; the (centred) headline sits above the
  *           tagline, both over the artwork
  *
- * The artwork "breathes": a slow Ken Burns drift on the painting plus a
- * scattering of warm light motes that rise and twinkle over it (all CSS,
- * disabled under prefers-reduced-motion — see global.css).
+ * The painting has a slow Ken Burns drift (`.hero-kenburns` in global.css,
+ * disabled under prefers-reduced-motion).
  *
  * The copyright line shows only on lg+ here; on mobile home there is none, and
  * inner pages get it from the slim footer in BaseLayout.
@@ -24,42 +23,6 @@ import { COPYRIGHT } from '../consts';
  * placeholder brand copy.
  * TODO(fonts): `font-serif` is a system serif stack today; see global.css.
  */
-
-// Deterministic pseudo-random so the build output is stable.
-const rand = (seed: number) => {
-  const x = Math.sin(seed) * 10000;
-  return x - Math.floor(x);
-};
-const round = (n: number, p = 1) => Math.round(n * 10 ** p) / 10 ** p;
-
-const SPECKS = Array.from({ length: 16 }, (_, i) => {
-  const s = i + 1;
-  return {
-    left: round(10 + rand(s * 12.9898) * 74),
-    top: round(12 + rand(s * 78.233) * 64),
-    size: round(2 + rand(s * 39.42) * 4),
-    dur: Math.round(14 + rand(s * 27.17) * 18),
-    delay: -Math.round(rand(s * 53.71) * 34),
-    drift: Math.round(-38 + rand(s * 93.9) * 76),
-    rise: Math.round(45 + rand(s * 11.13) * 100),
-    peak: round(0.42 + rand(s * 61.4) * 0.4, 2),
-  };
-});
-
-// A few large, very soft blooms — light welling up from inside the painting.
-const GLOWS = Array.from({ length: 3 }, (_, i) => {
-  const s = i + 1;
-  return {
-    left: round(18 + rand(s * 5.11) * 60),
-    top: round(24 + rand(s * 17.7) * 46),
-    size: Math.round(42 + rand(s * 8.3) * 52),
-    dur: Math.round(20 + rand(s * 3.9) * 16),
-    delay: -Math.round(rand(s * 21.4) * 24),
-    drift: Math.round(-16 + rand(s * 14.2) * 32),
-    rise: Math.round(18 + rand(s * 6.6) * 34),
-    peak: round(0.06 + rand(s * 9.9) * 0.08, 2),
-  };
-});
 ---
 
 <section
@@ -94,28 +57,6 @@ const GLOWS = Array.from({ length: 3 }, (_, i) => {
     <div
       class="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/45 to-transparent"
     >
-    </div>
-
-    {
-      /* Light coming off the painting — soft blooms + drifting motes. Decorative. */
-    }
-    <div class="hero-specks pointer-events-none" aria-hidden="true">
-      {
-        GLOWS.map((g) => (
-          <span
-            class="hero-glow"
-            style={`left:${g.left}%;top:${g.top}%;width:${g.size}px;height:${g.size}px;--dur:${g.dur}s;--delay:${g.delay}s;--drift:${g.drift}px;--rise:${g.rise}px;--peak:${g.peak}`}
-          />
-        ))
-      }
-      {
-        SPECKS.map((s) => (
-          <span
-            class="hero-speck"
-            style={`left:${s.left}%;top:${s.top}%;width:${s.size}px;height:${s.size}px;--dur:${s.dur}s;--delay:${s.delay}s;--drift:${s.drift}px;--rise:${s.rise}px;--peak:${s.peak}`}
-          />
-        ))
-      }
     </div>
 
     {
