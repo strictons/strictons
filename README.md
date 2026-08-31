@@ -73,7 +73,11 @@ vercel.json             Deploy config for this project (see Deployment)
 ### Navigation
 
 The header is just the logo lockup + a hamburger button, at every breakpoint
-([`Header.astro`](src/components/Header.astro)). Opening it:
+([`Header.astro`](src/components/Header.astro)). On the home page the bar is
+full-bleed with the same left/right insets as the hero, so the logo lines up
+with the headline and the toggle with the artist credit; inner pages keep the
+`max-w-6xl` container. The hamburger is three hairline rules of unequal length
+that even up on hover and fold into an X on open. Opening it:
 
 1. A **curtain** (`#primary-nav`) drops from above the viewport — slow to start,
    accelerating into the finish. Its background is `bg-artwork-blend`, a gradient

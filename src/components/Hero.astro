@@ -56,15 +56,20 @@ import { COPYRIGHT } from '../consts';
     >
     </div>
 
-    {/* Tagline — centred on the artwork at every breakpoint */}
+    {
+      /*
+      Tagline. lg+: centred on the artwork. Mobile: sits just below the vertical
+      midline, so it pairs with the headline (just above it) as a centred group.
+    */
+    }
     <p
-      class="absolute inset-x-0 top-1/2 -translate-y-1/2 px-4 text-center font-serif text-lg font-bold tracking-[0.05em] text-white uppercase italic [text-shadow:0_2px_16px_rgba(0,0,0,0.65)] sm:px-8 sm:text-xl xl:text-2xl 2xl:text-3xl"
+      class="absolute inset-x-0 top-[calc(50%+1.25rem)] px-4 text-center font-serif text-lg font-bold tracking-[0.05em] text-white uppercase italic [text-shadow:0_2px_16px_rgba(0,0,0,0.65)] sm:px-8 sm:text-xl lg:top-1/2 lg:-translate-y-1/2 xl:text-2xl 2xl:text-3xl"
     >
       Hand them a guide at check in
     </p>
 
     <figcaption
-      class="absolute right-6 bottom-8 text-right font-serif text-xs leading-relaxed text-white/90 italic [text-shadow:0_1px_10px_rgba(0,0,0,0.65)] sm:right-8 sm:bottom-10 sm:text-sm"
+      class="absolute right-6 bottom-8 text-right font-serif text-xs leading-relaxed text-white/90 italic [text-shadow:0_1px_10px_rgba(0,0,0,0.65)] sm:right-10 sm:bottom-10 sm:text-sm xl:right-12 2xl:right-20"
     >
       Artwork commissioned by Australian<br />
       Artist Lillie Nolan<br />
@@ -80,11 +85,11 @@ import { COPYRIGHT } from '../consts';
   }
   <div class="pointer-events-none relative z-10 grid min-h-svh lg:grid-cols-2">
     <div
-      class="relative flex flex-col items-center justify-start px-6 pt-[24svh] pb-16 text-white sm:px-10 sm:pt-[26svh] lg:items-start lg:justify-center lg:bg-linen lg:px-10 lg:py-0 lg:pt-0 lg:text-slate-900 xl:px-12 2xl:px-20"
+      class="relative flex flex-col px-6 text-white sm:px-10 lg:items-start lg:justify-center lg:bg-linen lg:px-10 lg:py-0 lg:text-slate-900 xl:px-12 2xl:px-20"
     >
       <h1
         id="hero-heading"
-        class="max-w-xl text-center font-serif lg:text-left"
+        class="absolute inset-x-0 bottom-[calc(50%+1.25rem)] mx-auto max-w-xl px-6 text-center font-serif sm:px-10 lg:static lg:mx-0 lg:px-0 lg:text-left"
       >
         <span
           class="block text-base font-medium tracking-[0.06em] text-white/90 uppercase [text-shadow:0_2px_14px_rgba(0,0,0,0.55)] sm:text-lg lg:text-xl lg:text-slate-700 lg:[text-shadow:none]"
