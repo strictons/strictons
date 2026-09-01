@@ -5,6 +5,22 @@
   "outputDirectory": "dist",
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    { "source": "/for-guests", "destination": "/", "permanent": true },
+    { "source": "/journal", "destination": "/", "permanent": true },
+    { "source": "/journal/:path*", "destination": "/", "permanent": true },
+    { "source": "/partners", "destination": "/", "permanent": true },
+    {
+      "source": "/for-businesses",
+      "destination": "/for-business",
+      "permanent": true
+    },
+    {
+      "source": "/contact/schedule",
+      "destination": "/contact",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
