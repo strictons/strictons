@@ -35,6 +35,7 @@ export const SITE = {
 export const NAV_LINKS = [
   { href: '/for-hotels', label: 'For Hotels' },
   { href: '/for-business', label: 'For Business' },
+  { href: '/guide-specs', label: 'Guide Specs' },
   { href: '/faq', label: 'FAQs' },
   { href: '/contact', label: 'Contact' },
 ] as const;

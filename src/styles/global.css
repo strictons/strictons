@@ -3,13 +3,13 @@
 /*
   Font roles
   ----------
-    --font-sans     body / UI text            (system stack — final)
-    --font-serif    display headings           (system stack — placeholder)
+    --font-sans     body / UI text            (system stack, final)
+    --font-serif    display headings           (system stack, placeholder)
     --font-display  brand wordmark / display   -> "Graveur Display" (Bold)
 
   TODO(fonts): the "Graveur Display" file is NOT in the repo yet. Drop
   `graveur-display-bold.woff2` (and optionally `.woff`) into `public/fonts/`
-  — see public/fonts/README.md. Until then the wordmark renders in the serif
+  (see public/fonts/README.md). Until then the wordmark renders in the serif
   fallback below; nothing else needs to change. When it lands, also uncomment
   the <link rel="preload"> in src/components/BaseHead.astro.
 
@@ -82,7 +82,7 @@ html {
 }
 
 /*
-  Mixed-colour field sampled from the commissioned artwork — deep oxblood base
+  Mixed-colour field sampled from the commissioned artwork: deep oxblood base
   with a rust glow, a navy pool, a whisper of the guide's teal and a warm
   highlight. Backs the full-screen nav menu.
 */
@@ -107,7 +107,7 @@ html {
 /*
   Full-screen nav menu choreography
   ---------------------------------
-  1. The panel is a curtain that drops from above the viewport — slow to start,
+  1. The panel is a curtain that drops from above the viewport: slow to start,
      accelerating into the finish (weighty / "luxury"). Close retracts quicker;
      visibility trails the transform so the slide-up stays visible.
   2. Only once the curtain has landed do the contents (.nav-reveal) settle in
@@ -160,7 +160,7 @@ header[data-nav-open='true'] .nav-logo {
 }
 
 /*
-  Hamburger — three hairline rules of unequal length (right-aligned), that even
+  Hamburger: three hairline rules of unequal length (right-aligned), that even
   up on hover and fold into a fine X when the menu opens.
 */
 .hamburger {
@@ -212,7 +212,7 @@ header[data-nav-open='true'] .nav-logo {
   transform: translateY(-50%) rotate(-45deg);
 }
 
-/* Hero painting — a very slow Ken Burns drift. */
+/* Hero painting: a very slow Ken Burns drift. */
 .hero-kenburns {
   transform-origin: 50% 42%;
   animation: hero-kenburns 38s ease-in-out infinite alternate;

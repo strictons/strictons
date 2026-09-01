@@ -1,0 +1,145 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { Image } from 'astro:assets';
+import cover from '../assets/Guide Cover.png';
+
+/*
+  Guide Specs: the physical brochure shown as a lightly angled product shot
+  (it's a 16pp saddle-stitched book, so the "thickness" is just a sliver), with
+  three specs down each side. Size + binding sit as a caption under the guide so
+  the two columns stay even at 3 and 3.
+  Copy is first-pass; confirm the print-partner wording before launch.
+*/
+const specsLeft = [
+  {
+    label: 'Premium stock',
+    body: '300gsm satin silk cover, 150gsm satin silk interior. Weighted in the hand and built for daily handling.',
+  },
+  {
+    label: 'Keycard die-cuts',
+    body: 'Slots in the back cover to hold room keycards. Can be included or removed.',
+  },
+  {
+    label: '100% on brand',
+    body: 'Fonts, colours and imagery are all aligned to the hotel. Nothing templated.',
+  },
+];
+
+const specsRight = [
+  {
+    label: '16 or 20 pages',
+    body: 'A 16pp or 20pp layout, depending on how much the hotel wants inside.',
+  },
+  {
+    label: 'Awarded print partner',
+    body: 'Produced by one of Australia’s most awarded printing partners. Clients include Apple, Deloitte and the Royal Australian Mint.',
+  },
+  {
+    label: 'Unlimited for 12 months',
+    body: 'Reprints on demand for a full year, so reception never runs out.',
+  },
+];
+---
+
+<BaseLayout
+  title="Guide Specs"
+  description="Strictons guide specifications: 101.5 × 185 mm, 16pp saddle-stitched, 300gsm satin silk cover, keycard die-cuts, fully custom, printed by an award-winning Australian print partner."
+>
+  <section class="mx-auto max-w-6xl px-4 py-16">
+    <p class="text-sm font-semibold tracking-[0.08em] text-slate-500 uppercase">
+      Guide Specs
+    </p>
+    <h1 class="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
+      Designed for pockets, made to take home.
+    </h1>
+    <p class="mt-4 max-w-prose text-lg text-slate-600">
+      A pocket-sized book a guest would actually keep. Premium paper, keycard
+      slots in the back, and every page tailored to the hotel. Here's what goes
+      into one.
+    </p>
+
+    <div
+      class="mt-16 grid gap-x-12 gap-y-12 lg:mt-20 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:items-stretch lg:gap-x-16"
+    >
+      <ul
+        class="order-2 flex flex-col gap-8 sm:grid sm:grid-cols-3 sm:gap-x-8 lg:order-1 lg:flex lg:justify-between lg:gap-6 lg:text-right"
+      >
+        {
+          specsLeft.map((spec) => (
+            <li>
+              <p class="font-semibold text-slate-900">{spec.label}</p>
+              <p class="mt-1 text-sm text-slate-600">{spec.body}</p>
+            </li>
+          ))
+        }
+      </ul>
+
+      <figure class="order-1 flex flex-col items-center lg:order-2 lg:py-4">
+        <div class="guide-shot w-[220px] sm:w-[250px] lg:w-[270px]">
+          <Image
+            src={cover}
+            alt="The cover of a Strictons pocket guide, branded for Beachcomber Hotel & Resort, Toukley."
+            widths={[220, 270, 440, 540]}
+            sizes="(min-width: 1024px) 270px, 250px"
+          />
+        </div>
+        <figcaption
+          class="mt-6 text-center text-xs font-semibold tracking-[0.08em] text-slate-500 uppercase"
+        >
+          101.5 × 185 mm · 16pp saddle-stitched
+        </figcaption>
+      </figure>
+
+      <ul
+        class="order-3 flex flex-col gap-8 sm:grid sm:grid-cols-3 sm:gap-x-8 lg:flex lg:justify-between lg:gap-6"
+      >
+        {
+          specsRight.map((spec) => (
+            <li>
+              <p class="font-semibold text-slate-900">{spec.label}</p>
+              <p class="mt-1 text-sm text-slate-600">{spec.body}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Lightly angled product shot of a thin 16pp saddle-stitched booklet. The
+     page block is a ~2px sliver on the right edge only; it tapers to nothing at
+     the bottom corner, as if the pages fold back into the stitch. */
+  .guide-shot {
+    position: relative;
+    transform: perspective(2400px) rotateY(-9deg) rotateX(2deg) rotateZ(-0.5deg);
+  }
+
+  .guide-shot img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 3px;
+    box-shadow: 10px 14px 24px -12px rgb(15 23 42 / 0.35);
+  }
+
+  .guide-shot::after {
+    content: '';
+    position: absolute;
+    top: 1.5px;
+    right: -2px;
+    bottom: 1.5px;
+    width: 2px;
+    z-index: -1;
+    border-radius: 0 2px 2px 0;
+    background: linear-gradient(to bottom, #edeef1, #dde0e4);
+    /* full height at the top, collapsing into the bottom-right corner */
+    clip-path: polygon(0 0, 100% 0, 100% 88%, 0 100%);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .guide-shot {
+      transform: none;
+    }
+  }
+</style>

@@ -1,23 +1,181 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../consts';
+
+/*
+  FAQ: synthesised from the For Hotels and For Business pages. Keep answers in
+  sync with those pages if the offer changes. Grouped: about the guide, for
+  hotels, for local businesses.
+  Copy is first-pass marketing messaging; refine with brand voice later.
+*/
+const faqGroups = [
+  {
+    heading: 'About the guide',
+    items: [
+      {
+        q: 'What is the product?',
+        a: `Strictons produces a guide that hotels hand to guests at check-in. It
+          comes in two parts: a printed guide that doubles as the keycard
+          holder, and a digital version guests reach by scanning the QR code on
+          it. It covers the essentials, hotel's amenities and a curated set of local
+          businesses worth visiting.`,
+      },
+      {
+        q: 'Is there an app to download?',
+        a: `No. The printed guide works on its own, and the digital guide opens
+          in a browser from the QR code. Nothing to install, for guests, staff or businesses.`,
+      },
+      {
+        q: 'Who creates the content, and who keeps it current?',
+        a: `Branding is provided by the hotel, along with images from businesses. We write the copy to match the hotel's branding and tone, and
+          the hotel approves it before anything is printed. After launch we
+          maintain the digital guide. When a detail changes we update it,
+          usually within 24 hours. There's no dashboard or login for
+          the hotels or businesses to manage.`,
+      },
+    ],
+  },
+  {
+    heading: 'For hotels',
+    items: [
+      {
+        q: 'What does it cost the hotel?',
+        a: `Nothing. The guide is funded by the local businesses featured inside
+          it, who pay for their spot. Those businesses are only approached once
+          the hotel has approved the list.`,
+      },
+      {
+        q: 'Who decides which businesses appear?',
+        a: `The hotel. We put together a shortlist of local venues that fit the
+          property's brand and guests; the hotel adds or removes anything it
+          likes. Nothing goes further without the hotel's sign-off.`,
+      },
+      {
+        q: 'What does setup involve?',
+        a: `We shortlist local businesses that suit the property.
+          The hotel reviews and approves the list. We design the physical and
+          digital guide to match the hotel's branding, and the hotel approves
+          the design before it goes to print.`,
+      },
+      {
+        q: 'How are the printed guides kept in stock?',
+        a: `After the first print run we store the guides and send an ongoing,
+          unlimited supply for 12 months, so reception never runs out.`,
+      },
+      {
+        q: 'Does this replace the reception or concierge?',
+        a: `Absolutely not. It takes the routine questions off their hands, and provides them with a professional tool to support their service.
+          It maintains consistent brand standards, in a convenient format for guests.`,
+      },
+    ],
+  },
+  {
+    heading: 'For local businesses',
+    items: [
+      {
+        q: 'How do I get a spot in a guide?',
+        a: `Spots are by invitation only, and only after a hotel has curated and
+          approved its list. If a hotel near you is building a guide, get in
+          touch and we'll follow up.`,
+      },
+      {
+        q: 'Why not just run social media ads?',
+        a: `A spot in the guide reaches guests who are already in the area, with
+          time and money, deciding where to go, not someone scrolling a feed in
+          another city. And because the placement comes from the hotel, it reads
+          as a recommendation rather than an ad.`,
+      },
+      {
+        q: "What's included with a spot?",
+        a: `A placement in the printed guide and your own page in the digital
+          guide, with links to your website, contact details, socials and
+          directions. Guests reach it by scanning the QR code on the printed
+          guide.`,
+      },
+      {
+        q: 'How is performance measured?',
+        a: `We track every scan of the guide's QR codes and send you a monthly
+          report showing how many guests visited your page.`,
+      },
+    ],
+  },
+];
+
+// FAQPage structured data: flatten the groups; collapse answer whitespace.
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqGroups.flatMap((group) =>
+    group.items.map((item) => ({
+      '@type': 'Question',
+      name: item.q,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.a.replace(/\s+/g, ' ').trim(),
+      },
+    })),
+  ),
+};
 ---
 
 <BaseLayout
   title="FAQs"
-  description="Placeholder page — frequently asked questions about Strictons. Real content to come."
+  description="Frequently asked questions about Strictons guides: what they are, what they cost hotels, and how local businesses get a spot inside."
 >
-  <section class="mx-auto max-w-6xl px-4 py-16">
-    <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">FAQs</h1>
-    <p class="mt-4 max-w-prose text-slate-600">
-      Placeholder content. Frequently asked questions will go here.
-    </p>
+  <script
+    is:inline
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify(faqSchema)}
+  />
 
-    {
-      /*
-      TODO(content): render Q&A as a semantic list, e.g. a series of
-      <article> blocks with <h2> questions, or a <dl>. Consider adding
-      FAQPage JSON-LD structured data once real questions exist.
-    */
-    }
+  <section class="mx-auto max-w-6xl px-4 py-16">
+    <p class="text-sm font-semibold tracking-[0.08em] text-slate-500 uppercase">
+      FAQs
+    </p>
+    <h1 class="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
+      How Strictons works.
+    </h1>
+    <p class="mt-4 max-w-prose text-lg text-slate-600">
+      The short version of what the guide is, what it costs, and how hotels and
+      local businesses use it.
+    </p>
+  </section>
+
+  {
+    faqGroups.map((group, i) => (
+      <section
+        class={
+          i % 2 === 0
+            ? 'border-t border-slate-200 bg-slate-50'
+            : 'border-t border-slate-200'
+        }
+      >
+        <div class="mx-auto max-w-6xl px-4 py-16">
+          <h2 class="text-2xl font-bold tracking-tight sm:text-3xl">
+            {group.heading}
+          </h2>
+          <dl class="mt-8 grid gap-x-10 gap-y-8 sm:grid-cols-2">
+            {group.items.map((item) => (
+              <div>
+                <dt class="text-lg font-semibold text-slate-900">{item.q}</dt>
+                <dd class="mt-2 text-slate-600">{item.a}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </section>
+    ))
+  }
+
+  <section class="border-t border-slate-200">
+    <div class="mx-auto max-w-6xl px-4 py-16">
+      <p class="max-w-prose text-slate-600">
+        Still have a question? Email <a
+          class="underline"
+          href={`mailto:${SITE.email}`}>{SITE.email}</a
+        > or use the <a class="underline" href="/contact">booking form</a>.
+      </p>
+    </div>
   </section>
 </BaseLayout>

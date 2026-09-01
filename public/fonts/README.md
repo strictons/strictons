@@ -6,7 +6,7 @@ Self-hosted brand fonts live here and are served from `/fonts/…`.
 
 The Strictons wordmark in the header/menu is set in **Graveur Display Bold**
 (`--font-display`). The font file is **not** committed to this repo (licensed
-font — add it from the brand's font vendor account).
+font; add it from the brand's font vendor account).
 
 Drop this file into this folder, keeping the exact name:
 
@@ -22,7 +22,7 @@ Then:
 
 1. Uncomment the `<link rel="preload" href="/fonts/graveur-display-bold.woff2" …>`
    in `src/components/BaseHead.astro`.
-2. That's it — the `@font-face` (in `src/styles/global.css`) and the
+2. That's it. The `@font-face` (in `src/styles/global.css`) and the
    `--font-display` token already point at these paths.
 
 Until the file is added, the wordmark falls back to the serif stack defined on

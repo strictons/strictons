@@ -9,7 +9,7 @@ interface Props {
    * over the linen headline column on lg+ (dark) and over the artwork on
    * smaller screens (light), so its colours flip at `lg`. While the menu is
    * open the header bar sits on top of the dark menu panel and its marks are
-   * forced light — see `header[data-nav-open]` in global.css.
+   * forced light; see `header[data-nav-open]` in global.css.
    */
   overlay?: boolean;
 }
@@ -31,7 +31,7 @@ const isActive = (href: string) =>
 >
   {
     /*
-      Bar — stays above the menu panel (local z-20 > panel z-10). On the home
+      Bar: stays above the menu panel (local z-20 > panel z-10). On the home
       page it is full-bleed with the same left/right insets as the hero, so the
       logo lines up with the headline and the toggle with the artist credit.
     */
@@ -46,7 +46,7 @@ const isActive = (href: string) =>
   >
     <a
       href="/"
-      aria-label={`${SITE.name} – home`}
+      aria-label={`${SITE.name} home`}
       class="flex items-center gap-2.5 sm:gap-3"
     >
       <Image
@@ -191,7 +191,7 @@ const isActive = (href: string) =>
       toggle.setAttribute('aria-expanded', 'true');
       document.documentElement.style.overflow = 'hidden';
       document.addEventListener('keydown', onKeydown);
-      // Focus the panel itself, not a link — nothing should look "selected".
+      // Focus the panel itself, not a link; nothing should look "selected".
       // The focus trap + Tab take over from here.
       requestAnimationFrame(() => panel.focus());
     };

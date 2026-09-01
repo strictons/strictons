@@ -10,7 +10,7 @@ export default defineConfig({
   site: 'https://strictons.com',
 
   // Every page is statically generated at build time. No SSR, no adapter needed
-  // for the Vercel deploy target — Vercel auto-detects the Astro build output.
+  // for the Vercel deploy target. Vercel auto-detects the Astro build output.
   output: 'static',
 
   // Clean, trailing-slash-free URLs (matches vercel.json `trailingSlash: false`).

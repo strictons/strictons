@@ -4,7 +4,7 @@ import Hero from '../components/Hero.astro';
 import { SITE } from '../consts';
 
 /*
-  Structured data (JSON-LD) scaffolding — Organization schema.
+  Structured data (JSON-LD) scaffolding: Organization schema.
   Placeholder values; wire real data in when branding is finalized.
   TODO(brand): logo, sameAs profiles, and description below are placeholders.
 */
@@ -13,7 +13,7 @@ const organizationSchema = {
   '@type': 'Organization',
   name: SITE.name,
   url: SITE.url,
-  logo: new URL('/favicon.svg', SITE.url).href,
+  logo: new URL('/favicon-512.png', SITE.url).href,
   description: SITE.description,
   email: SITE.email,
   sameAs: [
@@ -31,7 +31,7 @@ const organizationSchema = {
 
 <BaseLayout
   title={SITE.name}
-  description="Strictons builds digital guides for hotels and businesses. Placeholder marketing copy — real content to come."
+  description="Strictons builds digital guides for hotels and businesses. Placeholder marketing copy. Real content to come."
   headerOverlay
 >
   <script

@@ -4,7 +4,7 @@ import artwork from '../assets/strictons-artwork-lillie-nolan.jpg';
 import { COPYRIGHT } from '../consts';
 
 /**
- * Home-page hero — full-viewport split.
+ * Home-page hero: full-viewport split.
  *   lg+   : linen headline column (left)  |  commissioned artwork (right)
  *   < lg  : artwork fills the screen; the (centred) headline sits above the
  *           tagline, both over the artwork
@@ -15,7 +15,7 @@ import { COPYRIGHT } from '../consts';
  * The copyright line shows only on lg+ here; on mobile home there is none, and
  * inner pages get it from the slim footer in BaseLayout.
  *
- * The site header is layered over this section — see BaseLayout `headerOverlay`.
+ * The site header is layered over this section; see BaseLayout `headerOverlay`.
  * The artwork is set with `object-fill`: it always shows its full height and is
  * stretched horizontally to fill its column (no vertical cropping).
  *
@@ -29,7 +29,7 @@ import { COPYRIGHT } from '../consts';
   aria-labelledby="hero-heading"
   class="relative min-h-svh overflow-hidden"
 >
-  {/* Artwork layer — full-bleed on mobile, right half on lg+ */}
+  {/* Artwork layer: full-bleed on mobile, right half on lg+ */}
   <figure class="absolute inset-0 overflow-hidden bg-[#5a1f16] lg:left-1/2">
     <Image
       src={artwork}
@@ -41,7 +41,7 @@ import { COPYRIGHT } from '../consts';
       class="hero-kenburns h-full w-full object-fill"
     />
 
-    {/* Legibility overlays — must not intercept clicks */}
+    {/* Legibility overlays: must not intercept clicks */}
     <div
       class="pointer-events-none absolute inset-0 bg-black/25 lg:bg-transparent"
     >
@@ -75,8 +75,7 @@ import { COPYRIGHT } from '../consts';
       class="absolute right-6 bottom-8 text-right font-serif text-xs leading-relaxed text-white/90 italic [text-shadow:0_1px_10px_rgba(0,0,0,0.65)] sm:right-10 sm:bottom-10 sm:text-sm xl:right-12 2xl:right-20"
     >
       Artwork commissioned by Australian<br />
-      Artist Lillie Nolan<br />
-      @lilliepaints
+      Artist Lillie Nolan @lilliepaints
     </figcaption>
   </figure>
 
@@ -110,7 +109,7 @@ import { COPYRIGHT } from '../consts';
       }
 
       {
-        /* Copyright: desktop home only — mobile home has none, inner pages use the footer. */
+        /* Copyright: desktop home only. Mobile home has none, inner pages use the footer. */
       }
       <p
         class="absolute bottom-6 left-10 hidden text-xs tracking-wide text-slate-400 lg:block xl:left-12 2xl:left-20"

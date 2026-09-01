@@ -1,16 +1,113 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+/*
+  For Business: the value of a spot inside a hotel's guide. Hero + value
+  points, then a section on the digital page every business gets and the
+  monthly scan reporting.
+  Copy is first-pass marketing messaging; refine with brand voice later.
+*/
+const points = [
+  {
+    title: 'Guests who are here to spend',
+    body: `High intent customers are already in your area, with funds,
+      deciding where to eat, drink and shop. You reach them at the right moment, not on a social media feed five days later.`,
+  },
+  {
+    title: 'Handed to every guest',
+    body: `The guide is handed to everyone at check-in, for 12 months. Your business is placed directly in front of thousands of high value customers. Not a scrolling impression, a real thoughtful recommendation.`,
+  },
+  {
+    title: "Guests skip the comparison",
+    body: `An endorsement from a hotel carries weight. Guests don't need to open Google or ChatGPT to sift reviews or weigh you against competitors. You've already been recommended. `,
+  },
+  {
+    title: 'Provides an easy, actionable means to book',
+    body: `Every business has a digital page, accessible via QR code. This page links to your website, contacts, socials and provides directions to make bookings as easy as possible.`,
+  },
+];
+
+/*
+  What every spot includes: the digital page and the monthly reporting.
+  Confirm the exact reporting cadence and fields before launch.
+*/
+const digital = [
+  {
+    title: 'Your own digital page',
+    body: `Every business in the guide gets a dedicated page. Guests scan the QR
+      code on the physical guide and land straight on it.`,
+  },
+  {
+    title: 'Every next step, one tap away',
+    body: `Links to your website, contact details and socials, so an interested
+      guest can take action as easily as possible.`,
+  },
+  {
+    title: 'Monthly scan reporting',
+    body: `Each month we send you the number of QR scans your page received. A
+      direct read on how many guests acted on your placement.`,
+  },
+];
 ---
 
 <BaseLayout
   title="For Business"
-  description="Placeholder page — how businesses use Strictons digital guides. Real copy to come."
+  description="Why a spot in a hotel's Strictons guide works: high-intent guests, handed to every guest at check-in, read as the hotel's recommendation, with monthly QR scan reports."
 >
   <section class="mx-auto max-w-6xl px-4 py-16">
-    <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">For Business</h1>
-    <p class="mt-4 max-w-prose text-slate-600">
-      Placeholder content. This page will explain how Strictons works for
-      businesses beyond hotels.
+    <p class="text-sm font-semibold tracking-[0.08em] text-slate-500 uppercase">
+      For Business
     </p>
+    <h1 class="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
+      Your best customers are staying nearby.
+    </h1>
+    <p class="mt-4 max-w-prose text-lg text-slate-600">
+      A spot in a hotel guide puts your business in front of high intent customers. The ones with the time, money and means to book. 
+    </p>
+
+    <div class="mt-12 grid gap-x-10 gap-y-8 sm:grid-cols-2">
+      {
+        points.map((point) => (
+          <div>
+            <h2 class="text-lg font-semibold text-slate-900">{point.title}</h2>
+            <p class="mt-2 max-w-prose text-slate-600">{point.body}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="border-t border-slate-200 bg-slate-50">
+    <div class="mx-auto max-w-6xl px-4 py-16">
+      <p class="text-sm font-semibold tracking-[0.08em] text-slate-500 uppercase">
+        Included with every spot
+      </p>
+      <h2 class="mt-3 text-2xl font-bold tracking-tight sm:text-3xl">
+        Monthly reporting, on every guest scan.
+      </h2>
+      <p class="mt-4 max-w-prose text-lg text-slate-600">
+        We track every scan of the guide QR codes. You'll receive a monthly report to see how many guests are taking action from the physical guide.
+      </p>
+
+      <ol class="mt-8 grid gap-8 sm:grid-cols-3">
+        {
+          digital.map((item, i) => (
+            <li class="flex gap-4">
+              <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-slate-900 text-sm font-semibold text-white">
+                {i + 1}
+              </span>
+              <div>
+                <h3 class="font-semibold text-slate-900">{item.title}</h3>
+                <p class="mt-1 max-w-prose text-slate-600">{item.body}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+
+      <p class="mt-10 max-w-prose text-slate-600">
+        Spots are limited and offered by invitation only.
+      </p>
+    </div>
   </section>
 </BaseLayout>

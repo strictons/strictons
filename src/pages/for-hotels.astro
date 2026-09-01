@@ -1,16 +1,143 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+/*
+  For Hotels: hero + "what a guide does for your hotel" points, then a section
+  on cost (free to the hotel, funded by featured local businesses), then the
+  four-step process the hotel controls (shortlist -> approve -> brief -> design).
+  Copy is first-pass marketing messaging; refine with brand voice later.
+*/
+const points = [
+  {
+    title: 'Fewer questions at the front desk',
+    body: `Wi-Fi passwords, checkout times, breakfast hours and directions. The routine questions are handled before a guest needs to return or call reception.
+    The phone rings less and your queue moves faster.`,
+  },
+  {
+    title: 'Brand standards hold through staff turnover',
+    body: `Hospitality moves fast and new hires can't answer every question on day
+      one. The guide provides consistent, on-brand messaging
+      every time, so service quality doesn't slip.`,
+  },
+  {
+    title: 'Amenities, rewards and offers in front of every guest',
+    body: `The spa, the bar, the loyalty programme. Put them in the guide so guests actually see them. On-property
+      spend and sign-ups follow from guests knowing what's on offer.`,
+  },
+  {
+    title: 'No more keycard sleeves',
+    body: `Used as the keycard holder, the guide replaces the printed paper
+      sleeve entirely. Remove a supply cost and replace it with a high quality marketing piece.`,
+  },
+];
+
+/*
+  The process. Four steps; the hotel approves the businesses and the design.
+  Confirm the exact wording of each gate before launch.
+*/
+const steps = [
+  {
+    title: 'We build a shortlist',
+    body: `We research local venues that fit your brand and your guests, and put
+      a shortlist in front of you.`,
+  },
+  {
+    title: 'You approve the list',
+    body: `Add or remove businesses as you see fit. Only the venues you approve
+      are invited to take a spot.`,
+  },
+  {
+    title: 'You brief the guide',
+    body: `Share your branding and tell us what you would like featured throughout the guide.`,
+  },
+  {
+    title: 'We design it, you sign off',
+    body: `We produce the physical and digital guide to match your brand. You
+      approve the final design before anything goes to print.`,
+  },
+];
 ---
 
 <BaseLayout
   title="For Hotels"
-  description="Placeholder page — how hotels use Strictons digital guides. Real copy to come."
+  description="How a Strictons digital guide works for your hotel: fewer front-desk questions, consistent brand standards, more visible amenities, and no keycard sleeves."
 >
   <section class="mx-auto max-w-6xl px-4 py-16">
-    <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">For Hotels</h1>
-    <p class="mt-4 max-w-prose text-slate-600">
-      Placeholder content. This page will explain how Strictons works for
-      hotels.
+    <p class="text-sm font-semibold tracking-[0.08em] text-slate-500 uppercase">
+      For Hotels
     </p>
+    <h1 class="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
+      What a guide does for your hotel.
+    </h1>
+    <p class="mt-4 max-w-prose text-lg text-slate-600">
+      Hand over a guide at check-in to put your guests and staff at ease. Your team spends less time explaining and more
+      time hosting.
+    </p>
+
+    <div class="mt-12 grid gap-x-10 gap-y-8 sm:grid-cols-2">
+      {
+        points.map((point) => (
+          <div>
+            <h2 class="text-lg font-semibold text-slate-900">{point.title}</h2>
+            <p class="mt-2 max-w-prose text-slate-600">{point.body}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="border-t border-slate-200 bg-slate-50">
+    <div class="mx-auto max-w-6xl px-4 py-16">
+      <p class="text-sm font-semibold tracking-[0.08em] text-slate-500 uppercase">
+        No cost
+      </p>
+      <h2 class="mt-3 text-2xl font-bold tracking-tight sm:text-3xl">
+        Zero cost to the hotel.
+      </h2>
+      <p class="mt-4 max-w-prose text-lg text-slate-600">
+        The guide doesn't cost you anything. Spots inside are paid for by local
+        businesses, and those businesses are only invited once you've approved
+        them. You decide what appears in your guide; we design, print and
+        maintain everything.
+      </p>
+    </div>
+  </section>
+
+  <section class="border-t border-slate-200">
+    <div class="mx-auto max-w-6xl px-4 py-16">
+      <p class="text-sm font-semibold tracking-[0.08em] text-slate-500 uppercase">
+        The process
+      </p>
+      <h2 class="mt-3 text-2xl font-bold tracking-tight sm:text-3xl">
+        How your guide comes together.
+      </h2>
+      <p class="mt-4 max-w-prose text-lg text-slate-600">
+        Four key steps. You approve the businesses
+        and the design. We handle everything in between.
+      </p>
+
+      <ol class="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          steps.map((step, i) => (
+            <li class="flex gap-4">
+              <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-slate-900 text-sm font-semibold text-white">
+                {i + 1}
+              </span>
+              <div>
+                <h3 class="font-semibold text-slate-900">{step.title}</h3>
+                <p class="mt-1 text-slate-600">{step.body}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+
+      <p class="mt-10 max-w-prose text-slate-600">
+        Following print, we store the physical guides for you and deliver an
+        ongoing, unlimited supply for 12 months. The digital guide is maintained
+        by us, so there's no extra login to worry about. If anything needs
+        changing, we can update it for you at any time.
+      </p>
+    </div>
   </section>
 </BaseLayout>

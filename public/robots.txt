@@ -1,4 +1,4 @@
-# strictons.com — marketing site
+# strictons.com marketing site
 # Full crawl allowed for all bots, including AI / answer-engine crawlers.
 
 User-agent: *

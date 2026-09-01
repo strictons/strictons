@@ -2,13 +2,13 @@
 
 Marketing / informational site for **Strictons**. The Strictons product (a
 digital guide app) lives in a separate repository with its own deployment;
-**this repo contains no app logic and does not link out to it** — it is purely
+**this repo contains no app logic and does not link out to it**. It is purely
 static marketing content.
 
 Built with [Astro](https://astro.build/) (static output, ~1 KB of client JS for
 the nav menu and nothing else), TypeScript, and Tailwind CSS v4.
 
-> **Status:** structure / shell only. Every page is placeholder content — real
+> **Status:** structure / shell only. Every page is placeholder content; real
 > copy, imagery and branding come later. The home page is the hero and nothing
 > else; the other pages are a heading + a line.
 
@@ -35,7 +35,7 @@ Dev server runs at `http://localhost:4321`.
 | `npm run dev`          | Start the local dev server                    |
 | `npm run build`        | Static build to `dist/`                       |
 | `npm run preview`      | Serve the built `dist/` locally               |
-| `npm run check`        | `astro check` — type-check `.astro` / `.ts`   |
+| `npm run check`        | `astro check`: type-check `.astro` / `.ts`    |
 | `npm run lint`         | `oxlint` over the source                      |
 | `npm run format`       | Prettier write                                |
 | `npm run format:check` | Prettier check (CI-friendly)                  |
@@ -46,7 +46,7 @@ Dev server runs at `http://localhost:4321`.
 ```
 public/                 Static assets served as-is
   favicon.svg           TODO(brand): placeholder mark
-  fonts/                Self-hosted brand fonts — see public/fonts/README.md
+  fonts/                Self-hosted brand fonts. See public/fonts/README.md
   robots.txt            Full crawl allowed, incl. AI crawlers
   llms.txt              AI-visibility summary (llmstxt.org convention)
   og-default.png        TODO(brand): placeholder 1200x630 social image
@@ -79,13 +79,13 @@ with the headline and the toggle with the artist credit; inner pages keep the
 `max-w-6xl` container. The hamburger is three hairline rules of unequal length
 that even up on hover and fold into an X on open. Opening it:
 
-1. A **curtain** (`#primary-nav`) drops from above the viewport — slow to start,
+1. A **curtain** (`#primary-nav`) drops from above the viewport: slow to start,
    accelerating into the finish. Its background is `bg-artwork-blend`, a gradient
    mixed from colours sampled out of the painting.
 2. The logo + hamburger stay pinned on top; the hamburger **morphs into an X**.
 3. Once the curtain lands, the links (`.nav-reveal`) **fade + rise** into view.
 
-The menu lists For Hotels / For Business / FAQs / Contact — no Home (the logo
+The menu lists For Hotels / For Business / FAQs / Contact; no Home (the logo
 links home), no item numbers. All the motion is CSS in `global.css`, keyed off
 `data-open` / `data-nav-open` attributes and `aria-expanded`;
 `prefers-reduced-motion` collapses it.
@@ -104,12 +104,12 @@ Progressive enhancement:
 `src/assets/strictons-logo.png` is a trimmed, transparent, single-colour (black)
 lion mark, **mirrored to face left**, derived from the supplied
 `strictons-logo.svg` (a 660 KB Canva export that wrapped a raster PNG + a baked
-white background — not usable as-is in the header). It renders black on light
+white background, not usable as-is in the header). It renders black on light
 headers and is flipped to white with a CSS `invert` filter over dark surfaces
 (mobile hero, open menu). Replace it with a proper vector mark when one exists;
 keep the transparent, single-colour, tightly-cropped, left-facing shape.
 
-The wordmark next to it is **"Graveur Display" Bold** (`--font-display`) — the
+The wordmark next to it is **"Graveur Display" Bold** (`--font-display`); the
 font file still needs to be added, see [`public/fonts/README.md`](public/fonts/README.md).
 
 ### Routes
@@ -146,22 +146,22 @@ Per-page `<head>` extras (JSON-LD, extra preloads) go in the `head` slot:
 
 ## SEO
 
-- **Titles / descriptions** — props on `<BaseLayout>` (forwarded to `BaseHead`).
-- **Open Graph + Twitter cards** — templated in `src/components/BaseHead.astro`;
+- **Titles / descriptions:** props on `<BaseLayout>` (forwarded to `BaseHead`).
+- **Open Graph + Twitter cards:** templated in `src/components/BaseHead.astro`;
   defaults from `SITE` in `src/consts.ts`.
-- **Canonical URLs** — emitted on every page from `Astro.site` + pathname.
-- **Sitemap** — `@astrojs/sitemap`, output at `/sitemap-index.xml`.
-- **robots.txt** — `public/robots.txt`, full crawl, references the sitemap.
-- **Structured data** — Organization JSON-LD scaffolded on the homepage
+- **Canonical URLs:** emitted on every page from `Astro.site` + pathname.
+- **Sitemap:** `@astrojs/sitemap`, output at `/sitemap-index.xml`.
+- **robots.txt:** `public/robots.txt`, full crawl, references the sitemap.
+- **Structured data:** Organization JSON-LD scaffolded on the homepage
   (`src/pages/index.astro`); placeholder values, mechanism is wired up.
 
 ## AI visibility
 
-- `public/llms.txt` — summary + key links per the
+- `public/llms.txt`: summary + key links per the
   [llms.txt](https://llmstxt.org/) convention (placeholder copy).
 - `robots.txt` explicitly allows GPTBot, ClaudeBot, PerplexityBot, Google-Extended,
   and other AI crawlers.
-- All page content is server-rendered static HTML — no content hidden behind
+- All page content is server-rendered static HTML, with no content hidden behind
   client JS or interaction, so non-JS crawlers read the real page.
 
 ## Performance
@@ -171,10 +171,10 @@ Per-page `<head>` extras (JSON-LD, extra preloads) go in the `head` slot:
 - Images go through Astro's `<Image>` component (Sharp) for automatic
   optimization + responsive `srcset`. See the pattern in `src/components/Hero.astro`.
 - The hero artwork has a slow CSS-only Ken Burns drift (`.hero-kenburns` in
-  `global.css`) — transform only, disabled under `prefers-reduced-motion`.
+  `global.css`): transform only, disabled under `prefers-reduced-motion`.
 - **Fonts:** `--font-sans` / `--font-serif` are system stacks (no network cost).
   `--font-display` (the wordmark) points at "Graveur Display" via an `@font-face`
-  with `font-display: swap` — the file needs adding, see
+  with `font-display: swap`; the file needs adding, see
   [`public/fonts/README.md`](public/fonts/README.md); until then it falls back to
   serif. When it's added, uncomment the preload in `src/components/BaseHead.astro`.
 
@@ -207,15 +207,15 @@ to it, deploy.
 
 ## TODO markers (where things plug in later)
 
-- `TODO(brand)` — favicon, OG image, colors, social handles; replace the raster
+- `TODO(brand)`: favicon, OG image, colors, social handles; replace the raster
   lion mark with a vector one.
-- `TODO(fonts)` — add `public/fonts/graveur-display-bold.woff2` (see
+- `TODO(fonts)`: add `public/fonts/graveur-display-bold.woff2` (see
   `public/fonts/README.md`); swap `--font-serif` for the real brand serif.
-- `TODO(forms)` — contact form backend (`src/pages/contact.astro`); currently a
+- `TODO(forms)`: contact form backend (`src/pages/contact.astro`); currently a
   disabled static placeholder.
-- `TODO(analytics)` — analytics loader (add to `src/layouts/BaseLayout.astro`);
+- `TODO(analytics)`: analytics loader (add to `src/layouts/BaseLayout.astro`);
   none loaded.
-- `TODO(content)` — real copy on every page; FAQ Q&A structure + FAQPage JSON-LD.
+- `TODO(content)`: real copy on every page; FAQ Q&A structure + FAQPage JSON-LD.
 
 ## Linting / formatting
 
