@@ -1,19 +1,23 @@
 # Strictons
 
-> Strictons builds digital guides for hotels and businesses. This site
-> (strictons.com) is the marketing and information site for the Strictons
-> digital guide platform.
+> Strictons designs a printed and digital guide that hotels hand to guests at
+> check in. It covers the essentials, the hotel's amenities, and a curated set
+> of local businesses. It is free to the hotel and funded by the featured
+> businesses, who pay for a spot only after the hotel approves the list.
+> Strictons is based in Australia and works on site across NSW and the ACT.
 
-Placeholder summary; real copy will replace this. The pages below are the
-canonical entry points for understanding what Strictons is and who it is for.
+This site (strictons.com) is the marketing and information site for Strictons.
+The pages below are the canonical entry points for understanding what Strictons
+is and who it is for.
 
 ## Pages
 
-- [Home](https://strictons.com/): Overview of Strictons.
-- [For Hotels](https://strictons.com/for-hotels): How hotels use Strictons digital guides.
-- [For Business](https://strictons.com/for-business): How other businesses use Strictons.
-- [FAQs](https://strictons.com/faq): Common questions about Strictons.
-- [Contact](https://strictons.com/contact): How to get in touch.
+- [Home](https://strictons.com/): What Strictons is and who it is for.
+- [For Hotels](https://strictons.com/for-hotels): What the guide does for a hotel, why it is free, and how it comes together.
+- [For Business](https://strictons.com/for-business): The value of a spot in a hotel's guide, the digital page, and monthly scan reporting.
+- [Guide Specs](https://strictons.com/guide-specs): Physical specifications of the printed guide (size, paper, binding, keycard die-cuts, print partner).
+- [FAQs](https://strictons.com/faq): Common questions about the guide, for hotels and for local businesses.
+- [Contact](https://strictons.com/contact): How to get in touch and book a meeting.
 
 ## Contact
 

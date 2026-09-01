@@ -14,7 +14,7 @@ export const SITE = {
 
   /** Default meta description. Per-page descriptions override this. */
   description:
-    'Strictons builds digital guides for hotels and businesses. This is the marketing and information site for the Strictons digital guide platform.',
+    'Strictons designs printed and digital guides that hotels hand to guests at check in. Free to the hotel and funded by featured local businesses.',
 
   /** Contact address (also used in structured data + llms.txt). */
   email: 'guides@strictons.com',
