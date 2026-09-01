@@ -6,6 +6,12 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.strictons.com" }],
+      "destination": "https://strictons.com/:path*",
+      "permanent": true
+    },
     { "source": "/for-guests", "destination": "/", "permanent": true },
     { "source": "/journal", "destination": "/", "permanent": true },
     { "source": "/journal/:path*", "destination": "/", "permanent": true },
