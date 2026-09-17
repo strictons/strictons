@@ -261,6 +261,9 @@
 .story-card-reverse > .home-image {
   grid-column: 2;
 }
+.story-section-experience .story-card {
+  background: #fff;
+}
 .story-section-solution .story-card {
   --solution-surface: #29171b;
   background:
@@ -360,17 +363,23 @@
 }
 .solution-product {
   display: block;
+  position: relative;
   margin-top: 1rem;
   color: #f3dfba;
   font: 400 clamp(1.75rem, 2.4vw, 2.375rem)/1.2 var(--font-serif);
+}
+.solution-product::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
   background: linear-gradient(
     105deg,
-    #b89160 8%,
-    #f5ddb0 32%,
-    #fff7df 43%,
-    #c89d61 54%,
-    #f5ddb0 72%,
-    #b89160 92%
+    transparent 24%,
+    rgb(255 247 223 / 35%) 39%,
+    #fff7df 48%,
+    rgb(255 247 223 / 35%) 57%,
+    transparent 72%
   );
   background-size: 220% 100%;
   background-clip: text;
@@ -473,6 +482,9 @@
 .brand-grid figure:nth-child(3) figcaption {
   transform: rotate(-0.5deg);
 }
+.digital-card {
+  background: #fff;
+}
 .home-contact-card {
   --solution-surface: #29171b;
   display: flex;
@@ -546,12 +558,15 @@ header[data-home] > div:first-child {
   padding: 22px 0;
   border-bottom: 1px solid #d8d5cb;
 }
+header[data-home] #primary-nav .nav-reveal {
+  width: min(1160px, calc(100% - 96px));
+  padding-inline: 0;
+}
 header[data-home] > div:first-child > a {
   grid-column: 2;
 }
 header[data-home] .nav-logo {
   height: 42px;
-  filter: none;
 }
 header[data-home] .nav-tint {
   color: #30332e;
@@ -562,14 +577,18 @@ header[data-home] #nav-toggle {
   margin: 0;
 }
 header[data-home][data-nav-open='true'] {
-  background: var(--nav-menu-background);
+  background: transparent;
 }
 header[data-home][data-nav-open='true'] > div:first-child {
   border-bottom-color: transparent;
 }
+header[data-home][data-nav-open='true'] .nav-tint {
+  color: #f6f2e9;
+}
 @media (max-width: 1000px) {
   .home-container,
-  header[data-home] > div:first-child {
+  header[data-home] > div:first-child,
+  header[data-home] #primary-nav .nav-reveal {
     width: calc(100% - 64px);
   }
   .hero-grid {
@@ -582,7 +601,8 @@ header[data-home][data-nav-open='true'] > div:first-child {
 }
 @media (max-width: 760px) {
   .home-container,
-  header[data-home] > div:first-child {
+  header[data-home] > div:first-child,
+  header[data-home] #primary-nav .nav-reveal {
     width: calc(100% - clamp(64px, 20vw, 80px));
   }
   header[data-home] > div:first-child {
@@ -774,7 +794,7 @@ header[data-home][data-nav-open='true'] > div:first-child {
   .home-button {
     transition: none;
   }
-  .solution-product,
+  .solution-product::after,
   .home-contact p {
     animation: none;
     background-position: 50% 50%;

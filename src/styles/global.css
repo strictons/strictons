@@ -41,10 +41,10 @@
   --nav-menu-background:
     radial-gradient(
       80% 55% at 15% 0%,
-      rgb(69 97 139 / 35%),
+      rgb(120 158 202 / 42%),
       transparent 60%
     ),
-    linear-gradient(160deg, #20304c 0%, #172238 70%, #131c2c 100%);
+    linear-gradient(160deg, #3e648f 0%, #315378 70%, #294765 100%);
 }
 
 html {
@@ -166,7 +166,7 @@ dt {
 
 /* Carry the menu surface through the header while the curtain is moving. */
 header[data-nav-open='true'] {
-  background: var(--nav-menu-background);
+  background: transparent;
   border-color: transparent;
 }
 header[data-nav-open='true'] .nav-tint {
@@ -175,8 +175,14 @@ header[data-nav-open='true'] .nav-tint {
 header[data-nav-open='true'] .nav-tint:hover {
   opacity: 0.7;
 }
-header[data-nav-open='true'] .nav-logo {
-  filter: brightness(0) invert(1);
+.nav-logo {
+  display: block;
+  flex: none;
+  width: auto;
+  aspect-ratio: 96 / 112;
+  background-color: currentColor;
+  -webkit-mask: var(--nav-logo-image) center / contain no-repeat;
+  mask: var(--nav-logo-image) center / contain no-repeat;
 }
 #primary-nav li {
   border-color: rgb(246 242 233 / 22%);

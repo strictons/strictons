@@ -1,5 +1,4 @@
 ---
-import { Image } from 'astro:assets';
 import { NAV_LINKS, SITE } from '../consts';
 import logo from '../assets/strictons-logo.png';
 
@@ -50,15 +49,12 @@ const isActive = (href: string) =>
       aria-label={`${SITE.name} home`}
       class="flex items-center gap-2.5 sm:gap-3"
     >
-      <Image
-        src={logo}
-        alt=""
-        width={96}
-        height={112}
-        densities={[1, 2]}
+      <span
+        aria-hidden="true"
+        style={`--nav-logo-image: url("${logo.src}")`}
         class:list={[
-          'nav-logo h-8 w-auto sm:h-9 lg:h-10',
-          overlay ? 'invert lg:invert-0' : '',
+          'nav-logo nav-tint h-8 sm:h-9 lg:h-10',
+          overlay ? 'text-white lg:text-slate-900' : 'text-slate-900',
         ]}
       />
       <span
