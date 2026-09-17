@@ -38,6 +38,13 @@
 
 :root {
   color-scheme: light;
+  --nav-menu-background:
+    radial-gradient(
+      80% 55% at 15% 0%,
+      rgb(69 97 139 / 35%),
+      transparent 60%
+    ),
+    linear-gradient(160deg, #20304c 0%, #172238 70%, #131c2c 100%);
 }
 
 html {
@@ -125,8 +132,8 @@ dt {
      with a soft fade + rise.
 */
 #primary-nav {
-  background: #efeee8;
-  color: #30332e;
+  background: var(--nav-menu-background);
+  color: #f6f2e9;
   transform: translateY(-100%);
   visibility: hidden;
   transition:
@@ -157,50 +164,29 @@ dt {
   transition-delay: 440ms;
 }
 
-/* Keep the logo and close icon dark against the warm neutral menu. */
+/* Carry the menu surface through the header while the curtain is moving. */
 header[data-nav-open='true'] {
-  background-color: transparent;
+  background: var(--nav-menu-background);
   border-color: transparent;
 }
 header[data-nav-open='true'] .nav-tint {
-  color: #30332e;
+  color: #f6f2e9;
 }
 header[data-nav-open='true'] .nav-tint:hover {
   opacity: 0.7;
 }
 header[data-nav-open='true'] .nav-logo {
-  filter: none;
+  filter: brightness(0) invert(1);
 }
-
-@media (max-width: 760px) {
-  #primary-nav {
-    color: #f6f2e9;
-    background:
-      radial-gradient(
-        80% 55% at 15% 0%,
-        rgb(69 97 139 / 35%),
-        transparent 60%
-      ),
-      linear-gradient(160deg, #20304c 0%, #172238 70%, #131c2c 100%);
-  }
-  #primary-nav li {
-    border-color: rgb(246 242 233 / 22%);
-  }
-  #primary-nav a {
-    color: #f6f2e9;
-  }
-  #primary-nav a:hover,
-  #primary-nav a[aria-current='page'] {
-    color: #c8d7eb;
-  }
-  header[data-home][data-nav-open='true'] .nav-tint,
-  header[data-nav-open='true'] .nav-tint {
-    color: #f6f2e9;
-  }
-  header[data-home][data-nav-open='true'] .nav-logo,
-  header[data-nav-open='true'] .nav-logo {
-    filter: brightness(0) invert(1);
-  }
+#primary-nav li {
+  border-color: rgb(246 242 233 / 22%);
+}
+#primary-nav a {
+  color: #f6f2e9;
+}
+#primary-nav a:hover,
+#primary-nav a[aria-current='page'] {
+  color: #c8d7eb;
 }
 
 /*

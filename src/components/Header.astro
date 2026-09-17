@@ -8,8 +8,8 @@ interface Props {
    * Layer the header transparently over the home hero. The logo lockup sits
    * over the linen headline column on lg+ (dark) and over the artwork on
    * smaller screens (light), so its colours flip at `lg`. While the menu is
-   * open the header bar sits on top of the warm neutral menu panel and its
-   * marks stay dark; see `header[data-nav-open]` in global.css.
+   * open the header bar carries the blue menu surface and its marks turn
+   * light; see `header[data-nav-open]` in global.css.
    */
   overlay?: boolean;
 }
@@ -198,13 +198,20 @@ const isActive = (href: string) =>
     };
 
     const closeMenu = () => {
-      delete header.dataset.navOpen;
       panel.dataset.open = 'false';
       toggle.setAttribute('aria-expanded', 'false');
       document.documentElement.style.overflow = '';
       document.removeEventListener('keydown', onKeydown);
       toggle.focus();
     };
+
+    // Keep the header visually joined to the curtain until it has fully
+    // retracted. Removing this state immediately causes a flash on close.
+    panel.addEventListener('transitionend', (e) => {
+      if (e.propertyName === 'transform' && panel.dataset.open === 'false') {
+        delete header.dataset.navOpen;
+      }
+    });
 
     toggle.addEventListener('click', () =>
       panel.dataset.open === 'true' ? closeMenu() : openMenu()
