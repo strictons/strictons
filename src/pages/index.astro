@@ -1,7 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
-import { SITE } from '../consts';
+import HomeImage from '../components/HomeImage.astro';
+import '../styles/home.css';
+import { COPYRIGHT, SITE } from '../consts';
 
 /*
   Structured data (JSON-LD) scaffolding: Organization schema.
@@ -30,7 +32,7 @@ const organizationSchema = {
 ---
 
 <BaseLayout
-  title="Digital guides for hotels and businesses"
+  title="Pocket guides for a more memorable hotel stay"
   description="We create signature print and digital hotel guides, fully tailored to your brand, your community and your guest profile. At zero cost to the hotel."
   headerOverlay
 >
@@ -41,5 +43,210 @@ const organizationSchema = {
     set:html={JSON.stringify(organizationSchema)}
   />
 
-  <Hero />
+  <div class="homepage">
+    <Hero />
+
+    <section
+      id="how-it-works"
+      class="story-section"
+      aria-labelledby="welcome-heading"
+    >
+      <div class="home-container story-card">
+        <h2 id="welcome-heading">
+          Every guest wants to feel personally taken care of, <em
+            >without a long check-in.</em
+          >
+        </h2>
+        <HomeImage
+          name="guest-arrival"
+          alt="Guests arriving with their luggage at a hotel reception."
+        />
+        <div class="story-copy">
+          <p>
+            When travellers arrive, they have a<br />number of questions racing
+            through their mind.
+          </p>
+          <ul class="story-list">
+            <li>What time is check-out?</li>
+            <li>Do they have a restaurant?</li>
+            <li>Where is the nearest shopping centre?</li>
+          </ul>
+          <p class="story-closing">
+            They’re tired, stressed and unfamiliar.<strong
+              >They just want to get to their room.</strong
+            >
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="story-section story-section-team"
+      aria-labelledby="team-heading"
+    >
+      <div class="home-container story-card story-card-reverse">
+        <h2 id="team-heading">
+          Your team wants to be <em>the perfect host.</em>
+        </h2>
+        <div class="story-copy">
+          <p>But in a busy hotel...</p>
+          <ul class="story-list">
+            <li>Three more guests are waiting</li>
+            <li>The phone is ringing</li>
+            <li>A room needs help</li>
+          </ul>
+          <p class="story-closing">
+            Staff want to give guests everything.<strong
+              >They don’t always have the time.</strong
+            >
+          </p>
+        </div>
+        <HomeImage
+          name="reception-team"
+          alt="A busy hotel reception team welcoming guests and answering the phone."
+        />
+      </div>
+    </section>
+
+    <section
+      class="story-section story-section-anticipate"
+      aria-labelledby="anticipate-heading"
+    >
+      <div class="home-container story-card">
+        <h2 id="anticipate-heading">
+          Unanswered questions,<br />
+          <em>can quickly compound.</em>
+        </h2>
+        <HomeImage
+          name="uncertainty"
+          alt="A newly arrived hotel guest looking uncertain while standing in an elevator with her luggage."
+        />
+        <div class="story-copy anticipate-copy">
+          <p>
+            Uncertainty changes how a guest experiences what comes next.<br />One
+            unanswered question. An amenity they can’t find.<br />Then something
+            doesn’t go to plan.
+          </p>
+          <p>
+            Individually, they’re minor. Together, they can become frustration,
+            dissatisfaction and even a complaint.
+          </p>
+          <p class="story-closing">
+            <strong
+              >It’s hard to relax when you’re still figuring everything
+              out.</strong
+            >
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="story-section story-section-solution"
+      aria-labelledby="solution-heading"
+    >
+      <div class="home-container story-card story-card-reverse">
+        <h2 id="solution-heading">
+          Put everything guests need,<br />
+          <em>right into their hands.</em>
+        </h2>
+        <div class="story-copy solution-copy">
+          <p>
+            With a custom designed,<br /> professionally printed.<strong
+              class="solution-product">Pocket Hotel Guide.</strong
+            >
+          </p>
+        </div>
+        <HomeImage
+          name="guide-reception"
+          alt="A hotel host handing a guest their branded pocket guide."
+        />
+      </div>
+    </section>
+
+    <section
+      class="story-section story-section-experience"
+      aria-labelledby="experience-heading"
+    >
+      <div class="home-container story-card">
+        <h2 id="experience-heading">
+          Once guests feel at ease,<br />
+          <em>show them what you want them to experience.</em>
+        </h2>
+        <HomeImage
+          name="hotel-dining"
+          alt="Guests enjoying dinner and wine by the water at sunset."
+        />
+        <div class="story-copy">
+          <p>
+            A beautiful room matters. But the best memories are often made
+            beyond it. A restaurant you recommended. An afternoon at your spa.
+            A local experience they would never have found themselves. When
+            your hotel leads them there, those memories become part of their
+            stay with you.
+          </p>
+          <p class="story-closing">
+            <strong
+              >Create a more memorable stay, increase ancilliary revenue and
+              give them a reason to come back and explore more</strong
+            >
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="story-section brand-section" aria-labelledby="brand-heading">
+      <div class="home-container brand-card">
+        <h2 id="brand-heading">
+          When their stay ends,<br />
+          <em>your brand travels with them.</em>
+        </h2>
+        <div class="brand-intro">
+          <p>Traditional compendiums stay in the room.</p>
+          <p>Our guides are designed to be used on the go.</p>
+          <p>Then taken home and used to plan again.</p>
+        </div>
+        <div class="brand-grid">
+          <figure>
+            <figcaption>From your hotel.</figcaption>
+            <HomeImage
+              name="hero-guide"
+              alt="A guest reading a pocket guide while relaxing in a hotel room overlooking the water."
+            />
+          </figure>
+          <figure>
+            <figcaption>To their car.</figcaption>
+            <HomeImage
+              name="guide-car"
+              alt="A hotel pocket guide beside a guest’s belongings on a car seat."
+            />
+          </figure>
+          <figure>
+            <figcaption>To their bookshelf.</figcaption>
+            <HomeImage
+              name="guide-bookshelf"
+              alt="A hotel pocket guide kept on a bookshelf as a reminder of a memorable stay."
+            />
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="story-section home-contact" aria-labelledby="contact-heading">
+      <div class="home-container home-contact-card">
+        <div>
+          <h2 id="contact-heading">Make every guest feel welcome.</h2>
+          <p>
+            Let’s create a pocket guide<br class="cta-mobile-break" /> for your
+            hotel.
+          </p>
+        </div>
+        <a class="home-button" href="/contact"
+          >Get in touch <span aria-hidden="true">↗</span></a
+        >
+      </div>
+    </section>
+
+    <div class="home-copyright">{COPYRIGHT}</div>
+  </div>
 </BaseLayout>

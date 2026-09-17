@@ -1,0 +1,36 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  name: string;
+  alt: string;
+}
+const { name, alt } = Astro.props;
+// Add a photo with the documented filename and it replaces the blank on build.
+const assets = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/*.{jpg,jpeg,png,webp}',
+  { eager: true }
+);
+const photo =
+  assets[`../assets/${name}.jpg`]?.default ??
+  assets[`../assets/${name}.jpeg`]?.default ??
+  assets[`../assets/${name}.png`]?.default ??
+  assets[`../assets/${name}.webp`]?.default;
+---
+
+<div class="home-image">
+  {
+    photo ? (
+      <Image
+        src={photo}
+        alt={alt}
+        widths={[400, 640, 960, 1280]}
+        sizes="(min-width: 900px) 40vw, 90vw"
+        loading="lazy"
+      />
+    ) : (
+      <div class="home-image-blank" aria-hidden="true" />
+    )
+  }
+</div>

@@ -45,6 +45,17 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
+/* Shared heading typography for every page, including FAQ question headings. */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+dt {
+  font-family: var(--font-serif);
+}
+
 /* Visible focus ring for keyboard users across interactive elements. */
 :focus-visible {
   outline: 2px solid var(--color-slate-900, #0f172a);
@@ -114,6 +125,8 @@ html {
      with a soft fade + rise.
 */
 #primary-nav {
+  background: #efeee8;
+  color: #30332e;
   transform: translateY(-100%);
   visibility: hidden;
   transition:
@@ -144,19 +157,50 @@ html {
   transition-delay: 440ms;
 }
 
-/* While the menu is open the header bar sits on top of the dark panel. */
+/* Keep the logo and close icon dark against the warm neutral menu. */
 header[data-nav-open='true'] {
   background-color: transparent;
   border-color: transparent;
 }
 header[data-nav-open='true'] .nav-tint {
-  color: #fff;
+  color: #30332e;
 }
 header[data-nav-open='true'] .nav-tint:hover {
   opacity: 0.7;
 }
 header[data-nav-open='true'] .nav-logo {
-  filter: invert(1);
+  filter: none;
+}
+
+@media (max-width: 760px) {
+  #primary-nav {
+    color: #f6f2e9;
+    background:
+      radial-gradient(
+        80% 55% at 15% 0%,
+        rgb(69 97 139 / 35%),
+        transparent 60%
+      ),
+      linear-gradient(160deg, #20304c 0%, #172238 70%, #131c2c 100%);
+  }
+  #primary-nav li {
+    border-color: rgb(246 242 233 / 22%);
+  }
+  #primary-nav a {
+    color: #f6f2e9;
+  }
+  #primary-nav a:hover,
+  #primary-nav a[aria-current='page'] {
+    color: #c8d7eb;
+  }
+  header[data-home][data-nav-open='true'] .nav-tint,
+  header[data-nav-open='true'] .nav-tint {
+    color: #f6f2e9;
+  }
+  header[data-home][data-nav-open='true'] .nav-logo,
+  header[data-nav-open='true'] .nav-logo {
+    filter: brightness(0) invert(1);
+  }
 }
 
 /*
