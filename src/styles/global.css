@@ -39,17 +39,30 @@
 :root {
   color-scheme: light;
   --nav-menu-background:
-    radial-gradient(
-      80% 55% at 15% 0%,
-      rgb(120 158 202 / 42%),
-      transparent 60%
-    ),
+    radial-gradient(80% 55% at 15% 0%, rgb(120 158 202 / 42%), transparent 60%),
     linear-gradient(160deg, #3e648f 0%, #315378 70%, #294765 100%);
 }
 
 html {
   font-family: var(--font-sans);
   -webkit-text-size-adjust: 100%;
+}
+
+/* The header yields while travelling down a page and returns on upward intent. */
+.scroll-aware-header {
+  transition: transform 340ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.scroll-aware-header:not([data-home]) {
+  position: sticky;
+  top: 0;
+}
+.scroll-aware-header[data-scroll-hidden='true'] {
+  transform: translateY(-100%);
+}
+@media (prefers-reduced-motion: reduce) {
+  .scroll-aware-header {
+    transition: none;
+  }
 }
 
 /* Shared heading typography for every page, including FAQ question headings. */

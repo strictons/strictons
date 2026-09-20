@@ -23,12 +23,24 @@ const isActive = (href: string) =>
 <header
   data-home={overlay || undefined}
   class:list={[
-    'z-50',
+    'scroll-aware-header z-50',
     overlay
       ? 'absolute inset-x-0 top-0'
       : 'relative border-b border-slate-200 bg-white',
   ]}
 >
+  {
+    overlay && (
+      <div
+        class="evolution-banner"
+        aria-label="An evolution of the traditional hotel compendium"
+      >
+        <div class="evolution-banner-track" aria-hidden="true">
+          <span>An evolution of the traditional hotel compendium</span>
+        </div>
+      </div>
+    )
+  }
   {
     /*
       Bar: stays above the menu panel (local z-20 > panel z-10). On the home
@@ -38,7 +50,7 @@ const isActive = (href: string) =>
   }
   <div
     class:list={[
-      'relative z-20 flex items-center justify-between py-4 sm:py-5',
+      'header-bar relative z-20 flex items-center justify-between py-4 sm:py-5',
       overlay
         ? 'w-full px-6 sm:px-10 xl:px-12 2xl:px-20'
         : 'mx-auto max-w-6xl px-4',
@@ -55,8 +67,7 @@ const isActive = (href: string) =>
         class:list={[
           'nav-logo nav-tint h-8 sm:h-9 lg:h-10',
           overlay ? 'text-white lg:text-slate-900' : 'text-slate-900',
-        ]}
-      />
+        ]}></span>
       <span
         class:list={[
           'nav-tint font-display text-lg tracking-[0.2em] uppercase sm:text-xl lg:text-2xl',
@@ -216,4 +227,47 @@ const isActive = (href: string) =>
       if ((e.target as HTMLElement).closest('a[href]')) closeMenu();
     });
   }
+</script>
+
+<script>
+  const initialiseScrollHeader = () => {
+    const header = document.querySelector<HTMLElement>('.scroll-aware-header');
+    if (!header || header.dataset.scrollReady === 'true') return;
+
+    header.dataset.scrollReady = 'true';
+    let lastPosition = window.scrollY;
+    let ticking = false;
+
+    const updateHeader = () => {
+      const currentPosition = Math.max(window.scrollY, 0);
+
+      if (currentPosition < 72) {
+        delete header.dataset.scrollHidden;
+        lastPosition = currentPosition;
+      } else if (currentPosition > lastPosition + 8) {
+        if (header.dataset.navOpen !== 'true') {
+          header.dataset.scrollHidden = 'true';
+        }
+        lastPosition = currentPosition;
+      } else if (currentPosition < lastPosition - 8) {
+        delete header.dataset.scrollHidden;
+        lastPosition = currentPosition;
+      }
+
+      ticking = false;
+    };
+
+    window.addEventListener(
+      'scroll',
+      () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(updateHeader);
+      },
+      { passive: true }
+    );
+  };
+
+  initialiseScrollHeader();
+  document.addEventListener('astro:page-load', initialiseScrollHeader);
 </script>

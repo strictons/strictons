@@ -14,7 +14,7 @@ export const SITE = {
 
   /** Default meta description. Per-page descriptions override this. */
   description:
-    'Strictons designs printed and digital guides that hotels hand to guests at check in. Free to the hotel and funded by featured local businesses.',
+    'Strictons creates custom print and digital pocket guides that help hotel guests settle in, discover local experiences and enjoy a more memorable stay.',
 
   /** Contact address (also used in structured data + llms.txt). */
   email: 'guides@strictons.com',

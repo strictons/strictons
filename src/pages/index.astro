@@ -32,8 +32,8 @@ const organizationSchema = {
 ---
 
 <BaseLayout
-  title="Pocket guides for a more memorable hotel stay"
-  description="We create signature print and digital hotel guides, fully tailored to your brand, your community and your guest profile. At zero cost to the hotel."
+  title="Pocket Hotel Guides for Better Guest Stays"
+  description="Custom print and digital pocket guides that help hotel guests settle in, discover local experiences and enjoy a memorable stay—at no cost to the hotel."
   headerOverlay
 >
   <script
@@ -160,9 +160,6 @@ const organizationSchema = {
           name="guide-reception"
           alt="A hotel host handing a guest their branded pocket guide."
         />
-        <p class="solution-compendium">
-          An evolution of the traditional hotel compendium
-        </p>
       </div>
     </section>
 
@@ -180,16 +177,12 @@ const organizationSchema = {
           alt="Guests enjoying dinner and wine by the water at sunset."
         />
         <div class="story-copy">
-          <p>
-            The best memories are often made beyond the hotel room.
-          </p>
+          <p>The best memories are often made beyond the hotel room.</p>
           <p>
             A restaurant you recommended. An afternoon at your spa. A local
             experience they would never have found themselves.
           </p>
-          <p>
-            When you lead them there, those memories attach to your hotel.
-          </p>
+          <p>When you lead them there, those memories attach to your hotel.</p>
           <p class="story-closing">
             <strong
               >Create a more memorable stay and give them a reason to come back
@@ -285,6 +278,39 @@ const organizationSchema = {
       </div>
     </section>
 
+    <a class="back-to-top" href="#main" aria-label="Back to top">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="m6.5 14.5 5.5-5.5 5.5 5.5"></path>
+      </svg>
+    </a>
+
     <div class="home-copyright">{COPYRIGHT}</div>
   </div>
+
+  <script>
+    const initialiseHomeControls = () => {
+      const homepage = document.querySelector<HTMLElement>('.homepage');
+      if (!homepage || homepage.dataset.controlsReady === 'true') return;
+
+      homepage.dataset.controlsReady = 'true';
+      const backToTop = homepage.querySelector<HTMLElement>('.back-to-top');
+
+      const updateBackToTop = () => {
+        backToTop?.classList.toggle(
+          'is-visible',
+          window.scrollY > window.innerHeight * 0.85
+        );
+      };
+      window.addEventListener('scroll', updateBackToTop, { passive: true });
+      updateBackToTop();
+
+      backToTop?.addEventListener('click', (event) => {
+        event.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'auto' });
+      });
+    };
+
+    initialiseHomeControls();
+    document.addEventListener('astro:page-load', initialiseHomeControls);
+  </script>
 </BaseLayout>
