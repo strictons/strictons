@@ -16,9 +16,9 @@
 }
 .homepage h1,
 .homepage h2 {
-  font-weight: 400;
-  letter-spacing: -0.025em;
-  line-height: 1.2;
+  font-weight: 675;
+  letter-spacing: -0.04em;
+  line-height: 1.06;
   text-wrap: balance;
 }
 .homepage h1 {
@@ -31,7 +31,7 @@
   margin-top: 1.25rem;
 }
 .homepage em {
-  font-weight: 400;
+  font-weight: 625;
 }
 .home-hero {
   padding-top: 126px;
@@ -52,8 +52,8 @@
 }
 .hero-copy h1 {
   font-size: clamp(2.25rem, 10cqi, 3.75rem);
-  line-height: 1.1;
-  letter-spacing: -0.035em;
+  line-height: 1.03;
+  letter-spacing: -0.045em;
 }
 .hero-line {
   display: block;
@@ -72,7 +72,7 @@
 .hero-line-accent {
   color: var(--home-accent);
   font-style: italic;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.04em;
 }
 .hero-copy p {
   color: var(--home-muted);
