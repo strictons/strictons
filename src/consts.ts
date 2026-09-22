@@ -33,7 +33,8 @@ export const SITE = {
 
 /** Primary navigation, shown in the header's full-screen menu. */
 export const NAV_LINKS = [
-  { href: '/for-hotels', label: 'For Hotels' },
+  { href: '/how-it-works', label: 'How It Works' },
+  { href: '/live-version', label: 'The Live Version' },
   { href: '/for-business', label: 'For Business' },
   { href: '/guide-specs', label: 'Guide Specs' },
   { href: '/faq', label: 'FAQs' },

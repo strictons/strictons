@@ -1,113 +1,270 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { Image } from 'astro:assets';
+import customers from '../assets/customers.png';
+import '../styles/business.css';
 
-/*
-  For Business: the value of a spot inside a hotel's guide. Hero + value
-  points, then a section on the digital page every business gets and the
-  monthly scan reporting.
-  Copy is first-pass marketing messaging; refine with brand voice later.
-*/
-const points = [
+const included = [
   {
-    title: 'Guests who are here to spend',
-    body: `High intent customers are already in your area, with funds,
-      deciding where to eat, drink and shop. You reach them at the right moment, not on a social media feed five days later.`,
-  },
-  {
-    title: 'Handed to every guest',
-    body: `The guide is handed to everyone at check-in, for 12 months. Your business is placed directly in front of thousands of high value customers. Not a scrolling impression, a real thoughtful recommendation.`,
-  },
-  {
-    title: "Guests skip the comparison",
-    body: `An endorsement from a hotel carries weight. Guests don't need to open Google or ChatGPT to sift reviews or weigh you against competitors. You've already been recommended. `,
-  },
-  {
-    title: 'Provides an easy, actionable means to book',
-    body: `Every business has a digital page, accessible via QR code. This page links to your website, contacts, socials and provides directions to make bookings as easy as possible.`,
-  },
-];
-
-/*
-  What every spot includes: the digital page and the monthly reporting.
-  Confirm the exact reporting cadence and fields before launch.
-*/
-const digital = [
-  {
-    title: 'Your own digital page',
-    body: `Every business in the guide gets a dedicated page. Guests scan the QR
-      code on the physical guide and land straight on it.`,
+    title: 'Your own live page',
+    paragraphs: [
+      'Every featured business gets a dedicated page in the live version of the guide.',
+      'Guests scan the QR code on your physical placement and land straight on your business.',
+    ],
   },
   {
     title: 'Every next step, one tap away',
-    body: `Links to your website, contact details and socials, so an interested
-      guest can take action as easily as possible.`,
+    paragraphs: [
+      'Bookings, directions, offers, your website, contact details and other useful links are all there when a guest wants to act.',
+    ],
   },
   {
     title: 'Monthly scan reporting',
-    body: `Each month we send you the number of QR scans your page received. A
-      direct read on how many guests acted on your placement.`,
+    paragraphs: [
+      'See how many times guests scanned your placement each month.',
+      'A simple view of how often the physical guide prompted someone to take the next step.',
+    ],
   },
 ];
 ---
 
 <BaseLayout
   title="For Business"
-  description="Put your business in a hotel's Strictons guide: high intent guests handed a recommendation at check in, plus your own digital page and monthly QR scan reports."
+  description="Put your business in front of nearby hotel guests while they are deciding where to eat, drink, shop and explore."
 >
-  <section class="mx-auto max-w-6xl px-4 py-16">
-    <p class="text-sm font-semibold tracking-[0.08em] text-slate-500 uppercase">
-      For Business
-    </p>
-    <h1 class="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
-      Your best customers are staying nearby.
-    </h1>
-    <p class="mt-4 max-w-prose text-lg text-slate-600">
-      A spot in a hotel guide puts your business in front of high intent customers. The ones with the time, money and means to book. 
-    </p>
+  <section class="business-hero" aria-labelledby="business-hero-heading">
+    <div class="business-hero-card">
+      <div class="business-hero-visual">
+        <Image
+          class="business-hero-image"
+          src={customers}
+          alt="Travellers ready to spend at local businesses during their stay."
+          widths={[320, 480, 640, 800, 960, 1024]}
+          sizes="(max-width: 760px) 72vw, 460px"
+          format="webp"
+          quality={90}
+          loading="eager"
+          decoding="sync"
+          fetchpriority="high"
+        />
+      </div>
+      <div class="business-hero-shade" aria-hidden="true"></div>
 
-    <div class="mt-12 grid gap-x-10 gap-y-8 sm:grid-cols-2">
-      {
-        points.map((point) => (
-          <div>
-            <h2 class="text-lg font-semibold text-slate-900">{point.title}</h2>
-            <p class="mt-2 max-w-prose text-slate-600">{point.body}</p>
-          </div>
-        ))
-      }
+      <div class="business-hero-copy">
+        <p class="business-hero-eyebrow">For Business</p>
+        <h1 id="business-hero-heading">
+          Your best customers are staying nearby <em>tonight.</em>
+        </h1>
+        <p class="business-hero-intro">
+          Put your business in front of hotel guests while they’re deciding
+          where to eat, drink, shop and explore.
+        </p>
+        <p class="business-hero-closing">
+          Right place. Right moment. Right in front of them.
+        </p>
+      </div>
     </div>
   </section>
 
-  <section class="border-t border-slate-200 bg-slate-50">
-    <div class="mx-auto max-w-6xl px-4 py-16">
-      <p class="text-sm font-semibold tracking-[0.08em] text-slate-500 uppercase">
-        Included with every spot
-      </p>
-      <h2 class="mt-3 text-2xl font-bold tracking-tight sm:text-3xl">
-        Monthly reporting, on every guest scan.
+  <section class="business-section" aria-labelledby="views-heading">
+    <div class="business-copy-grid">
+      <h2 id="views-heading">
+        Tired of paying for views and wondering what came from them?
       </h2>
-      <p class="mt-4 max-w-prose text-lg text-slate-600">
-        We track every scan of the guide QR codes. You'll receive a monthly report to see how many guests are taking action from the physical guide.
-      </p>
+      <div class="business-copy">
+        <p>
+          You boost a post. Reach goes up. Views go up. Maybe you get a few
+          clicks.
+        </p>
+        <p>But there’s still one question that actually matters:</p>
+        <p><strong>Did anyone come in?</strong></p>
+        <p>
+          Social ads can put you in front of the right person at completely the
+          wrong time.
+        </p>
+        <p>
+          Strictons puts you in front of hotel guests who are already here,
+          already nearby and already deciding where to go.
+        </p>
+      </div>
+    </div>
+  </section>
 
-      <ol class="mt-8 grid gap-8 sm:grid-cols-3">
+  <section
+    class="business-section business-section-tinted"
+    aria-labelledby="decision-heading"
+  >
+    <div class="business-copy-grid">
+      <h2 id="decision-heading">Be there when the decision is being made.</h2>
+      <div class="business-copy">
+        <div class="business-decisions" aria-label="Guest decisions">
+          <p>Tonight’s dinner.</p>
+          <p>A drink after.</p>
+          <p>Coffee tomorrow morning.</p>
+          <p>Something to do this afternoon.</p>
+        </div>
+        <p>
+          These decisions are being made every day by guests staying just
+          minutes from your door.
+        </p>
+        <p>
+          <strong>Your business can be right there when they make them.</strong>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="business-section" aria-labelledby="recommendation-heading">
+    <div class="business-copy-grid">
+      <h2 id="recommendation-heading">A recommendation, not another ad.</h2>
+      <div class="business-copy">
+        <p>
+          Guests open the guide because they want to know{' '}
+          <strong>where to go.</strong>
+        </p>
+        <p>
+          Your business appears inside a curated guide made specifically for
+          their hotel and destination.
+        </p>
+        <p>You’re not interrupting their attention.</p>
+        <p>
+          <strong>You’re helping answer the question they already have.</strong>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section
+    class="business-section business-section-dark"
+    aria-labelledby="comparison-heading"
+  >
+    <div class="business-copy-grid">
+      <h2 id="comparison-heading">Get chosen before the comparison starts.</h2>
+      <div class="business-copy">
+        <p>When guests don’t have a recommendation, they search.</p>
+        <p>
+          Google. Maps. Reviews. Ratings. Photos. Then a handful of businesses
+          to compare.
+        </p>
+        <p>
+          <strong
+            >A recommendation gives them somewhere to start and often somewhere
+            to stop.</strong
+          >
+        </p>
+        <p>They see your business. It looks good. They scan. They book.</p>
+        <p>
+          Instead of fighting for attention alongside every competitor nearby,{
+            ' '
+          }
+          <strong
+            >you can be the recommendation already sitting in their hands.</strong
+          >
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="business-section" aria-labelledby="hands-heading">
+    <div class="business-copy-grid">
+      <h2 id="hands-heading">Put directly in their hands.</h2>
+      <div class="business-copy">
+        <p>
+          The physical guide is handed to hotel guests and stays with them
+          throughout their visit.
+        </p>
+        <p>
+          It sits in their room. They flick through it. They take it with them.
+        </p>
+        <p>
+          And your business is there every time they’re looking for what to do
+          next.
+        </p>
+        <p>
+          <strong
+            >It is not another impression disappearing down a feed. It is
+            something they can actually pick up and use.</strong
+          >
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section
+    class="business-section business-section-tinted"
+    aria-labelledby="next-step-heading"
+  >
+    <div class="business-copy-grid">
+      <h2 id="next-step-heading">From “that looks good” to “let’s go.”</h2>
+      <div class="business-copy">
+        <p>
+          Every placement includes a QR code that takes guests straight to your
+          business in the live version of the guide.
+        </p>
+        <p>From there, they can:</p>
+        <p class="business-action-list">
+          <strong>Make a booking.</strong><br />
+          <strong>Get directions.</strong><br />
+          <strong>Browse an offer.</strong><br />
+          <strong>Visit your website.</strong><br />
+          <strong>Find out more.</strong>
+        </p>
+        <p>
+          No need to search for you again. No need to remember your name later.
+        </p>
+        <p><strong>They see you, scan and take the next step.</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <section
+    class="business-section business-included"
+    aria-labelledby="reporting-heading"
+  >
+    <div class="business-section-inner">
+      <p class="business-kicker">Included with every spot</p>
+      <h2 id="reporting-heading">See when guests take action.</h2>
+      <div class="business-copy business-reporting-intro">
+        <p>Every scan from your placement is tracked.</p>
+        <p>
+          So instead of simply being told how many people <em>could</em> have seen
+          you, you can see how many guests scanned your placement to find out more.
+        </p>
+        <p>We send you a simple report each month.</p>
+      </div>
+
+      <ol class="business-included-grid">
         {
-          digital.map((item, i) => (
-            <li class="flex gap-4">
-              <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-slate-900 text-sm font-semibold text-white">
-                {i + 1}
-              </span>
+          included.map((item, i) => (
+            <li>
+              <span>{String(i + 1).padStart(2, '0')}</span>
+              <h3>{item.title}</h3>
               <div>
-                <h3 class="font-semibold text-slate-900">{item.title}</h3>
-                <p class="mt-1 max-w-prose text-slate-600">{item.body}</p>
+                {item.paragraphs.map((paragraph) => (
+                  <p>{paragraph}</p>
+                ))}
               </div>
             </li>
           ))
         }
       </ol>
+    </div>
+  </section>
 
-      <p class="mt-10 max-w-prose text-slate-600">
-        Spots are limited and offered by invitation only.
-      </p>
+  <section class="business-final" aria-labelledby="business-final-heading">
+    <div class="business-section-inner">
+      <h2 id="business-final-heading">Be where your customers are deciding.</h2>
+      <div class="business-copy">
+        <p>Your next customer may already be staying down the road.</p>
+        <p>Make sure you’re in front of them when they ask:</p>
+        <p><strong>Where should we go?</strong></p>
+        <p>
+          <strong>Spots are limited and offered by invitation only.</strong>
+        </p>
+        <a class="business-enquire" href="/contact">
+          Enquire about featuring your business.
+        </a>
+      </div>
     </div>
   </section>
 </BaseLayout>

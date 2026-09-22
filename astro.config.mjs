@@ -18,7 +18,9 @@ export default defineConfig({
 
   integrations: [
     // Emits /sitemap-index.xml + /sitemap-0.xml at build time.
-    sitemap(),
+    sitemap({
+      filter: (page) => page !== 'https://strictons.com/for-hotels',
+    }),
   ],
 
   image: {

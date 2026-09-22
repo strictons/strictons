@@ -1,7 +1,12 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
 import HomeImage from '../components/HomeImage.astro';
+import ContactCta from '../components/ContactCta.astro';
+import leftHandoff from '../assets/left-side-hero.png';
+import relaxedStay from '../assets/relaxed-stay.png';
+import zeroCost from '../assets/zero-cost.png';
 import '../styles/home.css';
 import { COPYRIGHT, SITE } from '../consts';
 
@@ -34,7 +39,6 @@ const organizationSchema = {
 <BaseLayout
   title="Pocket Hotel Guides for Better Guest Stays"
   description="Custom print and digital pocket guides that help hotel guests settle in, discover local experiences and enjoy a more memorable stay, at zero cost to the hotel. An evolution of the traditional hotel compendium."
-  headerOverlay
 >
   <script
     is:inline
@@ -53,18 +57,19 @@ const organizationSchema = {
     >
       <div class="home-container story-card">
         <h2 id="welcome-heading">
-          Every guest wants to feel personally taken care of, <em
+          Every guest wants to feel personally taken care of <em
             >without a long check-in.</em
           >
         </h2>
         <HomeImage
           name="guest-arrival"
           alt="Guests arriving with their luggage at a hotel reception."
+          depth
         />
         <div class="story-copy">
           <p>
             When travellers arrive, they have a<br />number of questions racing
-            through their mind.
+            through their minds.
           </p>
           <ul class="story-list">
             <li>What time is check-out?</li>
@@ -72,7 +77,7 @@ const organizationSchema = {
             <li>Where is the nearest shopping centre?</li>
           </ul>
           <p class="story-closing">
-            They’re tired, stressed and unfamiliar.<strong
+            They’re tired, stressed and in unfamiliar surroundings.<strong
               >They just want to get to their room.</strong
             >
           </p>
@@ -104,6 +109,7 @@ const organizationSchema = {
         <HomeImage
           name="reception-team"
           alt="A busy hotel reception team welcoming guests and answering the phone."
+          depth
         />
       </div>
     </section>
@@ -114,25 +120,27 @@ const organizationSchema = {
     >
       <div class="home-container story-card">
         <h2 id="anticipate-heading">
-          Unanswered questions,<br />
+          Unanswered questions<br />
           <em>can quickly compound.</em>
         </h2>
         <HomeImage
           name="uncertainty"
           alt="A newly arrived hotel guest looking uncertain while standing in an elevator with her luggage."
+          depth
         />
         <div class="story-copy anticipate-copy">
           <p>
-            One unanswered question. An amenity they can’t find.<br />Then
-            something doesn’t go to plan.
+            One unanswered question. An amenity they can't find.<br /><br />Then
+            something doesn't go to plan.
           </p>
           <p>
-            Individually, they're minor concerns. Together, they can become
-            frustration, dissatisfaction and even a complaint.
+            Individually, it may be a minor concern.<br />Together, it can turn
+            into frustration, dissatisfaction and even a complaint.
           </p>
           <p class="story-closing">
             <strong
-              >It’s hard to relax when they’re still figuring everything out.</strong
+              >It's hard for guests to relax<br />when they're still figuring
+              everything out.</strong
             >
           </p>
         </div>
@@ -140,26 +148,44 @@ const organizationSchema = {
     </section>
 
     <section
-      class="story-section story-section-solution"
-      aria-labelledby="solution-heading"
+      class="story-section story-section-handoff"
+      aria-labelledby="handoff-heading"
     >
-      <div class="home-container story-card story-card-reverse">
-        <h2 id="solution-heading">
-          Put everything a guest needs,<br />
-          <em>right into their hands.</em>
-        </h2>
-        <div class="story-copy solution-copy">
-          <p>
-            With a custom designed,<br /> professionally printed.<strong
-              class="solution-product"
-              data-text="Pocket Hotel Guide.">Pocket Hotel Guide.</strong
-            >
-          </p>
+      <div class="home-container handoff-card">
+        <div class="handoff-guide-frame" aria-hidden="true">
+          <Image
+            class="handoff-guide"
+            src={leftHandoff}
+            alt=""
+            widths={[480, 800, 1200, 1600]}
+            sizes="(max-width: 760px) 100vw, 58vw"
+            format="webp"
+            quality={90}
+            loading="lazy"
+            decoding="async"
+          />
         </div>
-        <HomeImage
-          name="guide-reception"
-          alt="A hotel host handing a guest their branded pocket guide."
-        />
+
+        <div class="handoff-copy">
+          <h2 id="handoff-heading">
+            One small change <em>for a more relaxed stay.</em>
+          </h2>
+          <p><strong>Hand your guests a guide at check-in.</strong></p>
+        </div>
+
+        <div class="handoff-guests-frame">
+          <Image
+            class="handoff-guests"
+            src={relaxedStay}
+            alt="Two hotel guests reading their pocket guide at reception."
+            widths={[480, 800, 1200]}
+            sizes="(max-width: 760px) 100vw, 58vw"
+            format="webp"
+            quality={90}
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
       </div>
     </section>
 
@@ -170,23 +196,23 @@ const organizationSchema = {
       <div class="home-container story-card">
         <h2 id="experience-heading">
           Once guests feel at ease,<br />
-          <em>give them a great experience.</em>
+          <em>show them a great experience</em>
         </h2>
         <HomeImage
           name="hotel-dining"
           alt="Guests enjoying dinner and wine by the water at sunset."
+          depth
         />
         <div class="story-copy">
           <p>The best memories are often made beyond the hotel room.</p>
           <p>
-            A restaurant you recommended. An afternoon at your spa. A local
-            experience they would never have found themselves.
+            A restaurant you recommend. An afternoon at your spa. A local
+            experience they might never have found.
           </p>
-          <p>When you lead them there, those memories attach to your hotel.</p>
           <p class="story-closing">
             <strong
-              >Create a more memorable stay and give them a reason to come back
-              and explore more</strong
+              >Create a more memorable stay and give them a<br />reason to come
+              back and explore more.</strong
             >
           </p>
         </div>
@@ -205,7 +231,7 @@ const organizationSchema = {
         <div class="brand-intro">
           <p>Traditional compendiums stay in the room.</p>
           <p>Our guides are designed to be used on the go.</p>
-          <p>Then taken home and used to plan again.</p>
+          <p>They are then taken home and used to plan again.</p>
         </div>
         <div class="brand-grid">
           <figure>
@@ -239,14 +265,15 @@ const organizationSchema = {
     >
       <div class="home-container story-card digital-card">
         <h2 id="digital-heading">
-          And yes, there’s a <em>digital version too.</em>
+          And yes, we build a <em>digital version too.</em>
         </h2>
         <HomeImage
           name="digital-guide"
           alt="A hotel guest opening a digital hotel guide on their phone."
+          depth
         />
         <div class="story-copy digital-copy">
-          <p>For the moments where digital works better.</p>
+          <p>For the moments when digital works better.</p>
           <p>
             Guests can open it instantly for directions, booking links and
             offers.
@@ -262,21 +289,36 @@ const organizationSchema = {
     </section>
 
     <section
-      class="story-section home-contact"
-      aria-labelledby="contact-heading"
+      class="story-section zero-cost-section"
+      aria-labelledby="zero-cost-heading"
     >
-      <div class="home-container home-contact-card">
-        <div>
-          <h2 id="contact-heading">Make every guest feel welcome.</h2>
+      <div class="home-container zero-cost-card">
+        <div class="zero-cost-copy">
+          <h2 id="zero-cost-heading">
+            All for <em>zero cost</em><br />to your hotel.
+          </h2>
           <p>
-            Let’s create a pocket guide<br class="cta-mobile-break" /> for your hotel.
+            Every guide is funded by sponsorships from local businesses. Every
+            business is reviewed, recommended and approved by your team first.
           </p>
         </div>
-        <a class="home-button" href="/contact"
-          >Get in touch <span aria-hidden="true">↗</span></a
-        >
+
+        <div class="zero-cost-visual">
+          <Image
+            src={zeroCost}
+            alt="Local hospitality, tourism and experience partners who help fund each hotel guide."
+            widths={[480, 800, 1052]}
+            sizes="(max-width: 760px) 100vw, 52vw"
+            format="webp"
+            quality={90}
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
       </div>
     </section>
+
+    <ContactCta />
 
     <a class="back-to-top" href="#main" aria-label="Back to top">
       <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -294,6 +336,9 @@ const organizationSchema = {
 
       homepage.dataset.controlsReady = 'true';
       const backToTop = homepage.querySelector<HTMLElement>('.back-to-top');
+      const depthScenes = Array.from(
+        homepage.querySelectorAll<HTMLElement>('[data-depth-scene]')
+      );
 
       const updateBackToTop = () => {
         backToTop?.classList.toggle(
@@ -308,6 +353,81 @@ const organizationSchema = {
         event.preventDefault();
         window.scrollTo({ top: 0, behavior: 'auto' });
       });
+
+      const reducedMotion = window.matchMedia(
+        '(prefers-reduced-motion: reduce)'
+      );
+
+      if (!reducedMotion.matches && depthScenes.length) {
+        let frame = 0;
+        const visibleScenes = new Set<HTMLElement>();
+
+        const renderDepth = () => {
+          frame = 0;
+          const viewportHeight = window.innerHeight;
+
+          visibleScenes.forEach((scene) => {
+            const rect = scene.getBoundingClientRect();
+            const sceneCentre = rect.top + rect.height / 2;
+            const viewportCentre = viewportHeight / 2;
+            const range = (viewportHeight + rect.height) / 2;
+            const progress = Math.max(
+              -1,
+              Math.min(1, (sceneCentre - viewportCentre) / range)
+            );
+
+            const focus = 1 - Math.abs(progress);
+            scene.style.setProperty('--scene-scroll-y', `${progress * -68}px`);
+            scene.style.setProperty('--scene-scale', `${1.08 + focus * 0.055}`);
+          });
+        };
+
+        const requestDepthFrame = () => {
+          if (!frame) frame = window.requestAnimationFrame(renderDepth);
+        };
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              const scene = entry.target as HTMLElement;
+              if (entry.isIntersecting) visibleScenes.add(scene);
+              else visibleScenes.delete(scene);
+            });
+            requestDepthFrame();
+          },
+          { rootMargin: '15% 0px' }
+        );
+
+        depthScenes.forEach((scene) => {
+          observer.observe(scene);
+
+          scene.addEventListener('pointermove', (event) => {
+            if (event.pointerType === 'touch') return;
+            const rect = scene.getBoundingClientRect();
+            const x = (event.clientX - rect.left) / rect.width - 0.5;
+            const y = (event.clientY - rect.top) / rect.height - 0.5;
+            scene.style.setProperty('--scene-pointer-x', `${x * 22}px`);
+            scene.style.setProperty('--scene-pointer-y', `${y * 16}px`);
+            scene.style.setProperty('--scene-rotate-x', `${y * -3.5}deg`);
+            scene.style.setProperty('--scene-rotate-y', `${x * 4.5}deg`);
+            scene.style.setProperty('--scene-light-x', `${(x + 0.5) * 100}%`);
+            scene.style.setProperty('--scene-light-y', `${(y + 0.5) * 100}%`);
+          });
+
+          scene.addEventListener('pointerleave', () => {
+            scene.style.setProperty('--scene-pointer-x', '0px');
+            scene.style.setProperty('--scene-pointer-y', '0px');
+            scene.style.setProperty('--scene-rotate-x', '0deg');
+            scene.style.setProperty('--scene-rotate-y', '0deg');
+            scene.style.setProperty('--scene-light-x', '50%');
+            scene.style.setProperty('--scene-light-y', '36%');
+          });
+        });
+
+        window.addEventListener('scroll', requestDepthFrame, { passive: true });
+        window.addEventListener('resize', requestDepthFrame, { passive: true });
+        requestDepthFrame();
+      }
     };
 
     initialiseHomeControls();

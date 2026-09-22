@@ -1,21 +1,20 @@
 ---
 import { Image } from 'astro:assets';
-import artwork from '../assets/strictons-artwork-lillie-nolan.jpg';
+import pocketHotelGuide from '../assets/pocket-hotel-guide.png';
 ---
 
-<section class="home-hero" aria-labelledby="hero-heading">
-  <div class="home-container hero-grid">
-    <div class="hero-copy">
+<section class="home-hero product-hero" aria-labelledby="hero-heading">
+  <div class="product-hero-card">
+    <div class="product-hero-copy">
       <h1 id="hero-heading">
-        <span class="hero-line">Do more, with less</span>
-        <span class="hero-ampersand">&amp;</span>
-        <span class="hero-line hero-line-accent">look after every guest.</span>
+        Put everything a guest needs,<br />
+        <em>right into their hands.</em>
       </h1>
-      <p>
-        Hand them the information they need to settle in, and the inspiration to
-        make the most out of their stay.
+      <p class="product-hero-intro">
+        With a custom-designed,<br />professionally printed
+        <strong>Pocket Hotel Guide.</strong>
       </p>
-      <a class="home-button" href="#how-it-works">
+      <a class="home-button product-hero-button" href="#how-it-works">
         See how it works
         <svg
           width="18"
@@ -30,62 +29,20 @@ import artwork from '../assets/strictons-artwork-lillie-nolan.jpg';
         >
       </a>
     </div>
-    <figure class="hero-artwork">
-      <div class="hero-artwork-frame">
-        <div class="hero-artwork-surface">
-          <Image
-            src={artwork}
-            alt="Painting of a hotel host handing a guest a teal pocket guide at check-in."
-            widths={[480, 720, 960, 1280]}
-            sizes="(max-width: 400px) 80vw, (max-width: 512px) calc(100vw - 80px), (max-width: 760px) 432px, 360px"
-            loading="eager"
-            fetchpriority="high"
-          />
-        </div>
-      </div>
-      <figcaption>
-        <span>Artwork by Australian Artist Lillie Nolan · @lilliepaints</span>
-      </figcaption>
-    </figure>
+
+    <div class="product-hero-visual">
+      <Image
+        class="product-hero-cutout"
+        src={pocketHotelGuide}
+        alt="A hotel host handing a guest their branded pocket guide."
+        widths={[320, 480, 640, 800, 1024]}
+        sizes="(max-width: 760px) 62vw, (max-width: 1000px) 38vw, 430px"
+        format="webp"
+        quality={90}
+        loading="eager"
+        decoding="sync"
+        fetchpriority="high"
+      />
+    </div>
   </div>
 </section>
-
-<script>
-  let creditObserver: ResizeObserver | undefined;
-
-  async function fitArtworkCredit() {
-    creditObserver?.disconnect();
-    await document.fonts.ready;
-    const credit = document.querySelector<HTMLElement>(
-      '.hero-artwork figcaption'
-    );
-    const text = credit?.querySelector<HTMLElement>('span');
-    if (!credit || !text) return;
-
-    let previousWidth = 0;
-    const fit = () => {
-      const availableWidth = credit.getBoundingClientRect().width;
-      if (!availableWidth || availableWidth === previousWidth) return;
-      previousWidth = availableWidth;
-      // Preserve the previous size even though the displayed credit is shorter.
-      const displayedCredit = text.textContent;
-      text.textContent =
-        'Artwork by Australian Artist Lillie Nolan · 2026 · @lilliepaints';
-      text.style.fontSize = '100px';
-      const naturalWidth = text.getBoundingClientRect().width;
-      text.textContent = displayedCredit;
-      if (naturalWidth) {
-        text.style.fontSize = `${(92 * (availableWidth - 1)) / naturalWidth}px`;
-      }
-    };
-    fit();
-    creditObserver = new ResizeObserver(fit);
-    creditObserver.observe(credit);
-  }
-
-  fitArtworkCredit();
-  document.addEventListener('astro:page-load', fitArtworkCredit);
-  document.addEventListener('astro:before-swap', () =>
-    creditObserver?.disconnect()
-  );
-</script>

@@ -2,60 +2,19 @@
 import { NAV_LINKS, SITE } from '../consts';
 import logo from '../assets/strictons-logo.png';
 
-interface Props {
-  /**
-   * Layer the header transparently over the home hero. The logo lockup sits
-   * over the linen headline column on lg+ (dark) and over the artwork on
-   * smaller screens (light), so its colours flip at `lg`. While the menu is
-   * open the header bar carries the blue menu surface and its marks turn
-   * light; see `header[data-nav-open]` in global.css.
-   */
-  overlay?: boolean;
-}
-
-const { overlay = false } = Astro.props;
-
 const pathname = Astro.url.pathname.replace(/\/+$/, '') || '/';
 const isActive = (href: string) =>
   pathname === href || pathname.startsWith(`${href}/`);
 ---
 
-<header
-  data-home={overlay || undefined}
-  class:list={[
-    'scroll-aware-header z-50',
-    overlay
-      ? 'absolute inset-x-0 top-0'
-      : 'relative border-b border-slate-200 bg-white',
-  ]}
->
-  {
-    overlay && (
-      <div
-        class="evolution-banner"
-        aria-label="An evolution of the traditional hotel compendium"
-      >
-        <div class="evolution-banner-track" aria-hidden="true">
-          <span>An evolution of the traditional hotel compendium</span>
-        </div>
-      </div>
-    )
-  }
-  {
-    /*
-      Bar: stays above the menu panel (local z-20 > panel z-10). On the home
-      page it is full-bleed with the same left/right insets as the hero, so the
-      logo lines up with the headline and the toggle with the artist credit.
-    */
-  }
-  <div
-    class:list={[
-      'header-bar relative z-20 flex items-center justify-between py-4 sm:py-5',
-      overlay
-        ? 'w-full px-6 sm:px-10 xl:px-12 2xl:px-20'
-        : 'mx-auto max-w-6xl px-4',
-    ]}
-  >
+<header data-site-header class="scroll-aware-header">
+  <div class="evolution-banner">
+    <div class="evolution-banner-track">
+      <span>An evolution of the traditional hotel compendium</span>
+    </div>
+  </div>
+
+  <div class="header-bar relative z-20">
     <a
       href="/"
       aria-label={`${SITE.name} home`}
@@ -64,15 +23,10 @@ const isActive = (href: string) =>
       <span
         aria-hidden="true"
         style={`--nav-logo-image: url("${logo.src}")`}
-        class:list={[
-          'nav-logo nav-tint h-8 sm:h-9 lg:h-10',
-          overlay ? 'text-white lg:text-slate-900' : 'text-slate-900',
-        ]}></span>
+        class="nav-logo nav-tint"></span>
       <span
-        class:list={[
-          'nav-tint font-display text-lg tracking-[0.2em] uppercase sm:text-xl lg:text-2xl',
-          overlay ? 'text-white lg:text-slate-900' : 'text-slate-900',
-        ]}>{SITE.name}</span
+        class="nav-tint font-display text-lg tracking-[0.2em] uppercase sm:text-xl lg:text-2xl"
+        >{SITE.name}</span
       >
     </a>
 
@@ -81,10 +35,7 @@ const isActive = (href: string) =>
       id="nav-toggle"
       aria-controls="primary-nav"
       aria-expanded="false"
-      class:list={[
-        'nav-tint -mr-2 inline-flex h-11 w-11 items-center justify-center rounded sm:-mr-2.5 sm:h-12 sm:w-12',
-        overlay ? 'text-white' : 'text-slate-900',
-      ]}
+      class="nav-tint inline-flex h-11 w-11 items-center justify-center rounded sm:h-12 sm:w-12"
     >
       <span class="sr-only">Menu</span>
       <span class="hamburger" aria-hidden="true">
@@ -109,7 +60,7 @@ const isActive = (href: string) =>
   >
     <nav
       aria-label="Primary"
-      class="nav-reveal mx-auto flex w-full max-w-6xl flex-1 flex-col justify-center px-4 pt-24 pb-24"
+      class="nav-reveal mx-auto flex w-full max-w-6xl flex-1 flex-col justify-center px-4 pt-20 pb-12 sm:pt-24 sm:pb-16"
     >
       <ul>
         {
@@ -118,7 +69,7 @@ const isActive = (href: string) =>
               <a
                 href={link.href}
                 aria-current={isActive(link.href) ? 'page' : undefined}
-                class="group block py-4 font-serif text-4xl tracking-tight text-[#30332e] uppercase transition-colors hover:text-[#77715f] aria-[current=page]:text-[#77715f] sm:py-5 sm:text-6xl"
+                class="nav-menu-link group block py-3 font-serif tracking-tight text-[#30332e] uppercase transition-colors hover:text-[#77715f] aria-[current=page]:text-[#77715f] sm:py-4"
               >
                 <span class="inline-block transition-transform duration-300 group-hover:translate-x-2">
                   {link.label}
@@ -242,16 +193,21 @@ const isActive = (href: string) =>
       const currentPosition = Math.max(window.scrollY, 0);
 
       if (currentPosition < 72) {
+        delete header.dataset.scrollElevated;
         delete header.dataset.scrollHidden;
         lastPosition = currentPosition;
-      } else if (currentPosition > lastPosition + 8) {
-        if (header.dataset.navOpen !== 'true') {
-          header.dataset.scrollHidden = 'true';
+      } else {
+        header.dataset.scrollElevated = 'true';
+
+        if (currentPosition > lastPosition + 8) {
+          if (header.dataset.navOpen !== 'true') {
+            header.dataset.scrollHidden = 'true';
+          }
+          lastPosition = currentPosition;
+        } else if (currentPosition < lastPosition - 8) {
+          delete header.dataset.scrollHidden;
+          lastPosition = currentPosition;
         }
-        lastPosition = currentPosition;
-      } else if (currentPosition < lastPosition - 8) {
-        delete header.dataset.scrollHidden;
-        lastPosition = currentPosition;
       }
 
       ticking = false;
@@ -266,6 +222,8 @@ const isActive = (href: string) =>
       },
       { passive: true }
     );
+
+    updateHeader();
   };
 
   initialiseScrollHeader();

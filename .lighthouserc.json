@@ -2,6 +2,8 @@
   "ci": {
     "collect": {
       "staticDistDir": "./dist",
+      "autodiscoverUrlBlocklist": ["/404.html"],
+      "maxAutodiscoverUrls": 0,
       "numberOfRuns": 3
     },
     "assert": {

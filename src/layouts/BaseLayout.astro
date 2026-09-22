@@ -11,9 +11,6 @@
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import { COPYRIGHT } from '../consts';
-import '@fontsource-variable/albert-sans';
-import '@fontsource-variable/roboto-serif/full.css';
-import '@fontsource-variable/roboto-serif/full-italic.css';
 import '../styles/global.css';
 
 interface Props {
@@ -22,18 +19,10 @@ interface Props {
   image?: string;
   type?: 'website' | 'article';
   noindex?: boolean;
-  /** Layer the header transparently over the page's hero (home page). */
-  headerOverlay?: boolean;
 }
 
-const {
-  title,
-  description,
-  image,
-  type,
-  noindex,
-  headerOverlay = false,
-} = Astro.props;
+const { title, description, image, type, noindex } = Astro.props;
+const isHome = Astro.url.pathname === '/';
 ---
 
 <!doctype html>
@@ -45,7 +34,7 @@ const {
   </head>
   <body
     class="flex min-h-screen flex-col bg-white text-slate-900 antialiased"
-    style={headerOverlay ? 'background-color: #faf9f6;' : undefined}
+    style={isHome ? 'background-color: #faf9f6;' : undefined}
   >
     <a
       href="#main"
@@ -53,12 +42,12 @@ const {
     >
       Skip to content
     </a>
-    <Header overlay={headerOverlay} />
-    <main id="main" class="flex-1">
+    <Header />
+    <main id="main" class:list={['flex-1', !isHome && 'site-main-with-header']}>
       <slot />
     </main>
     {
-      !headerOverlay && (
+      !isHome && (
         <footer class="border-t border-slate-200">
           <div class="mx-auto max-w-6xl px-6 py-6 text-center text-xs tracking-wide text-slate-500">
             {COPYRIGHT}

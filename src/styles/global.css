@@ -1,27 +1,29 @@
 @import 'tailwindcss';
 
-/*
-  Font roles
-  ----------
-    --font-sans     body / UI text            (system stack, final)
-    --font-serif    display headings           (system stack, placeholder)
-    --font-display  brand wordmark / display   -> "Graveur Display" (Bold)
-
-  TODO(fonts): the "Graveur Display" file is NOT in the repo yet. Drop
-  `graveur-display-bold.woff2` (and optionally `.woff`) into `public/fonts/`
-  (see public/fonts/README.md). Until then the wordmark renders in the serif
-  fallback below; nothing else needs to change. When it lands, also uncomment
-  the <link rel="preload"> in src/components/BaseHead.astro.
-
-  --font-serif is still a system stack; swap it for the real brand serif the
-  same way (add an @font-face, repoint the token, add a preload).
-*/
-
 @font-face {
-  font-family: 'Graveur Display';
-  src: url('/fonts/graveur-display-bold.woff2') format('woff2');
-  font-weight: 700;
+  font-family: 'Albert Sans Variable';
+  src: url('@fontsource-variable/albert-sans/files/albert-sans-latin-wght-normal.woff2')
+    format('woff2-variations');
+  font-weight: 100 900;
   font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Noto Serif Display Variable';
+  src: url('@fontsource-variable/noto-serif-display/files/noto-serif-display-latin-standard-normal.woff2')
+    format('woff2-variations');
+  font-weight: 100 900;
+  font-stretch: 62.5% 100%;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Noto Serif Display Variable';
+  src: url('@fontsource-variable/noto-serif-display/files/noto-serif-display-latin-standard-italic.woff2')
+    format('woff2-variations');
+  font-weight: 100 900;
+  font-stretch: 62.5% 100%;
+  font-style: italic;
   font-display: swap;
 }
 
@@ -31,16 +33,15 @@
     BlinkMacSystemFont, 'Segoe UI', sans-serif, 'Apple Color Emoji',
     'Segoe UI Emoji';
   --font-serif:
-    'Roboto Serif Variable', ui-serif, Georgia, 'Times New Roman', serif;
+    'Noto Serif Display Variable', ui-serif, Georgia, 'Times New Roman', serif;
   --font-display:
-    'Graveur Display', 'Roboto Serif Variable', ui-serif, Georgia, serif;
+    'Noto Serif Display Variable', ui-serif, Georgia, 'Times New Roman', serif;
 }
 
 :root {
   color-scheme: light;
-  --nav-menu-background:
-    radial-gradient(80% 55% at 15% 0%, rgb(120 158 202 / 42%), transparent 60%),
-    linear-gradient(160deg, #3e648f 0%, #315378 70%, #294765 100%);
+  --feature-hero-heading-size: clamp(2rem, 2.75vw, 2.625rem);
+  --nav-menu-background: #fff;
 }
 
 html {
@@ -49,20 +50,274 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
-/* The header yields while travelling down a page and returns on upward intent. */
+/* One shared header for every route. The banner remains pinned while the
+   navigation bar yields on downward travel and returns on upward intent. */
 .scroll-aware-header {
+  position: fixed;
+  z-index: 50;
+  inset: 0 0 auto;
+  border-bottom: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.scroll-aware-header > .header-bar {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  width: min(1160px, calc(100% - 96px));
+  margin-inline: auto;
+  padding: 22px 0;
+  isolation: isolate;
   transition: transform 340ms cubic-bezier(0.16, 1, 0.3, 1);
 }
-.scroll-aware-header:not([data-home]) {
-  position: sticky;
+.scroll-aware-header > .header-bar::before {
+  position: absolute;
+  z-index: -1;
   top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 100vw;
+  background: rgb(255 255 255 / 90%);
+  backdrop-filter: blur(18px) saturate(120%);
+  content: '';
+  transform: translateX(-50%);
+  -webkit-backdrop-filter: blur(18px) saturate(120%);
 }
-.scroll-aware-header[data-scroll-hidden='true'] {
+.scroll-aware-header > .header-bar > a {
+  grid-column: 2;
+}
+.scroll-aware-header .nav-logo {
+  height: 42px;
+}
+.scroll-aware-header .nav-tint {
+  color: #30332e;
+}
+.scroll-aware-header #nav-toggle {
+  grid-column: 3;
+  justify-self: end;
+  margin: 0;
+}
+.scroll-aware-header #primary-nav .nav-reveal {
+  width: min(1160px, calc(100% - 96px));
+  padding-inline: 0;
+}
+.scroll-aware-header[data-scroll-hidden='true'] > .header-bar {
   transform: translateY(-100%);
 }
+.site-main-with-header {
+  padding-top: 118px;
+}
+.evolution-banner {
+  position: relative;
+  z-index: 21;
+  display: flex;
+  height: 32px;
+  overflow: visible;
+  background: #29171b;
+  box-shadow: 0 -3px 0 3px #29171b;
+  color: #ead8b4;
+  transform: translateZ(0);
+}
+.evolution-banner::before {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% - 2px);
+  left: 0;
+  height: calc(100vh + 2px);
+  background: #29171b;
+  content: '';
+}
+.evolution-banner-track {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  overflow: hidden;
+}
+.evolution-banner-track span {
+  display: flex;
+  flex: none;
+  align-items: center;
+  height: 32px;
+  padding-inline: 2.25rem;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
 @media (prefers-reduced-motion: reduce) {
-  .scroll-aware-header {
+  .scroll-aware-header > .header-bar {
     transition: none;
+  }
+}
+
+/* Shared image-ready hero for pages whose cutout artwork is still to come. */
+.feature-page-hero {
+  display: flow-root;
+  overflow: clip;
+  padding-top: 8px;
+  background: #faf9f6;
+}
+
+.feature-page-hero-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(420px, 0.92fr);
+  position: relative;
+  isolation: isolate;
+  width: min(1160px, calc(100% - 96px));
+  min-height: clamp(470px, calc(100svh - 230px), 540px);
+  margin: clamp(44px, 6vh, 60px) auto clamp(56px, 7vh, 72px);
+  overflow: visible;
+  background: #29171b;
+  box-shadow: 0 30px 80px rgb(53 27 31 / 20%);
+}
+
+.feature-page-hero-copy {
+  grid-column: 1;
+  grid-row: 1;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  padding: clamp(42px, 4.75vw, 64px);
+  color: #f7efe7;
+}
+
+.feature-page-hero-copy h1 {
+  font-family: var(--font-serif);
+  font-size: var(--feature-hero-heading-size);
+  font-stretch: 94%;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.04;
+  text-wrap: balance;
+}
+
+.feature-page-hero-copy h1 span,
+.feature-page-hero-copy h1 em {
+  display: block;
+}
+
+.feature-page-hero-copy h1 em {
+  color: #d7b39d;
+  font-weight: 700;
+}
+
+.feature-page-hero-visual {
+  grid-column: 2;
+  grid-row: 1;
+  position: relative;
+  min-width: 0;
+  min-height: 100%;
+  overflow: visible;
+}
+
+.feature-page-hero-image {
+  position: absolute;
+  z-index: 1;
+  right: -5%;
+  bottom: -1px;
+  width: auto;
+  max-width: none;
+  height: 104%;
+  object-fit: contain;
+  object-position: right bottom;
+  filter: none;
+}
+
+@media (max-width: 1000px) {
+  .feature-page-hero-card {
+    grid-template-columns: minmax(0, 1fr) minmax(340px, 0.86fr);
+    width: calc(100% - 64px);
+  }
+
+  .feature-page-hero-copy {
+    padding-inline: clamp(36px, 5vw, 56px);
+  }
+
+  .scroll-aware-header > .header-bar,
+  .scroll-aware-header #primary-nav .nav-reveal {
+    width: calc(100% - 64px);
+  }
+}
+
+@media (max-width: 760px) {
+  :root {
+    --feature-hero-heading-size: clamp(1.75rem, 5.4vw, 2.125rem);
+  }
+
+  .feature-page-hero {
+    padding-top: 0;
+  }
+
+  .feature-page-hero-card {
+    grid-template-columns: minmax(0, 1fr);
+    width: calc(100% - clamp(64px, 20vw, 80px));
+    min-height: clamp(340px, 96vw, 430px);
+    margin: 44px auto 48px;
+  }
+
+  .feature-page-hero-copy {
+    grid-column: 1;
+    grid-row: 1;
+    justify-content: center;
+    padding: 40px 24px;
+    text-align: center;
+  }
+
+  .feature-page-hero-visual {
+    display: none;
+  }
+
+  .feature-page-hero-card--with-image {
+    min-height: 0;
+  }
+
+  .feature-page-hero-card--with-image .feature-page-hero-visual {
+    grid-column: 1;
+    grid-row: 1;
+    display: block;
+    min-height: clamp(290px, 78vw, 340px);
+  }
+
+  .feature-page-hero-card--with-image .feature-page-hero-copy {
+    grid-row: 2;
+    padding: 28px 20px 32px;
+  }
+
+  .feature-page-hero-image {
+    right: auto;
+    left: 50%;
+    bottom: 0;
+    height: 108%;
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      #000 0%,
+      #000 80%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(to bottom, #000 0%, #000 80%, transparent 100%);
+    filter: none;
+    transform: translateX(-50%);
+  }
+
+  .scroll-aware-header > .header-bar,
+  .scroll-aware-header #primary-nav .nav-reveal {
+    width: calc(100% - clamp(64px, 20vw, 80px));
+  }
+  .scroll-aware-header > .header-bar {
+    grid-template-columns: 1fr auto;
+    padding-block: 14px;
+  }
+  .scroll-aware-header > .header-bar > a {
+    grid-column: 1;
+  }
+  .scroll-aware-header #nav-toggle {
+    grid-column: 2;
+  }
+  .scroll-aware-header .nav-logo {
+    height: 34px;
+  }
+  .site-main-with-header {
+    padding-top: 94px;
   }
 }
 
@@ -85,59 +340,6 @@ dt {
 }
 
 /*
-  Subtle woven-paper field for the home hero's headline column (lg+).
-  Warm off-white + a faint fibre grain + a fine warp/weft weave.
-*/
-@utility bg-linen {
-  background-color: #fcfbf8;
-  background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.16 0 0 0 0 0.13 0 0 0 0 0.09 0 0 0 0.14 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E"),
-    repeating-linear-gradient(
-      90deg,
-      rgba(51, 37, 20, 0.022) 0 1px,
-      transparent 1px 4px
-    ),
-    repeating-linear-gradient(
-      0deg,
-      rgba(51, 37, 20, 0.022) 0 1px,
-      transparent 1px 4px
-    ),
-    radial-gradient(
-      130% 100% at 12% 0%,
-      rgba(255, 252, 244, 0.7),
-      transparent 55%
-    );
-  background-size:
-    200px 200px,
-    auto,
-    auto,
-    auto;
-}
-
-/*
-  Mixed-colour field sampled from the commissioned artwork: deep oxblood base
-  with a rust glow, a navy pool, a whisper of the guide's teal and a warm
-  highlight. Backs the full-screen nav menu.
-*/
-@utility bg-artwork-blend {
-  background-color: #241211;
-  background-image:
-    radial-gradient(80% 60% at 10% 4%, rgba(152, 65, 29, 0.5), transparent 60%),
-    radial-gradient(70% 65% at 96% 16%, rgba(19, 25, 37, 0.9), transparent 62%),
-    radial-gradient(
-      95% 85% at 86% 102%,
-      rgba(63, 167, 170, 0.2),
-      transparent 64%
-    ),
-    radial-gradient(
-      60% 55% at 22% 98%,
-      rgba(208, 157, 134, 0.14),
-      transparent 70%
-    ),
-    linear-gradient(155deg, #3c1b15 0%, #281312 46%, #16142a 100%);
-}
-
-/*
   Full-screen nav menu choreography
   ---------------------------------
   1. The panel is a curtain that drops from above the viewport: slow to start,
@@ -148,9 +350,13 @@ dt {
 */
 #primary-nav {
   background: var(--nav-menu-background);
-  color: #f6f2e9;
+  background-position: top left;
+  background-size: 100vw 100vh;
+  backdrop-filter: blur(24px) saturate(115%);
+  color: #30332e;
   transform: translateY(-100%);
   visibility: hidden;
+  -webkit-backdrop-filter: blur(24px) saturate(115%);
   transition:
     transform 320ms cubic-bezier(0.4, 0, 1, 1),
     visibility 0s linear 320ms;
@@ -178,14 +384,20 @@ dt {
   transform: translateY(0);
   transition-delay: 440ms;
 }
-
-/* Carry the menu surface through the header while the curtain is moving. */
+/* Keep the navigation controls legible on the permanent frosted header. */
 header[data-nav-open='true'] {
-  background: transparent;
   border-color: transparent;
+  background: transparent;
+}
+header[data-nav-open='true'] > .header-bar::before {
+  background: var(--nav-menu-background);
+  background-position: top left;
+  background-size: 100vw 100vh;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 header[data-nav-open='true'] .nav-tint {
-  color: #f6f2e9;
+  color: #30332e;
 }
 header[data-nav-open='true'] .nav-tint:hover {
   opacity: 0.7;
@@ -200,14 +412,29 @@ header[data-nav-open='true'] .nav-tint:hover {
   mask: var(--nav-logo-image) center / contain no-repeat;
 }
 #primary-nav li {
-  border-color: rgb(246 242 233 / 22%);
+  border-color: rgb(37 55 70 / 18%);
 }
 #primary-nav a {
-  color: #f6f2e9;
+  color: #253746;
 }
 #primary-nav a:hover,
 #primary-nav a[aria-current='page'] {
-  color: #c8d7eb;
+  color: #60798c;
+}
+.nav-menu-link {
+  font-size: clamp(1.65rem, 4.2vw, 3.35rem);
+  line-height: 1.05;
+}
+
+@media (max-height: 720px) {
+  .nav-menu-link {
+    font-size: clamp(1.4rem, 3.6vw, 2.65rem);
+  }
+
+  #primary-nav .nav-reveal {
+    padding-top: 5rem;
+    padding-bottom: 1.5rem;
+  }
 }
 
 /*
@@ -263,20 +490,6 @@ header[data-nav-open='true'] .nav-tint:hover {
   transform: translateY(-50%) rotate(-45deg);
 }
 
-/* Hero painting: a very slow Ken Burns drift. */
-.hero-kenburns {
-  transform-origin: 50% 42%;
-  animation: hero-kenburns 38s ease-in-out infinite alternate;
-}
-@keyframes hero-kenburns {
-  from {
-    transform: scale(1.06);
-  }
-  to {
-    transform: scale(1.16) translate3d(-1.6%, -1.4%, 0);
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   #primary-nav,
   #primary-nav[data-open='true'],
@@ -285,9 +498,5 @@ header[data-nav-open='true'] .nav-tint:hover {
   .hamburger-bar {
     transition-duration: 1ms;
     transition-delay: 0s;
-  }
-  .hero-kenburns {
-    animation: none;
-    transform: scale(1.03);
   }
 }

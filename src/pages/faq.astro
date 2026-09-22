@@ -1,107 +1,229 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { SITE } from '../consts';
+import '../styles/faq.css';
 
-/*
-  FAQ: synthesised from the For Hotels and For Business pages. Keep answers in
-  sync with those pages if the offer changes. Grouped: about the guide, for
-  hotels, for local businesses.
-  Copy is first-pass marketing messaging; refine with brand voice later.
-*/
 const faqGroups = [
   {
-    heading: 'About the guide',
-    items: [
-      {
-        q: 'What is the product?',
-        a: `Strictons produces a guide that hotels hand to guests at check-in. It
-          comes in two parts: a printed guide that doubles as the keycard
-          holder, and a digital version guests reach by scanning the QR code on
-          it. It covers the essentials, hotel's amenities and a curated set of local
-          businesses worth visiting.`,
-      },
-      {
-        q: 'Is there an app to download?',
-        a: `No. The printed guide works on its own, and the digital guide opens
-          in a browser from the QR code. Nothing to install, for guests, staff or businesses.`,
-      },
-      {
-        q: 'Who creates the content, and who keeps it current?',
-        a: `Branding is provided by the hotel, along with images from businesses. We write the copy to match the hotel's branding and tone, and
-          the hotel approves it before anything is printed. After launch we
-          maintain the digital guide. When a detail changes we update it,
-          usually within 24 hours. There's no dashboard or login for
-          the hotels or businesses to manage.`,
-      },
-    ],
-  },
-  {
+    id: 'for-hotels',
     heading: 'For hotels',
     items: [
       {
-        q: 'What does it cost the hotel?',
-        a: `Nothing. The guide is funded by the local businesses featured inside
-          it, who pay for their spot. Those businesses are only approached once
-          the hotel has approved the list.`,
+        q: 'Is it really free for the hotel?',
+        a: [
+          'Yes.',
+          'There’s no cost to the hotel for the design, production or supply of the guide.',
+          'The guide is funded by selected local businesses featured within it.',
+        ],
       },
       {
         q: 'Who decides which businesses appear?',
-        a: `The hotel. We put together a shortlist of local venues that fit the
-          property's brand and guests; the hotel adds or removes anything it
-          likes. Nothing goes further without the hotel's sign-off.`,
+        a: [
+          'You do. Completely.',
+          'We’ll put together an initial list to make things easy, but the hotel has complete control over who appears.',
+          'Add any businesses you want. Remove any you don’t.',
+          'Nothing goes into your guide without your approval.',
+        ],
       },
       {
-        q: 'What does setup involve?',
-        a: `We shortlist local businesses that suit the property.
-          The hotel reviews and approves the list. We design the physical and
-          digital guide to match the hotel's branding, and the hotel approves
-          the design before it goes to print.`,
+        q: 'Can we include businesses we already recommend?',
+        a: [
+          'Absolutely.',
+          'If there are restaurants, bars, attractions or local businesses your team already recommends, they can be added to the guide.',
+          'The business list is yours to shape around what you think is right for your guests.',
+        ],
       },
       {
-        q: 'How are the printed guides kept in stock?',
-        a: `After the first print run we store the guides and send an ongoing,
-          unlimited supply for 12 months, so reception never runs out.`,
+        q: 'What happens if we don’t like one of the businesses you suggest?',
+        a: [
+          'We remove it.',
+          'The hotel has final say over every business in the guide. There’s no obligation to include a business simply because we’ve suggested it.',
+        ],
       },
       {
-        q: 'Does this replace the reception or concierge?',
-        a: `Absolutely not. It takes the routine questions off their hands, and provides them with a professional tool to support their service.
-          It maintains consistent brand standards, in a convenient format for guests.`,
+        q: 'How much work is involved for our team?',
+        a: [
+          'Very little.',
+          'We handle the business outreach, content, design, production, printing and ongoing management.',
+        ],
+      },
+      {
+        q: 'What do you need from us?',
+        a: [
+          'Your brand assets, essential information, what you would like featured inside the guide and your input on the businesses included.',
+        ],
+      },
+      {
+        q: 'How long does it take to create the guide?',
+        a: [
+          'Timing depends on the hotel and how quickly approvals come together.',
+          'We’ll give you a clear production timeline at the beginning and manage the process from there.',
+        ],
+      },
+      {
+        q: 'Do we have to manage the live version?',
+        a: [
+          'No.',
+          'There’s no new platform, dashboard or system for your team to manage.',
+          'We build and maintain the live version alongside the physical guide.',
+        ],
+      },
+      {
+        q: 'Does it need to integrate with our existing systems?',
+        a: [
+          'No.',
+          'The live version works independently.',
+          'Where useful, it can simply link guests to systems you already use — your website, room service, spa bookings, entertainment, restaurant reservations or other guest services.',
+          'Nothing needs to be replaced.',
+        ],
+      },
+      {
+        q: 'Can we make changes after the guide launches?',
+        a: [
+          'Yes.',
+          'The live version can be updated as things change.',
+          'If something affects the printed guide, we’ll work with you on the best way to handle it as part of the guide lifecycle.',
+        ],
+      },
+      {
+        q: 'What happens when we run low on guides?',
+        a: [
+          "We'll send you more.",
+          "Simply let us know when you're running low and our team will arrange for replenishment.",
+        ],
+      },
+      {
+        q: 'Can we share the guide before guests arrive?',
+        a: [
+          'Yes.',
+          'The live version can be linked from pre-arrival emails, booking confirmations or other guest communications so guests can start exploring before check-in.',
+          'It can also support packages or experiences you’re promoting.',
+        ],
+      },
+      {
+        q: 'What can we see in the reporting?',
+        a: [
+          'QR scans give you a simple view of how guests are engaging with the guide.',
+          'You can see where guests are taking the next step from the physical guide into the live version.',
+        ],
+      },
+      {
+        q: 'Does this replace reception or concierge?',
+        a: [
+          'No.',
+          'It simply gives guests another easy way to discover what’s around them.',
+          'Your team can keep making personal recommendations as they always have. The guide gives guests something useful to browse in their own time and take with them.',
+        ],
       },
     ],
   },
   {
-    heading: 'For local businesses',
+    id: 'for-businesses',
+    heading: 'For businesses',
     items: [
       {
-        q: 'How do I get a spot in a guide?',
-        a: `Spots are by invitation only, and only after a hotel has curated and
-          approved its list. If a hotel near you is building a guide, get in
-          touch and we'll follow up.`,
+        q: 'How do I get into a hotel guide?',
+        a: [
+          'Businesses are selected for individual hotel guides based on the hotel, its location and what will be useful to its guests.',
+          'Places are limited and offered by invitation.',
+        ],
       },
       {
-        q: 'Why not just run social media ads?',
-        a: `A spot in the guide reaches guests who are already in the area, with
-          time and money, deciding where to go, not someone scrolling a feed in
-          another city. And because the placement comes from the hotel, it reads
-          as a recommendation rather than an ad.`,
+        q: 'Who decides whether my business is included?',
+        a: [
+          'The hotel does.',
+          'Every hotel has complete control over the businesses appearing in its guide.',
+          'They can add businesses they want represented and remove any they don’t.',
+        ],
       },
       {
-        q: "What's included with a spot?",
-        a: `A placement in the printed guide and your own page in the digital
-          guide, with links to your website, contact details, socials and
-          directions. Guests reach it by scanning the QR code on the printed
-          guide.`,
+        q: 'How long does a placement run?',
+        a: [
+          'Placements generally run for 12 months.',
+          'Your proposal will clearly set out the term before you commit.',
+        ],
+      },
+      {
+        q: 'What’s included with my placement?',
+        a: [
+          'Your placement in the physical guide, your own page in the live version, links that help guests take action, and monthly QR scan reporting.',
+        ],
+      },
+      {
+        q: 'Do I need to design the placement myself?',
+        a: [
+          'No.',
+          'We design it for you so it fits naturally within the guide.',
+          'We’ll ask for the information, imagery and brand assets we need, then take care of the rest.',
+        ],
+      },
+      {
+        q: 'Where does the QR code take guests?',
+        a: [
+          'Straight to your business in the live version of that hotel’s guide.',
+          'From there, guests can get directions, make a booking, visit your website, browse an offer or find out more.',
+        ],
+      },
+      {
+        q: 'Can guests book directly with us?',
+        a: [
+          'Yes.',
+          'If you already have a booking system, reservation page or enquiry process, we can send guests directly to it.',
+        ],
+      },
+      {
+        q: 'Do you take commission on bookings or sales?',
+        a: [
+          'No.',
+          'Guests are directed to your own booking, contact or purchasing channels.',
+        ],
+      },
+      {
+        q: 'Can I include an offer for hotel guests?',
+        a: [
+          'Yes.',
+          'If you have an offer that makes sense for guests, it can be included in the live version.',
+        ],
+      },
+      {
+        q: 'Can I update my information later?',
+        a: [
+          'Yes.',
+          'If a booking link, website, offer, contact detail or other live information changes, let us know and we can update the live version.',
+        ],
       },
       {
         q: 'How is performance measured?',
-        a: `We track every scan of the guide's QR codes and send you a monthly
-          report showing how many guests visited your page.`,
+        a: [
+          'Every business has its own QR code in the physical guide.',
+          'We track those scans and send you a monthly report showing how many times guests scanned your placement to take the next step.',
+        ],
+      },
+      {
+        q: 'What does a scan tell me?',
+        a: [
+          'It tells you that a guest saw your placement in the physical guide and chose to find out more.',
+          'It’s a simple way to see how often the guide is prompting guests to take the next step with your business.',
+        ],
+      },
+      {
+        q: 'Will other businesses like mine appear in the same guide?',
+        a: [
+          'Potentially.',
+          'The hotel has complete control over the final business mix and decides what it wants included for its guests.',
+        ],
+      },
+      {
+        q: 'How much does a placement cost?',
+        a: [
+          'Pricing depends on the hotel, guide and placement.',
+          'If you’re invited to feature, we’ll provide the relevant options and pricing upfront before you commit.',
+        ],
       },
     ],
   },
 ];
 
-// FAQPage structured data: flatten the groups; collapse answer whitespace.
 const faqSchema = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
@@ -111,16 +233,16 @@ const faqSchema = {
       name: item.q,
       acceptedAnswer: {
         '@type': 'Answer',
-        text: item.a.replace(/\s+/g, ' ').trim(),
+        text: item.a.join(' '),
       },
-    })),
+    }))
   ),
 };
 ---
 
 <BaseLayout
-  title="FAQs"
-  description="Common questions about Strictons guides: what they are, what they cost the hotel, and how local businesses get a spot inside one."
+  title="Frequently asked questions"
+  description="Everything you might still be wondering about Strictons guides, for hotels and local businesses."
 >
   <script
     is:inline
@@ -129,53 +251,58 @@ const faqSchema = {
     set:html={JSON.stringify(faqSchema)}
   />
 
-  <section class="mx-auto max-w-6xl px-4 py-16">
-    <p class="text-sm font-semibold tracking-[0.08em] text-slate-500 uppercase">
-      FAQs
-    </p>
-    <h1 class="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
-      How Strictons works.
-    </h1>
-    <p class="mt-4 max-w-prose text-lg text-slate-600">
-      The short version of what the guide is, what it costs, and how hotels and
-      local businesses use it.
-    </p>
-  </section>
+  <header class="faq-title" aria-labelledby="faq-heading">
+    <div class="faq-shell">
+      <h1 id="faq-heading">Frequently asked questions</h1>
+    </div>
+  </header>
 
-  {
-    faqGroups.map((group, i) => (
-      <section
-        class={
-          i % 2 === 0
-            ? 'border-t border-slate-200 bg-slate-50'
-            : 'border-t border-slate-200'
-        }
-      >
-        <div class="mx-auto max-w-6xl px-4 py-16">
-          <h2 class="text-2xl font-bold tracking-tight sm:text-3xl">
-            {group.heading}
-          </h2>
-          <dl class="mt-8 grid gap-x-10 gap-y-8 sm:grid-cols-2">
-            {group.items.map((item) => (
-              <div>
-                <dt class="text-lg font-semibold text-slate-900">{item.q}</dt>
-                <dd class="mt-2 text-slate-600">{item.a}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-      </section>
-    ))
-  }
+  <div class="faq-shell faq-layout">
+    <div class="faq-groups">
+      {
+        faqGroups.map((group) => (
+          <section
+            id={group.id}
+            class="faq-group"
+            aria-labelledby={`${group.id}-heading`}
+          >
+            <div class="faq-group-heading">
+              <h2 id={`${group.id}-heading`}>{group.heading}</h2>
+            </div>
 
-  <section class="border-t border-slate-200">
-    <div class="mx-auto max-w-6xl px-4 py-16">
-      <p class="max-w-prose text-slate-600">
-        Still have a question? Email <a
-          class="underline"
-          href={`mailto:${SITE.email}`}>{SITE.email}</a
-        > or use the <a class="underline" href="/contact">booking form</a>.
-      </p>
+            <div class="faq-list">
+              {group.items.map((item) => (
+                <details>
+                  <summary>
+                    <span>{item.q}</span>
+                    <span class="faq-toggle" aria-hidden="true" />
+                  </summary>
+                  <div class="faq-answer">
+                    {item.a.map((paragraph) => (
+                      <p>{paragraph}</p>
+                    ))}
+                  </div>
+                </details>
+              ))}
+            </div>
+          </section>
+        ))
+      }
+    </div>
+  </div>
+
+  <section class="faq-contact" aria-labelledby="faq-contact-heading">
+    <div class="faq-shell faq-contact-inner">
+      <div>
+        <p class="faq-kicker">Still curious?</p>
+        <h2 id="faq-contact-heading">Still have a question?</h2>
+        <p>Get in touch and we’ll help.</p>
+      </div>
+      <a href="/contact">
+        Get in touch
+        <span aria-hidden="true">↗</span>
+      </a>
+      <a class="faq-email" href={`mailto:${SITE.email}`}>{SITE.email}</a>
     </div>
   </section>
 </BaseLayout>

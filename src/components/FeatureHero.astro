@@ -1,0 +1,58 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  headingId: string;
+  lines: string[];
+  accentFrom?: number;
+  image?: ImageMetadata;
+  imageAlt?: string;
+}
+
+const {
+  headingId,
+  lines,
+  accentFrom = lines.length,
+  image,
+  imageAlt = '',
+} = Astro.props;
+---
+
+<section class="feature-page-hero" aria-labelledby={headingId}>
+  <div
+    class:list={[
+      'feature-page-hero-card',
+      image && 'feature-page-hero-card--with-image',
+    ]}
+  >
+    <div class="feature-page-hero-copy">
+      <h1 id={headingId}>
+        {
+          lines.map((line, index) =>
+            index >= accentFrom ? <em>{line}</em> : <span>{line}</span>
+          )
+        }
+      </h1>
+      <slot />
+    </div>
+    <div class="feature-page-hero-visual" aria-hidden={!imageAlt}>
+      {
+        image && (
+          <Image
+            class="feature-page-hero-image"
+            src={image}
+            alt={imageAlt}
+            widths={[320, 480, 640, 800, 1024]}
+            sizes="(max-width: 760px) 112vw, (max-width: 1000px) 620px, 720px"
+            format="webp"
+            quality={92}
+            loading="eager"
+            decoding="sync"
+            fetchpriority="high"
+          />
+        )
+      }
+    </div>
+  </div>
+</section>

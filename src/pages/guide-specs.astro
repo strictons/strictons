@@ -1,7 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import FeatureHero from '../components/FeatureHero.astro';
 import { Image } from 'astro:assets';
 import cover from '../assets/Guide Cover.png';
+import pocketGuides from '../assets/pocket-guides.png';
 
 /*
   Guide Specs: the physical brochure shown as a lightly angled product shot
@@ -13,15 +15,15 @@ import cover from '../assets/Guide Cover.png';
 const specsLeft = [
   {
     label: 'Premium stock',
-    body: '300gsm satin silk cover, 150gsm satin silk interior. Weighted in the hand and built for daily handling.',
+    body: '300gsm satin silk cover, 150gsm satin silk interior. The guide feels substantial in the hand and is built for daily handling.',
   },
   {
     label: 'Keycard die-cuts',
-    body: 'Slots in the back cover to hold room keycards. Can be included or removed.',
+    body: 'Slots in the back cover hold room keycards and can be included or removed.',
   },
   {
     label: '100% on brand',
-    body: 'Fonts, colours and imagery are all aligned to the hotel. Nothing templated.',
+    body: 'Fonts, colours and imagery are all aligned to the hotel. Nothing is templated.',
   },
 ];
 
@@ -31,27 +33,32 @@ const specsRight = [
     body: 'A 16pp or 20pp layout, depending on how much the hotel wants inside.',
   },
   {
-    label: 'Awarded print partner',
+    label: 'Award-winning print partner',
     body: 'Produced by one of Australia’s most awarded printing partners. Clients include Apple, Deloitte and the Royal Australian Mint.',
   },
   {
     label: 'Unlimited for 12 months',
-    body: 'Reprints on demand for a full year, so reception never runs out.',
+    body: 'We provide reprints on demand for a full year, so reception never runs out.',
   },
 ];
 ---
 
 <BaseLayout
   title="Guide Specs"
-  description="Strictons guide specs: 101.5 × 185 mm, 16 or 20pp saddle-stitched, 300gsm satin silk cover, keycard die-cuts, fully custom, printed by an award-winning Australian partner."
+  description="Strictons guide specs: 101.5 × 185 mm, 16pp or 20pp saddle-stitched, 300gsm satin silk cover, keycard die-cuts, fully custom, printed by an award-winning Australian partner."
 >
+  <FeatureHero
+    headingId="guide-specs-heading"
+    lines={['Designed for pockets,', 'made to take home']}
+    accentFrom={1}
+    image={pocketGuides}
+    imageAlt="Two hotel guests placing their Beachcomber pocket guides into a jacket and handbag."
+  />
+
   <section class="mx-auto max-w-6xl px-4 py-16">
     <p class="text-sm font-semibold tracking-[0.08em] text-slate-500 uppercase">
       Guide Specs
     </p>
-    <h1 class="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
-      Designed for pockets, made to take home.
-    </h1>
     <p class="mt-4 max-w-prose text-lg text-slate-600">
       A pocket-sized book a guest would actually keep. Premium paper, keycard
       slots in the back, and every page tailored to the hotel. Here's what goes
@@ -79,8 +86,10 @@ const specsRight = [
           <Image
             src={cover}
             alt="The cover of a Strictons pocket guide, branded for Beachcomber Hotel & Resort, Toukley."
-            widths={[220, 270, 440, 540]}
+            widths={[220, 270, 440, 538]}
             sizes="(min-width: 1024px) 270px, 250px"
+            format="webp"
+            quality={92}
           />
         </div>
         <figcaption
@@ -107,12 +116,11 @@ const specsRight = [
 </BaseLayout>
 
 <style>
-  /* Lightly angled product shot of a thin 16pp saddle-stitched booklet. The
-     page block is a ~2px sliver on the right edge only; it tapers to nothing at
-     the bottom corner, as if the pages fold back into the stitch. */
+  /* Straight-on product shot of a thin 16pp saddle-stitched booklet. The page
+     block is a ~2px sliver on the right edge only; it tapers to nothing at the
+     bottom corner, as if the pages fold back into the stitch. */
   .guide-shot {
     position: relative;
-    transform: perspective(2400px) rotateY(-9deg) rotateX(2deg) rotateZ(-0.5deg);
   }
 
   .guide-shot img {
@@ -135,11 +143,5 @@ const specsRight = [
     background: linear-gradient(to bottom, #edeef1, #dde0e4);
     /* full height at the top, collapsing into the bottom-right corner */
     clip-path: polygon(0 0, 100% 0, 100% 88%, 0 100%);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .guide-shot {
-      transform: none;
-    }
   }
 </style>

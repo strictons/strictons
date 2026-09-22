@@ -1,36 +1,60 @@
 ---
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
+import digitalGuide from '../assets/digital-guide.png';
+import guestArrival from '../assets/guest-arrival.jpg';
+import guideBookshelf from '../assets/guide-bookshelf.jpg';
+import guideCar from '../assets/guide-car.jpg';
+import heroGuide from '../assets/hero-guide.jpg';
+import hotelDining from '../assets/hotel-dining.jpg';
+import receptionTeam from '../assets/reception-team.jpg';
+import uncertainty from '../assets/uncertainty.jpg';
+
+const photos = {
+  'digital-guide': digitalGuide,
+  'guest-arrival': guestArrival,
+  'guide-bookshelf': guideBookshelf,
+  'guide-car': guideCar,
+  'hero-guide': heroGuide,
+  'hotel-dining': hotelDining,
+  'reception-team': receptionTeam,
+  uncertainty,
+} satisfies Record<string, ImageMetadata>;
 
 interface Props {
-  name: string;
+  name: keyof typeof photos;
   alt: string;
+  depth?: boolean;
 }
-const { name, alt } = Astro.props;
-// Add a photo with the documented filename and it replaces the blank on build.
-const assets = import.meta.glob<{ default: ImageMetadata }>(
-  '../assets/*.{jpg,jpeg,png,webp}',
-  { eager: true }
-);
-const photo =
-  assets[`../assets/${name}.jpg`]?.default ??
-  assets[`../assets/${name}.jpeg`]?.default ??
-  assets[`../assets/${name}.png`]?.default ??
-  assets[`../assets/${name}.webp`]?.default;
+const { name, alt, depth = false } = Astro.props;
+const photo = photos[name];
+const isBrandJourneyImage = [
+  'hero-guide',
+  'guide-car',
+  'guide-bookshelf',
+].includes(name);
+const responsiveWidths = [320, 480, 640, 800, 960, photo.width]
+  .filter((width) => width <= photo.width)
+  .filter((width, index, widths) => widths.indexOf(width) === index)
+  .sort((a, b) => a - b);
+const responsiveSizes = isBrandJourneyImage
+  ? '(max-width: 480px) calc(100vw - 120px), (max-width: 760px) 14.5rem, 15vw'
+  : '(max-width: 760px) calc(100vw - 104px), (max-width: 1000px) 38vw, 475px';
 ---
 
-<div class="home-image">
-  {
-    photo ? (
-      <Image
-        src={photo}
-        alt={alt}
-        widths={[400, 640, 960, 1280]}
-        sizes="(min-width: 900px) 40vw, 90vw"
-        loading="lazy"
-      />
-    ) : (
-      <div class="home-image-blank" aria-hidden="true" />
-    )
-  }
+<div
+  class="home-image"
+  data-depth-scene={depth ? '' : undefined}
+  data-scene={depth ? name : undefined}
+>
+  <Image
+    src={photo}
+    alt={alt}
+    widths={responsiveWidths}
+    sizes={responsiveSizes}
+    format="webp"
+    quality={90}
+    loading="lazy"
+    decoding="async"
+  />
 </div>
