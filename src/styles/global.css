@@ -339,6 +339,197 @@ dt {
   outline-offset: 2px;
 }
 
+/* Site-wide footer: deliberately darker and quieter than the editorial pages. */
+.site-footer {
+  position: relative;
+  overflow: hidden;
+  background: #050505;
+  color: #f7f3eb;
+}
+.site-footer::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 1px;
+  background: rgb(234 216 180 / 32%);
+  content: '';
+}
+.site-footer-inner {
+  width: min(1160px, calc(100% - 96px));
+  margin-inline: auto;
+  padding-block: clamp(52px, 6vw, 76px) 24px;
+}
+.site-footer-main {
+  display: grid;
+  grid-template-columns: minmax(260px, 1.45fr) minmax(160px, 0.75fr) minmax(
+      240px,
+      1fr
+    );
+  gap: clamp(32px, 4.5vw, 64px);
+  padding-bottom: clamp(40px, 5vw, 60px);
+}
+.site-footer-brand {
+  display: flex;
+  align-items: center;
+  align-self: start;
+  gap: 16px;
+  width: fit-content;
+  color: #f7f3eb;
+  text-decoration: none;
+}
+.site-footer-statement {
+  max-width: 34ch;
+  margin-top: 18px;
+  color: #a6a29a;
+  font-size: 0.9375rem;
+  line-height: 1.65;
+}
+.site-footer-logo {
+  display: block;
+  width: 52px;
+  aspect-ratio: 96 / 112;
+  flex: none;
+  background: currentColor;
+  -webkit-mask: var(--footer-logo-image) center / contain no-repeat;
+  mask: var(--footer-logo-image) center / contain no-repeat;
+}
+.site-footer-wordmark {
+  font-family: var(--font-serif);
+  font-size: clamp(1.55rem, 2.5vw, 2.2rem);
+  letter-spacing: 0.2em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+.site-footer-label {
+  margin-bottom: 18px;
+  color: #bfa88f;
+  font-size: 0.75rem;
+  font-weight: 650;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+.site-footer-nav ul {
+  display: grid;
+  gap: 10px;
+}
+.site-footer-nav a,
+.site-footer-meta a {
+  color: #e9e4dc;
+  text-decoration: none;
+  text-underline-offset: 4px;
+  transition: color 180ms ease;
+}
+.site-footer-nav a:hover,
+.site-footer-meta a:hover,
+.site-footer-email:hover,
+.site-footer-phone:hover {
+  color: #ead8b4;
+}
+.site-footer-email {
+  color: #f7f3eb;
+  font-family: var(--font-serif);
+  font-size: 0.9375rem;
+  text-decoration-color: rgb(234 216 180 / 55%);
+  text-decoration-line: underline;
+  text-underline-offset: 6px;
+  transition: color 180ms ease;
+}
+.site-footer-phone {
+  display: block;
+  width: fit-content;
+  margin-top: 12px;
+  color: #cbc6bd;
+  font-size: 0.9375rem;
+  letter-spacing: 0.025em;
+  text-decoration: none;
+  transition: color 180ms ease;
+}
+.site-footer-book {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  min-width: 194px;
+  margin-top: 20px;
+  padding: 12px 16px;
+  border: 1px solid rgb(234 216 180 / 48%);
+  color: #f7f3eb;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+  text-decoration: none;
+  transition:
+    border-color 180ms ease,
+    background 180ms ease,
+    color 180ms ease;
+}
+.site-footer-book span {
+  color: #bfa88f;
+  font-size: 1rem;
+  transition: translate 180ms ease;
+}
+.site-footer-book:hover {
+  border-color: #ead8b4;
+  background: #ead8b4;
+  color: #16120f;
+}
+.site-footer-book:hover span {
+  color: #16120f;
+  translate: 2px -2px;
+}
+.site-footer-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding-top: 24px;
+  border-top: 1px solid rgb(255 255 255 / 14%);
+  color: #85827c;
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+}
+.site-footer-meta ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 12px 24px;
+}
+
+@media (max-width: 1000px) {
+  .site-footer-inner {
+    width: calc(100% - 64px);
+  }
+}
+
+@media (max-width: 760px) {
+  .site-footer-inner {
+    width: calc(100% - clamp(64px, 20vw, 80px));
+    padding-block: 56px 24px;
+  }
+  .site-footer-main {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 42px;
+    padding-bottom: 52px;
+  }
+  .site-footer-logo {
+    width: 44px;
+  }
+  .site-footer-statement {
+    margin-top: 24px;
+  }
+  .site-footer-book {
+    margin-top: 24px;
+  }
+  .site-footer-meta {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .site-footer-meta ul {
+    justify-content: flex-start;
+  }
+}
+
 /*
   Full-screen nav menu choreography
   ---------------------------------

@@ -19,6 +19,8 @@ is and who it is for.
 - [Guide Specs](https://strictons.com/guide-specs): Physical specifications of the printed guide (size, paper, binding, keycard die-cuts, print partner).
 - [FAQs](https://strictons.com/faq): Common questions about the guide, for hotels and for local businesses.
 - [Contact](https://strictons.com/contact): How to get in touch and book a meeting.
+- [Privacy Policy](https://strictons.com/privacy): How Strictons handles personal information.
+- [Website Terms](https://strictons.com/terms): Terms that apply when using the Strictons website.
 
 ## Contact
 

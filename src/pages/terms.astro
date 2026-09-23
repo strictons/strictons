@@ -1,0 +1,158 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../consts';
+import '../styles/legal.css';
+---
+
+<BaseLayout
+  title="Website Terms"
+  description="Terms that apply when you visit and use the Strictons website."
+>
+  <article class="legal-page">
+    <header class="legal-hero">
+      <div class="legal-shell">
+        <p class="legal-kicker">Legal</p>
+        <h1>Website Terms</h1>
+        <p class="legal-intro">
+          These terms apply when you visit or use strictons.com. By using this
+          website, you agree to them.
+        </p>
+        <p class="legal-updated">Last updated 24 September 2026</p>
+      </div>
+    </header>
+
+    <div class="legal-shell legal-content">
+      <section>
+        <h2>About this website</h2>
+        <p>
+          This website is operated by Strictons in New South Wales, Australia.
+          It provides general information about Strictons, our hotel guides and
+          opportunities for hotels and local businesses.
+        </p>
+        <p>
+          These website terms do not replace any proposal, service agreement,
+          order or other written agreement between you and Strictons. If there
+          is an inconsistency, the specific written agreement will apply to the
+          extent of the inconsistency.
+        </p>
+      </section>
+
+      <section>
+        <h2>Information on the website</h2>
+        <p>
+          We aim to keep the website accurate and useful, but its content is
+          general information only. Details about availability, timing,
+          inclusions, pricing, production and results may change and should be
+          confirmed with us before you rely on them or make a decision.
+        </p>
+        <p>
+          Images and examples may be illustrative. A reference to a hotel,
+          business, product or service does not create an endorsement unless we
+          clearly say otherwise.
+        </p>
+      </section>
+
+      <section>
+        <h2>Acceptable use</h2>
+        <p>You must not use the website to:</p>
+        <ul>
+          <li>break any law or infringe another person’s rights;</li>
+          <li>
+            introduce malicious code, interfere with security or disrupt the
+            website or its users;
+          </li>
+          <li>
+            access or attempt to access non-public systems, accounts or data;
+          </li>
+          <li>
+            scrape, copy or automatically extract substantial website content
+            without our prior written permission; or
+          </li>
+          <li>misrepresent your identity or your relationship with us.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Intellectual property</h2>
+        <p>
+          Unless stated otherwise, Strictons owns or licenses the website and
+          its content, including its text, design, graphics, logos, images and
+          other material. All rights are reserved.
+        </p>
+        <p>
+          You may view the website and make a temporary copy for your personal
+          or internal business use. You must not reproduce, adapt, publish,
+          distribute, commercialise or otherwise use website content without our
+          prior written permission, except as permitted by law.
+        </p>
+        <p>
+          Trade marks and material belonging to third parties remain the
+          property of their respective owners.
+        </p>
+      </section>
+
+      <section>
+        <h2>Third-party services and links</h2>
+        <p>
+          The website may link to or display services operated by others,
+          including the Cal.com booking calendar and websites featured in guide
+          examples. Those services have their own terms and privacy practices.
+          We do not control them and are not responsible for their content,
+          availability or operation.
+        </p>
+      </section>
+
+      <section>
+        <h2>Availability and liability</h2>
+        <p>
+          We may change, suspend or withdraw any part of the website without
+          notice. We do not promise that the website will always be available,
+          uninterrupted, secure or free from errors or harmful components.
+        </p>
+        <p>
+          To the maximum extent permitted by law, Strictons excludes warranties
+          and liability arising from your use of, or reliance on, this website.
+          Nothing in these terms excludes, restricts or modifies any right,
+          guarantee or remedy that cannot lawfully be excluded, including under
+          the Australian Consumer Law.
+        </p>
+      </section>
+
+      <section>
+        <h2>Privacy</h2>
+        <p>
+          Our <a href="/privacy">Privacy Policy</a> explains how we handle personal
+          information collected through the website and our dealings with you.
+        </p>
+      </section>
+
+      <section>
+        <h2>Changes to these terms</h2>
+        <p>
+          We may update these terms from time to time. The current version will
+          be published here with its effective date. Your continued use of the
+          website after an update means the updated terms apply to that use.
+        </p>
+      </section>
+
+      <section>
+        <h2>Governing law</h2>
+        <p>
+          These terms are governed by the laws of New South Wales, Australia.
+          You and Strictons submit to the non-exclusive jurisdiction of the
+          courts of New South Wales and courts entitled to hear appeals from
+          them.
+        </p>
+      </section>
+
+      <section>
+        <h2>Contact</h2>
+        <p>
+          Questions about these terms can be sent to <a
+            href={`mailto:${SITE.email}`}>{SITE.email}</a
+          >.
+        </p>
+      </section>
+    </div>
+  </article>
+</BaseLayout>

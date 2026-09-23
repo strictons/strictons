@@ -1,0 +1,67 @@
+---
+import { COPYRIGHT, NAV_LINKS, POLICY_LINKS, SITE } from '../consts';
+import logo from '../assets/strictons-logo.png';
+---
+
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="site-footer-main">
+      <div class="site-footer-identity">
+        <a class="site-footer-brand" href="/" aria-label={`${SITE.name} home`}>
+          <span
+            aria-hidden="true"
+            style={`--footer-logo-image: url("${logo.src}")`}
+            class="site-footer-logo"></span>
+          <span class="site-footer-wordmark">{SITE.name}</span>
+        </a>
+        <p class="site-footer-statement">
+          Custom hotel guides, for Australian and New Zealand properties.
+          Connecting great hotels with the best local businesses and
+          experiences.
+        </p>
+      </div>
+
+      <nav class="site-footer-nav" aria-label="Footer">
+        <p class="site-footer-label">Explore</p>
+        <ul>
+          {
+            NAV_LINKS.map((link) => (
+              <li>
+                <a href={link.href}>{link.label}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <div class="site-footer-contact">
+        <p class="site-footer-label">Start a conversation</p>
+        <a class="site-footer-email" href={`mailto:${SITE.email}`}>
+          {SITE.email}
+        </a>
+        <a class="site-footer-phone" href="tel:+61259506402">
+          (02) 5950 6402
+        </a>
+        <a class="site-footer-book" href="/contact#booking-section">
+          Book a meeting
+          <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="site-footer-meta">
+      <p>{COPYRIGHT}</p>
+      <nav aria-label="Legal">
+        <ul>
+          {
+            POLICY_LINKS.map((link) => (
+              <li>
+                <a href={link.href}>{link.label}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </div>
+  </div>
+</footer>

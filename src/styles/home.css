@@ -652,13 +652,6 @@
 .cta-mobile-break {
   display: none;
 }
-.home-copyright {
-  padding: 24px;
-  color: #64748b;
-  font-size: 0.75rem;
-  letter-spacing: 0.025em;
-  text-align: center;
-}
 .back-to-top {
   position: fixed;
   right: clamp(18px, 2.5vw, 36px);

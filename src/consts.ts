@@ -41,8 +41,13 @@ export const NAV_LINKS = [
   { href: '/contact', label: 'Contact' },
 ] as const;
 
+/** Policies shown in the site-wide footer. */
+export const POLICY_LINKS = [
+  { href: '/privacy', label: 'Privacy Policy' },
+  { href: '/terms', label: 'Website Terms' },
+] as const;
+
 /**
- * Copyright line. Shown in the slim footer on inner pages, and at the bottom of
- * the hero on desktop home (hidden on mobile home). Year is fixed at build time.
+ * Copyright line shown in the site-wide footer. Year is fixed at build time.
  */
-export const COPYRIGHT = `© ${new Date().getFullYear()} ${SITE.name} · All rights reserved`;
+export const COPYRIGHT = `© ${new Date().getFullYear()} ${SITE.name}. All rights reserved.`;

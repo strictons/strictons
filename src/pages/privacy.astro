@@ -1,0 +1,166 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../consts';
+import '../styles/legal.css';
+---
+
+<BaseLayout
+  title="Privacy Policy"
+  description="How Strictons collects, uses, stores and protects personal information, and how to contact us about privacy."
+>
+  <article class="legal-page">
+    <header class="legal-hero">
+      <div class="legal-shell">
+        <p class="legal-kicker">Privacy</p>
+        <h1>Privacy Policy</h1>
+        <p class="legal-intro">
+          This policy explains how Strictons handles personal information when
+          you visit our website, contact us or work with us.
+        </p>
+        <p class="legal-updated">Last updated 24 September 2026</p>
+      </div>
+    </header>
+
+    <div class="legal-shell legal-content">
+      <section>
+        <h2>About this policy</h2>
+        <p>
+          Strictons is based in New South Wales, Australia. We respect your
+          privacy and aim to handle personal information in line with the
+          Privacy Act 1988 (Cth) and the Australian Privacy Principles where
+          they apply to us.
+        </p>
+        <p>
+          In this policy, “personal information” means information or an opinion
+          about an identified individual, or an individual who is reasonably
+          identifiable.
+        </p>
+      </section>
+
+      <section>
+        <h2>Information we collect</h2>
+        <p>Depending on how you interact with us, we may collect:</p>
+        <ul>
+          <li>your name, work contact details, job title and organisation;</li>
+          <li>
+            information you include in an enquiry, meeting booking, email or
+            other communication;
+          </li>
+          <li>
+            information needed to plan, create, produce and maintain a guide,
+            including hotel or business details, brand assets and approvals;
+          </li>
+          <li>
+            technical information sent by your browser or device, such as your
+            IP address, device type, browser type, pages visited and access
+            times; and
+          </li>
+          <li>any other information you choose to give us.</li>
+        </ul>
+        <p>
+          We do not generally seek sensitive information. Please do not send it
+          unless it is reasonably necessary and we have agreed to receive it.
+        </p>
+      </section>
+
+      <section>
+        <h2>How we collect information</h2>
+        <p>
+          We usually collect information directly from you when you email, call,
+          book a meeting, make an enquiry or work with us. We may also receive
+          business contact information from your organisation, a referral, a
+          publicly available source or a service provider acting on our behalf.
+        </p>
+        <p>
+          Our website does not currently use advertising or analytics cookies.
+          If you use the booking calendar on our Contact page, Cal.com may set
+          cookies or collect information under its own privacy terms. You can
+          contact us by email instead if you prefer not to use the calendar.
+        </p>
+      </section>
+
+      <section>
+        <h2>Why we use personal information</h2>
+        <p>We may use personal information to:</p>
+        <ul>
+          <li>respond to enquiries and arrange meetings;</li>
+          <li>provide, manage and improve our guides and related services;</li>
+          <li>
+            communicate with hotels, local businesses, suppliers and other
+            people we work with;
+          </li>
+          <li>send service messages and agreed marketing communications;</li>
+          <li>operate, secure and improve our website;</li>
+          <li>manage our records, accounts and business operations; and</li>
+          <li>comply with legal obligations and resolve disputes.</li>
+        </ul>
+        <p>
+          You may unsubscribe from marketing emails at any time by using the
+          unsubscribe option in the message or emailing us.
+        </p>
+      </section>
+
+      <section>
+        <h2>When we share information</h2>
+        <p>
+          We may disclose personal information to people who need it to support
+          our work, including hosting, email, scheduling, design, printing,
+          professional advisory and technology providers. We may also disclose
+          information where you have asked or authorised us to, where required
+          by law, or in connection with a business restructure or transfer.
+        </p>
+        <p>
+          Some providers may store or process information outside Australia. The
+          countries involved can change as providers update their systems.
+          Contact us if you would like current details relevant to your
+          information.
+        </p>
+        <p>We do not sell personal information.</p>
+      </section>
+
+      <section>
+        <h2>Storage and security</h2>
+        <p>
+          We may hold information electronically and, where necessary, in
+          physical records. We take reasonable steps to protect it from misuse,
+          interference, loss and unauthorised access, modification or
+          disclosure. No method of storage or transmission is completely secure,
+          so we cannot guarantee absolute security.
+        </p>
+        <p>
+          We keep personal information only for as long as reasonably needed for
+          the purpose for which it was collected, our business records and any
+          legal obligations. We then delete, destroy or de-identify it where
+          appropriate.
+        </p>
+      </section>
+
+      <section>
+        <h2>Access, correction and complaints</h2>
+        <p>
+          You may ask to access personal information we hold about you or ask us
+          to correct it. You may also contact us with a privacy question or
+          complaint. Email <a href={`mailto:${SITE.email}`}>{SITE.email}</a> and describe
+          your request. We may need to verify your identity before responding.
+        </p>
+        <p>
+          We will respond within a reasonable time. If you are not satisfied
+          with our response and the Privacy Act applies, you may contact the
+          Office of the Australian Information Commissioner at <a
+            href="https://www.oaic.gov.au"
+            rel="external">oaic.gov.au</a
+          >.
+        </p>
+      </section>
+
+      <section>
+        <h2>Changes to this policy</h2>
+        <p>
+          We may update this policy when our practices or legal obligations
+          change. The current version will be published here with its effective
+          date.
+        </p>
+      </section>
+    </div>
+  </article>
+</BaseLayout>
