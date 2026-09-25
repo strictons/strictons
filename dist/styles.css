@@ -1216,9 +1216,7 @@ a:focus-visible {
   min-height: 100vh;
   min-height: 100svh;
   overflow: hidden;
-  background: var(--ink)
-    url("https://res.cloudinary.com/q4tmczid/video/upload/so_0,q_auto,f_jpg/v1790235855/hf_20260924_073842_cec505f8-9606-4530-8762-7172ff163408.jpg")
-    center center / cover no-repeat;
+  background: var(--ink) url("./assets/hero/home-hero-desktop.jpg") center center / cover no-repeat;
 }
 
 .hero__poster,
@@ -1665,6 +1663,10 @@ a:focus-visible {
 
   .hero__video {
     object-position: center center;
+  }
+
+  .hero {
+    background-image: url("./assets/hero/home-hero-mobile.jpg");
   }
 
   .hero__poster img {
