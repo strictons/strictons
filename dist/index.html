@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#11100e" />
+    <meta name="description" content="Strictons is an Australian hospitality studio focused on custom hotel guides." />
+    <title>Strictons | Signature Hotel Guides</title>
+
+    <link rel="preconnect" href="https://res.cloudinary.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,700;1,400&family=Red+Hat+Display:wght@400;500&display=swap" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%2311100e'/%3E%3Cpath d='M46 17c-4-4-10-6-16-6-8 0-14 4-14 11 0 8 7 10 15 12 7 2 10 3 10 7 0 4-4 6-9 6-6 0-11-2-15-6l-3 5c5 5 11 7 18 7 10 0 17-5 17-13 0-8-7-11-16-13-6-2-9-3-9-6 0-3 3-5 7-5 5 0 9 2 12 5z' fill='%23f3efe7'/%3E%3C/svg%3E" />
+
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./script.js" defer></script>
+  </head>
+  <body class="home-page">
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="Strictons home">
+        <span class="brand__name">STRICTONS</span>
+        <span class="brand__strapline">SIGNATURE HOTEL GUIDES</span>
+      </a>
+
+      <button class="menu-trigger" type="button" aria-expanded="false" aria-controls="site-menu">
+        <span class="menu-trigger__label">Menu.</span>
+      </button>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <picture class="hero__poster" aria-hidden="true">
+          <source media="(max-width: 720px)" srcset="https://res.cloudinary.com/q4tmczid/video/upload/so_0,q_auto,f_jpg/v1790237491/hf_20260924_080713_8af0d14c-39a5-4939-b83e-be2174eba6f8.jpg" />
+          <img src="https://res.cloudinary.com/q4tmczid/video/upload/so_0,q_auto,f_jpg/v1790235855/hf_20260924_073842_cec505f8-9606-4530-8762-7172ff163408.jpg" alt="" />
+        </picture>
+        <video class="hero__video" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+          <source media="(max-width: 720px)" src="https://res.cloudinary.com/q4tmczid/video/upload/q_auto:eco/v1790237491/hf_20260924_080713_8af0d14c-39a5-4939-b83e-be2174eba6f8.mp4" type="video/mp4" />
+          <source media="(min-width: 721px)" src="https://res.cloudinary.com/q4tmczid/video/upload/q_auto:eco/v1790235855/hf_20260924_073842_cec505f8-9606-4530-8762-7172ff163408.mp4" type="video/mp4" />
+        </video>
+        <div class="hero__shade" aria-hidden="true"></div>
+
+        <div class="hero__content">
+          <h1 id="hero-title" class="hero__title">
+            <span class="hero__lead">We Design</span>
+            <span class="hero__focus">Custom Hotel Guides</span>
+            <span class="hero__audience">For Independent, Lifestyle and Destination Hotels.</span>
+          </h1>
+        </div>
+      </section>
+
+      <section class="experience-reel" aria-label="Hotel guide experiences">
+        <div class="experience-reel__viewport">
+          <div class="experience-reel__track">
+            <ul class="experience-reel__group">
+              <li><img src="./assets/reel/dining.jpg" alt="An elegant restaurant table set for two" width="1080" height="1080" /></li>
+              <li><img src="./assets/reel/wildlife.jpg" alt="A giraffe on a wildlife experience" width="1080" height="1080" /></li>
+              <li><img src="./assets/reel/water-park.jpg" alt="A resort pool with colourful water slides" width="1080" height="1080" /></li>
+              <li><img src="./assets/reel/spa.jpg" alt="A relaxing hotel spa treatment" width="1080" height="1080" /></li>
+              <li><img src="./assets/reel/culture.jpg" alt="Visitors exploring a city museum district" width="1080" height="1080" /></li>
+              <li><img src="./assets/reel/beach.jpg" alt="A swimmer in clear ocean water" width="1080" height="1080" /></li>
+              <li><img src="./assets/reel/date-night.jpg" alt="A couple enjoying a romantic restaurant date" width="1080" height="1080" /></li>
+              <li><img src="./assets/reel/cocktail.jpg" alt="A bartender presenting a cocktail" width="1080" height="1080" /></li>
+            </ul>
+            <ul class="experience-reel__group" aria-hidden="true">
+              <li><img src="./assets/reel/dining.jpg" alt="" width="1080" height="1080" /></li>
+              <li><img src="./assets/reel/wildlife.jpg" alt="" width="1080" height="1080" /></li>
+              <li><img src="./assets/reel/water-park.jpg" alt="" width="1080" height="1080" /></li>
+              <li><img src="./assets/reel/spa.jpg" alt="" width="1080" height="1080" /></li>
+              <li><img src="./assets/reel/culture.jpg" alt="" width="1080" height="1080" /></li>
+              <li><img src="./assets/reel/beach.jpg" alt="" width="1080" height="1080" /></li>
+              <li><img src="./assets/reel/date-night.jpg" alt="" width="1080" height="1080" /></li>
+              <li><img src="./assets/reel/cocktail.jpg" alt="" width="1080" height="1080" /></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__top">
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <a href="./why.html">Why</a>
+          <a href="./how-it-works.html">How It Works</a>
+          <a href="./for-business.html">For Business</a>
+          <a href="./live-version.html">Digital Guides</a>
+          <a href="./faq.html">FAQ</a>
+          <a href="./contact.html">Contact</a>
+        </nav>
+
+        <a class="footer-brand" href="./" aria-label="Strictons home">
+          <span class="footer-brand__name">STRICTONS</span>
+          <span class="footer-brand__strapline">SIGNATURE HOTEL GUIDES</span>
+        </a>
+      </div>
+
+      <div class="site-footer__legal">
+        <span>&copy; 2026 Strictons</span>
+        <div class="site-footer__policies">
+          <a href="./privacy.html">Privacy Policy</a>
+          <a href="./terms.html">Terms &amp; Conditions</a>
+        </div>
+      </div>
+    </footer>
+
+    <aside class="site-menu" id="site-menu" aria-hidden="true">
+      <nav class="site-menu__nav" aria-label="Main navigation">
+        <ol>
+          <li><a href="./why.html">Why</a></li>
+          <li><a href="./how-it-works.html">How It Works</a></li>
+          <li><a href="./for-business.html">For Business</a></li>
+          <li><a href="./live-version.html">Digital Guides</a></li>
+          <li><a href="./faq.html">FAQ</a></li>
+          <li><a href="./contact.html">Contact</a></li>
+        </ol>
+      </nav>
+    </aside>
+  </body>
+</html>

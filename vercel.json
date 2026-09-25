@@ -1,7 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "framework": "astro",
-  "buildCommand": "astro build",
+  "buildCommand": "npm run check",
   "outputDirectory": "dist",
   "cleanUrls": true,
   "trailingSlash": false,
@@ -15,7 +14,11 @@
     { "source": "/for-guests", "destination": "/", "permanent": true },
     { "source": "/for-hotels", "destination": "/", "permanent": true },
     { "source": "/journal", "destination": "/", "permanent": true },
-    { "source": "/journal/:path*", "destination": "/", "permanent": true },
+    {
+      "source": "/journal/:path*",
+      "destination": "/",
+      "permanent": true
+    },
     { "source": "/partners", "destination": "/", "permanent": true },
     {
       "source": "/for-businesses",
@@ -45,7 +48,7 @@
       ]
     },
     {
-      "source": "/_astro/(.*)",
+      "source": "/assets/(.*)",
       "headers": [
         {
           "key": "Cache-Control",
