@@ -55,7 +55,20 @@ function revealVideo() {
 }
 
 if (heroVideo) {
+  function playHeroVideo() {
+    heroVideo.muted = true;
+    const playAttempt = heroVideo.play();
+    if (playAttempt) playAttempt.catch(() => {});
+  }
+
   heroVideo.addEventListener("playing", revealVideo, { once: true });
+  heroVideo.addEventListener("canplay", playHeroVideo, { once: true });
+  window.addEventListener("pageshow", playHeroVideo);
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden && heroVideo.paused) playHeroVideo();
+  });
+
+  playHeroVideo();
   if (!heroVideo.paused && heroVideo.readyState >= 2) revealVideo();
 }
 

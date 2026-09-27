@@ -11,6 +11,7 @@ const requiredFiles = [
 await Promise.all(requiredFiles.map((file) => access(resolve(file))));
 
 const faq = await readFile(resolve("dist/faq.html"), "utf8");
+const home = await readFile(resolve("dist/index.html"), "utf8");
 const styles = await readFile(resolve("dist/styles.css"), "utf8");
 const script = await readFile(resolve("dist/script.js"), "utf8");
 const sharedPages = await Promise.all(
@@ -20,6 +21,8 @@ const sharedPages = await Promise.all(
 );
 
 const assertions = [
+  [home.includes("vc_h264") && home.includes('autoplay muted loop playsinline preload="auto"'), "Hero video uses a browser-compatible, eager-loading source"],
+  [script.includes("playHeroVideo") && script.includes("heroVideo.play()"), "Hero video playback is started explicitly"],
   [faq.includes('type="application/ld+json"'), "FAQ structured data is present"],
   [faq.match(/class="faq-question"/g)?.length === 23, "All 23 FAQ questions are present"],
   [faq.match(/aria-expanded="false"/g)?.length === 24, "FAQ rows and menu start collapsed"],
